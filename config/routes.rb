@@ -5,6 +5,7 @@ Belch::Application.routes.draw do
   get "home/about"
   get "home/beer2"
   get "home/beerlast"
+  get "home/location"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

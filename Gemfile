@@ -54,3 +54,6 @@ gem "twitter-bootstrap-rails"
 #Active Record Cleaner thang
 gem "squeel"
 
+#Location grabber
+gem "geocoder"
+
