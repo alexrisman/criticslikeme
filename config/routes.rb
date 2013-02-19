@@ -1,4 +1,10 @@
 Belch::Application.routes.draw do
+  resources :beers
+
+
+  resources :users
+
+
   get "home/index"
   get "home/recommend"
   get "home/info"
