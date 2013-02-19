@@ -1,13 +1,13 @@
-= form_for @rating do |f|
+= form_for @rating, :html => { :id => "rating" } do |f|
   - if @rating.errors.any?
     #error_explanation
       h2 = "#{pluralize(@beer.errors.count, "error")} prohibited this beer from being saved:"
       ul
         - @rating.errors.full_messages.each do |message|
           li = message
-
-  = f.number_field :stars, :placeholder=> "1-5, 5 being highest"
+  .star
+  .hidden#oldrating data-rating="#{@rating.stars}"
+  /= f.number_field :stars, :placeholder=> "1-5, 5 being highest"
   = f.hidden_field :user_id, :value => current_user.id
   = f.hidden_field :beer_id, :value => @beer.id
   .actions = f.submit 'Save', :class=> "btn"
-  

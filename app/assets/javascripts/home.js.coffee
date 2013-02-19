@@ -3,8 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  $('.star').raty();
-  $('.alert').hide()
-  $('.star').click ->
-    $('.alert').fadeIn(400)
+  $('.star').raty({ 
+    scoreName: 'rating[stars]', 
+    score: $("#oldrating").attr("data-rating"),
+    click: (score, evt)->
+       $("#rating").submit()
+      
+  });
     

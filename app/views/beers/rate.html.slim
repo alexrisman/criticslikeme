@@ -7,3 +7,5 @@ p.text-center
     =link_to "Next Beer", beers_rate_path(@nextbeer), :class=>"btn"
   -if (current_user.ratings.count > 2)
     =link_to "View Recommendations", beers_recommend_path, :class=>"btn btn-warning"
+-if (notice)
+  p.alert = notice
