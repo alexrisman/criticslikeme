@@ -1,5 +1,6 @@
 Belch::Application.routes.draw do
   resources :beers
+  match "beers/rate/:id" => "beers#rate", :as => "beers_rate"
   
   get "login" => "sessions#new", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
