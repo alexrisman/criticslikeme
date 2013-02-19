@@ -14,8 +14,11 @@ html
         .container
           =link_to "Belch", root_path, :class=>"brand"
           ul.nav.nav-stacked
-            li= link_to "Recommend me a beer", home_recommend_path
+            -if current_user
+              li= link_to "Recommend me a beer", home_recommend_path
             li= link_to "About", home_about_path
+            -if current_user
+              li= link_to "Logout", logout_path
       
     .container
       .row#main
