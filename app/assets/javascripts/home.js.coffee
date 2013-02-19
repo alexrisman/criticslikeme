@@ -7,3 +7,4 @@ $(document).ready ->
   $('.alert').hide()
   $('.star').click ->
     $('.alert').fadeIn(400)
+    
