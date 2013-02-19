@@ -27,10 +27,16 @@ class User < ActiveRecord::Base
   	end 
   end
   
+  def highest_rated_beer
+    if ratings
+      ratings.order("stars DESC").first.beer
+    end
+  end
+  
   #Most Similar User
   def closest_neighbor
     User.all.each do |user|
-    	if highest_rating && user.highest_rating && user != self && highest_rating.beer_id == user.highest_rating.beer_id
+    	if highest_rated_beer && user.highest_rated_beer && user != self && highest_rated_beer.id == user.highest_rated_beer.id
     		return user
     	end
   	end
