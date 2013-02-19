@@ -1,6 +1,8 @@
 class Beer < ActiveRecord::Base
   attr_accessible :info, :location, :name, :price, :photo
   belongs_to :user
+  has_many :ratings
+  has_many :users, through: :ratings
 
   #photo stuffs
   

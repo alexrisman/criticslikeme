@@ -1,4 +1,8 @@
 Belch::Application.routes.draw do
+  get "rating/new"
+
+  get "rating/create"
+
   resources :beers
   match "beers/rate/:id" => "beers#rate", :as => "beers_rate"
   

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates_presence_of :password, :on => :create
   before_save { |user| user.email = email.downcase }
+  has_many :ratings
+  has_many :beers, through: :ratings
   
   #Token to store in cookie
   before_create { generate_token(:token) }
@@ -18,5 +20,29 @@ class User < ActiveRecord::Base
   def self.authenticate(token, password)
     find_by_token(token).try(:authenticate, password)
   end
+  #highest rating
+  def highest_rating
+  	ratings.max_by do |element|
+  		element.stars
+  	end 
+  end
+  #Most Similar User
+  def closest_neighbor
+  	if highest_rating.beer_id == 1
+  		User.find_by_id(1)
+  	else
+  		if highest_rating.beer_id == 2
+  			User.find_by_id(2)
+  		else
+  			if highest_rating.beer_id == 3
+  				User.find_by_id(3)
+  			else
+  				User.find_by_id(rand(1..3))
+  			end
+  		end
+  	end
+
+  end
+  	
   
 end

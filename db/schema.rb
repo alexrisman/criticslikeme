@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20130219072637) do
-
 
   create_table "beers", :force => true do |t|
     t.string   "name"
