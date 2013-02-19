@@ -5,5 +5,14 @@
       ul
         - @user.errors.full_messages.each do |message|
           li = message
-
+        
+        
+  .field
+    = f.text_field :email, :placeholder => "Email"  
+  .field
+    = f.text_field :name, :placeholder => "Name"
+  .field
+    = f.password_field :password, :placeholder => "Password"
+  .field
+    = f.password_field :password_confirmation, :placeholder => "Retype Password"
   .actions = f.submit 'Save'
