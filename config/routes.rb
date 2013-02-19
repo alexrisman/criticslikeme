@@ -1,9 +1,10 @@
 Belch::Application.routes.draw do
   resources :beers
-
+  
+  get "login" => "sessions#new", :as => "login"
+  get "logout" => "sessions#destroy", :as => "logout"
 
   resources :users
-
 
   get "home/index"
   get "home/recommend"
@@ -12,6 +13,7 @@ Belch::Application.routes.draw do
   get "home/beer2"
   get "home/beerlast"
   get "home/location"
+  resources :sessions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
