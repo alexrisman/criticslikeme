@@ -1,18 +1,12 @@
 p#notice = notice
-= image_tag @beer.photo.url
-p
-  strong Name:
-  = @beer.name
-p
-  strong Info:
-  = @beer.info
-p
-  strong Price:
-  = @beer.price
-p
-  strong Location:
-  = @beer.location
 
-= link_to 'Edit', edit_beer_path(@beer)
-'|
-= link_to 'Back', beers_path
+h1=@beer.name
+p
+  =image_tag @beer.photo.url, :class=>"beer"
+p="$#{@beer.price}"
+p= @beer.info
+-if (@beer.location.length > 0)
+  h2 Get it here!
+  h4="#{@beer.name} is available near you at #{@beer.location}."
+  p (The "B" is for beer)
+  = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@beer.location}&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C#{@beer.location}&sensor=false"
