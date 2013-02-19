@@ -1,28 +1,13 @@
 p#notice = notice
-
-= image_tag @beer.photo.url
-p
-  strong Name:
-  = @beer.name
-p
-  strong Info:
-  = @beer.info
-p
-  strong Price:
-  = @beer.price
-p
-  strong Location:
-  = @beer.location
-p
-  strong Your Rating:
-  
-
-
 h1=@beer.name
 p
   =image_tag @beer.photo.url, :class=>"beer"
 p="$#{@beer.price}"
 p= @beer.info
+-if (@ratings)
+  p
+    strong Your Rating: 
+    =@ratings.stars
 p =link_to "Rate it", beers_rate_path(@beer), :class=>"btn btn-info btn-mini"
 -if (@beer.location.length > 0)
   h2 Get it here!

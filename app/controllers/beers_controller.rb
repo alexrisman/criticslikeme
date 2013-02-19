@@ -1,4 +1,5 @@
 class BeersController < ApplicationController
+  before_filter :authorize, :only => "rate"
   # GET /beers
   # GET /beers.json
   def index
@@ -14,7 +15,9 @@ class BeersController < ApplicationController
   # GET /beers/1.json
   def show
     @beer = Beer.find(params[:id])
-
+    if (current_user)
+      @ratings = current_user.ratings.find_by_beer_id(@beer.id)
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @beer }
@@ -24,6 +27,7 @@ class BeersController < ApplicationController
   def rate
     @beer = Beer.find(params[:id])
     @nextbeer = Beer.where("id > ?", @beer.id).first
+    @rating = current_user.ratings.find_by_beer_id(@beer.id) || Rating.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @beer }

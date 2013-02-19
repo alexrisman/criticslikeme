@@ -1,22 +1,13 @@
-= form_for @beer do |f|
-  - if @beer.errors.any?
+= form_for @rating do |f|
+  - if @rating.errors.any?
     #error_explanation
       h2 = "#{pluralize(@beer.errors.count, "error")} prohibited this beer from being saved:"
       ul
-        - @beer.errors.full_messages.each do |message|
+        - @rating.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-
-   		= beer_form.fields_for :ratings do |ratings_form|
-   			.field
-    			= ratings_form.label :stars
-    			= ratings_form.number_field :stars
-   	
- 
-
-  
-  .actions = f.submit 'Save'
+  = f.number_field :stars, :placeholder=> "1-5, 5 being highest"
+  = f.hidden_field :user_id, :value => current_user.id
+  = f.hidden_field :beer_id, :value => @beer.id
+  .actions = f.submit 'Save', :class=> "btn"
   

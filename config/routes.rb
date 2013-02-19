@@ -10,6 +10,7 @@ Belch::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
 
   resources :users
+  resources :ratings
 
   get "home/index"
   get "home/recommend"
