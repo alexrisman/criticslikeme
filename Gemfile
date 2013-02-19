@@ -57,3 +57,7 @@ gem "squeel"
 #Location grabber
 gem "geocoder"
 
+# file upload management
+gem "paperclip", "~> 2.7"
+gem "aws-sdk"
+
