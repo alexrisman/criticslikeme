@@ -20,6 +20,15 @@ class BeersController < ApplicationController
       format.json { render json: @beer }
     end
   end
+  
+  def rate
+    @beer = Beer.find(params[:id])
+    @nextbeer = Beer.where("id > ?", @beer.id).first
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @beer }
+    end
+  end
 
   # GET /beers/new
   # GET /beers/new.json
