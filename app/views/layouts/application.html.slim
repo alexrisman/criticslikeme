@@ -17,7 +17,7 @@ html
           =link_to "Belch", root_path, :class=>"brand"
           ul.nav.nav-stacked
             -if current_user
-              li= link_to "Suggest a beer", home_recommend_path
+              li= link_to "Suggest a beer", beers_recommend_path
             li= link_to "About", home_about_path
             -if current_user
               li= link_to "Logout", logout_path

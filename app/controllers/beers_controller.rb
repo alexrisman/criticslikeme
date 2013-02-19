@@ -33,7 +33,15 @@ class BeersController < ApplicationController
       format.json { render json: @beer }
     end
   end
-
+  
+  def recommend
+    @match = current_user.closest_neighbor
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @beer }
+    end
+  end
+  
   # GET /beers/new
   # GET /beers/new.json
   def new

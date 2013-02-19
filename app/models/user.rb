@@ -26,21 +26,16 @@ class User < ActiveRecord::Base
   		element.stars
   	end 
   end
+  
   #Most Similar User
   def closest_neighbor
-  	if highest_rating.beer_id == 1
-  		User.find_by_id(1)
-  	else
-  		if highest_rating.beer_id == 2
-  			User.find_by_id(2)
-  		else
-  			if highest_rating.beer_id == 3
-  				User.find_by_id(3)
-  			else
-  				User.find_by_id(rand(1..3))
-  			end
-  		end
+    User.all.each do |user|
+    	if highest_rating && user.highest_rating && user != self && highest_rating.beer_id == user.highest_rating.beer_id
+    		return user
+    	end
   	end
+  	
+  	User.all.sample(1).first
 
   end
   	

@@ -1,10 +1,8 @@
 Belch::Application.routes.draw do
-  get "rating/new"
-
-  get "rating/create"
-
-  resources :beers
+  
   match "beers/rate/:id" => "beers#rate", :as => "beers_rate"
+  get "beers/recommend", :as => "beers_recommend"
+  resources :beers
   
   get "login" => "sessions#new", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
