@@ -4,17 +4,19 @@ header
   .error
     = msg
 
-= form_tag sessions_path do
-  p
-    = label_tag :email
-    = text_field_tag :email, params[:email]
-  p
-    = label_tag :password 
-    = password_field_tag :password
-  p
-    = check_box_tag 'remember', true, true
-    |  Remember me
-  p.button	= submit_tag "Log in" 
-
+= form_tag sessions_path, :class=>"form-horizontal" do
+  .control-group
+    .controls
+      = text_field_tag :email, params[:email], :placeholder => "Email", :id=>"inputEmail"
+  .control-group
+    .controls
+      = password_field_tag :password,'', :placeholder => "Password"
+  .control-group
+    .controls
+      = check_box_tag 'remember', true, true
+      |  Remember me
+      br
+      = submit_tag "Log in", :class=>"btn"
+hr
 p
   =link_to "Or Sign up", new_user_path
