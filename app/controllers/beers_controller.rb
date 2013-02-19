@@ -36,6 +36,7 @@ class BeersController < ApplicationController
   
   def recommend
     @match = current_user.closest_neighbor
+    @recs = @match.ratings.where("stars>2")
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @beer }

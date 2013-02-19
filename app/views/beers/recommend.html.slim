@@ -1,4 +1,7 @@
 p="Based on the beers you've rated, it seems like you have similar tastes with one of our users, #{@match.name}. Check out their top rated beers."
-ul.nav.nav-tabs.nav-stacked
-  -@match.beers.each do |beer|
-    li =link_to beer.name, beer
+-if (@recs.count > 0)
+  ul.nav.nav-tabs.nav-stacked
+    -@recs.each do |rating|
+      li =link_to rating.beer.name, rating.beer
+-else
+  .alert This user doesn't like any beers. Sorry. Refresh and try again.
