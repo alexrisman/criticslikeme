@@ -12,7 +12,7 @@ class RatingsController < ApplicationController
     @rating = Rating.new(params[:rating])
 
     if @rating.save 
-    	:notice => "Thank you for purchasing!"
+    	#:notice => "Thank you for purchasing!"
     end
   end
 end
