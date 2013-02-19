@@ -26,7 +26,7 @@ class BeersController < ApplicationController
   
   def rate
     @beer = Beer.find(params[:id])
-    @nextbeer = Beer.where("id > ?", @beer.id).first
+    @nextbeer = Beer.order("id ASC").where("id > ?", @beer.id).first
     @rating = current_user.ratings.find_by_beer_id(@beer.id) || Rating.new
     respond_to do |format|
       format.html # show.html.erb
