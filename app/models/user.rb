@@ -44,6 +44,70 @@ class User < ActiveRecord::Base
   	User.all.sample(1).first
 
   end
-  	
+
+#Real most similar user
+  def user_stars
+    ratings.map {|rate| rate.stars}
+  end
+
+  def user_stars_squared
+    user_stars.map {|val| val*val}
+  end
+  
+  def correlation(u)
+    a = user_stars
+    b = u.user_stars
+    c = a.zip(b).map { |x,y| x*y } 
+    d = a.inject{|sum,x| sum + x }
+    e = b.inject{|sum,x| sum + x }
+    f = user_stars_squared
+    g = u.user_stars_squared
+    h = f.inject{|sum,x| sum + x }
+    i = g.inject{|sum,x| sum + x }
+    k = c.inject{|sum,x| sum + x }
+    n = a.count
+    (((n * k) - (d * e)) / (((n * h) - d**2) * ((n * i) - e**2))**0.5)
+    
+  end
+
+  def correlation_list
+    a = Array.new
+    b = User.all :conditions => (self ? ["id != ?", self.id] : [])
+    b.each do |user|
+      a.push SimilarUser.new(correlation(user), user.id)
+    end
+    a
+  end
+  
+  def similar_users
+    a = correlation_list
+    a.sort{|a,b| b.get_similarity <=>  a.get_similarity}
+
+  end
+
+  def real_closest_neighbor
+    a = similar_users
+    b = a.first.get_user
+    User.find_by_id(b)
+  end
+
+  class SimilarUser
+    def initialize(w,h)
+      @similarity, @user = w, h
+    end
+
+    def get_similarity
+      @similarity
+    end
+
+    def get_user
+      @user
+    end 
+  end
+
+
+
+
+    
   
 end
