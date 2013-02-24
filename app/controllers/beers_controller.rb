@@ -55,12 +55,13 @@ class BeersController < ApplicationController
   end
   
   def view_ratings
+    b = Beer.first
     if current_user
       @ratings = current_user.similar_users.map {|sim_user|
-          User.find(sim_user.get_user).rating_for(Beer.first)
+          User.find(sim_user.get_user).rating_for(b)
         }.flatten
     else
-      @ratings = Beer.first.ratings
+      @ratings = b.ratings
     end
     render :view_ratings, :layout => false
   end
