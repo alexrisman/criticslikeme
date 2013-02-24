@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def rating_for(beer)
+    ratings.select {|rate| rate.beer == beer ? rate : nil }
+  end
+  
   #Most Similar User
   def closest_neighbor
     User.all.each do |user|
@@ -47,7 +51,7 @@ class User < ActiveRecord::Base
 
 #Real most similar user
   def user_stars
-    ratings.map {|rate| rate.stars}
+    ratings.where("beer_id != 1").map {|rate| rate.stars}
   end
 
   def user_stars_squared
