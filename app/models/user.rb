@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
 
 #Real most similar user
   def user_stars
-    ratings.map {|rate| rate.stars}
+    ratings.where("beer_id != 1").map {|rate| rate.stars}
   end
 
   def user_stars_squared
