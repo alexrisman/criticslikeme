@@ -53,6 +53,17 @@ class BeersController < ApplicationController
       format.json { render json: @beer }
     end
   end
+  
+  def view_ratings
+    if current_user
+      @ratings = current_user.similar_users.map {|sim_user|
+          User.find(sim_user.get_user).rating_for(Beer.first)
+        }.flatten
+    else
+      @ratings = Beer.first.ratings
+    end
+    render :view_ratings, :layout => false
+  end
 
   # GET /beers/1/edit
   def edit

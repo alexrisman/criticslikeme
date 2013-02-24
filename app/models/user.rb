@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def rating_for(beer)
+    ratings.select {|rate| rate.beer == beer ? rate : nil }
+  end
+  
   #Most Similar User
   def closest_neighbor
     User.all.each do |user|
