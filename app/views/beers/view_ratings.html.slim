@@ -1,7 +1,13 @@
+= stylesheet_link_tag    "bootstrap_and_overrides", :media => "all"
+-if (current_user)
+  a.btn.disabled Reviews sorted by Critics Like Me
+-else
+  =link_to "Sort Reviews by Critics Like Me", root_path, :class=>"btn pull-center"
+br
 -@ratings.each do |rating|
   -if rating.review
     div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
     small style="color: #666666; font-size: 12px; font-weight: bold;"
       =link_to rating.user.name, rating.user
-    div style="padding: 20px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
+    div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
      =rating.review
