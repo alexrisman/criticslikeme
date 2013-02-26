@@ -26,8 +26,12 @@ class Beer < ActiveRecord::Base
   end
 
   def average_rating
-    a = ratings.map {|rate| rate.stars}
-    a.inject{ |sum, el| sum + el }.to_f / a.size
+    if ratings && ratings.length > 0
+      a = ratings.map {|rate| rate.stars}
+      a.inject{ |sum, el| sum + el }.to_f / a.size
+    else
+      0
+    end
   end
   
   	

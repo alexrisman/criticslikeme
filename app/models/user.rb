@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
   
   def rating_for(beer)
-    ratings.select {|rate| rate.beer == beer ? rate : nil }
+    ratings.select {|rate| rate.beer == beer ? rate : nil }.first
   end
   
   #Most Similar User
@@ -50,8 +50,24 @@ class User < ActiveRecord::Base
   end
 
 #Real most similar user
+  def subbed_averages
+    a = Array.new
+    Beer.all.each do |beer|
+      if rating_for(beer)
+        a.push rating_for(beer).stars.to_f
+      else
+        a.push beer.average_rating
+      end
+    end
+    a
+  end
+
+
+
   def user_stars
-    ratings.where("beer_id != 1").map {|rate| rate.stars}
+    a = subbed_averages
+    a.shift
+    a
   end
 
   def user_stars_squared
@@ -61,17 +77,20 @@ class User < ActiveRecord::Base
   def correlation(u)
     a = user_stars
     b = u.user_stars
-    c = a.zip(b).map { |x,y| x*y } 
-    d = a.inject{|sum,x| sum + x }
-    e = b.inject{|sum,x| sum + x }
-    f = user_stars_squared
-    g = u.user_stars_squared
-    h = f.inject{|sum,x| sum + x }
-    i = g.inject{|sum,x| sum + x }
-    k = c.inject{|sum,x| sum + x }
-    n = a.count
-    (((n * k) - (d * e)) / (((n * h) - d**2) * ((n * i) - e**2))**0.5)
-    
+    if a.uniq.size > 1 && b.uniq.size > 1
+      c = a.zip(b).map { |x,y| x*y } 
+      d = a.inject{|sum,x| sum + x }
+      e = b.inject{|sum,x| sum + x }
+      f = user_stars_squared
+      g = u.user_stars_squared
+      h = f.inject{|sum,x| sum + x }
+      i = g.inject{|sum,x| sum + x }
+      k = c.inject{|sum,x| sum + x }
+      n = a.count
+      (((n * k) - (d * e)) / (((n * h) - d**2) * ((n * i) - e**2))**0.5)
+    else
+      0
+    end
   end
 
   def correlation_list
