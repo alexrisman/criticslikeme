@@ -21,7 +21,13 @@ class Beer < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
   
   def value_ratio
-  	price/rating.stars
+    a = average_rating
+  	a / price
+  end
+
+  def average_rating
+    a = ratings.map {|rate| rate.stars}
+    a.inject{ |sum, el| sum + el }.to_f / a.size
   end
   
   	
