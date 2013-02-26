@@ -55,7 +55,7 @@ class BeersController < ApplicationController
   end
   
   def view_ratings
-    b = Beer.first
+    b = Beer.find(1)
     if current_user
       @ratings = current_user.similar_users.map {|sim_user|
           User.find(sim_user.get_user).rating_for(b)
