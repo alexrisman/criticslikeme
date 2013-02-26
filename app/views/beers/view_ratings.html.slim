@@ -1,8 +1,9 @@
 = stylesheet_link_tag    "bootstrap_and_overrides", :media => "all"
 -if (current_user)
   a.btn.disabled Reviews sorted by Critics Like Me
+  = link_to "Log out of Critics Like Me", logout_path, :class=> "btn"
 -else
-  =link_to "Sort Reviews by Critics Like Me", root_path, :class=>"btn pull-center"
+  =link_to "Sort Reviews by Critics Like Me", root_path, :class=>"btn"
 br
 -@ratings.each do |rating|
   -if (rating && rating.review)
