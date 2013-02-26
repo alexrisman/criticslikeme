@@ -5,7 +5,7 @@
   =link_to "Sort Reviews by Critics Like Me", root_path, :class=>"btn pull-center"
 br
 -@ratings.each do |rating|
-  -if rating.review
+  -if (rating && rating.review)
     div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
     small style="color: #666666; font-size: 12px; font-weight: bold;"
       =link_to rating.user.name, rating.user
