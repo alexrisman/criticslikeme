@@ -1,0 +1,30 @@
+= stylesheet_link_tag    "bootstrap_and_overrides", :media => "all"
+= javascript_include_tag "twitter/bootstrap"
+= javascript_include_tag "jquery"
+= javascript_include_tag "jquery_ujs"
+
+
+
+ul.nav.nav-tabs#myTab
+  li.active
+    a data-toggle="tab" href="#recent" Most Recent
+  li
+    a data-toggle="tab" href="#toprated" Top Rated
+  li
+    a data-toggle="tab" href="#highest" Highest Score
+  li
+    a data-toggle="tab" href="#criticslikeme" Critics Like Me
+    
+.tab-content
+  #recent.tab-pane.fade.in.active
+    -@recent_ratings.each do |rating|
+      = render :partial => "ratings", :locals => {:rating => rating}
+  #toprated.tab-pane.fade
+    -@toprated_ratings.each do |rating|
+      = render :partial => "ratings", :locals => {:rating => rating}
+  #highest.tab-pane.fade ...
+  #criticslikeme.tab-pane.fade
+    -@ratings.each do |rating|
+      = render :partial => "ratings", :locals => {:rating => rating} 
+
+    

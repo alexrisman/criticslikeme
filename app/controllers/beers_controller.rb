@@ -54,6 +54,20 @@ class BeersController < ApplicationController
     end
   end
   
+  def wine
+    #critics like me ratings
+    b = Beer.find(1)
+    if current_user
+      @ratings = current_user.similar_users.map {|sim_user|
+          User.find(sim_user.get_user).rating_for(b)
+        }.flatten
+    end
+    
+    @recent_ratings = b.ratings
+    @toprated_ratings = b.ratings.toprated
+    render :wine, :layout => false
+  end
+  
   def view_ratings
     b = Beer.find(1)
     if current_user

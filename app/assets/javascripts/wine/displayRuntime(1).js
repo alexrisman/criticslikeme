@@ -1,0 +1,1 @@
+fluid.application.getManager(fluid.application.presentationTypes.display).setDisplayFormat({containerId:"display:1477:117261_spin:spin", runtime:"flash"});
