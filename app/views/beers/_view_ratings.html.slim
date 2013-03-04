@@ -2,7 +2,7 @@
 = javascript_include_tag "twitter/bootstrap"
 = javascript_include_tag "jquery"
 = javascript_include_tag "jquery_ujs"
-
+= javascript_include_tag "jquery.raty"
 
 
 ul.nav.nav-tabs#myTab
@@ -31,4 +31,11 @@ ul.nav.nav-tabs#myTab
         = render :partial => "ratings", :locals => {:rating => rating} 
     -else 
       .alert Please sign in to view ratings sorted by Critics Like Me
-    
+
+javascript: 
+  $('.readstar').raty({ 
+    readOnly: true, 
+    score: function() {
+      return $(this).attr('data-number');
+    } 
+  });
