@@ -66,6 +66,16 @@ class BeersController < ApplicationController
     @recent_ratings = b.ratings
     @toprated_ratings = b.ratings.toprated
     @lowrated_ratings = b.ratings.lowrated
+    #Demo ratings
+    @patrick_ratings = (u = User.find_by_name("patrick") ? u.similar_users.map {|sim_user|
+        User.find(sim_user.get_user).rating_for(b)
+      }.flatten : b.ratings)
+    @alex_ratings =    (u = User.find_by_name("alex") ? u.similar_users.map {|sim_user|
+          User.find(sim_user.get_user).rating_for(b)
+        }.flatten : b.ratings)
+    @yee_ratings =      (u = User.find_by_name("yee") ? u.similar_users.map {|sim_user|
+            User.find(sim_user.get_user).rating_for(b)
+          }.flatten : b.ratings)
     render :wine, :layout => false
   end
   

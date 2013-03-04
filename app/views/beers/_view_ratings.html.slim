@@ -14,6 +14,17 @@ ul.nav.nav-tabs#myTab
     a data-toggle="tab" href="#lowrated" Lowest Score
   li
     a data-toggle="tab" href="#criticslikeme" Critics Like Me
+  li.dropdown
+    a.dropdown-toggle data-toggle="dropdown" href="#"
+      | Demo
+      b.caret
+    ul.dropdown-menu
+      li
+        a data-toggle="tab" href="#patrick" Patrick's Preferences
+      li
+        a data-toggle="tab" href="#alex" Alex's Preferences
+      li
+        a data-toggle="tab" href="#yee" Yee's Preferences
     
 .tab-content
   #recent.tab-pane.fade.in.active
@@ -31,7 +42,15 @@ ul.nav.nav-tabs#myTab
         = render :partial => "ratings", :locals => {:rating => rating} 
     -else 
       .alert Please sign in to view ratings sorted by Critics Like Me
-
+  #patrick.tab-pane.fade
+    -@patrick_ratings.each do |rating|
+      = render :partial => "ratings", :locals => {:rating => rating}
+  #alex.tab-pane.fade
+    -@alex_ratings.each do |rating|
+      = render :partial => "ratings", :locals => {:rating => rating}
+  #yee.tab-pane.fade 
+    -@yee_ratings.each do |rating|
+      = render :partial => "ratings", :locals => {:rating => rating}
 javascript: 
   $('.readstar').raty({ 
     readOnly: true, 
