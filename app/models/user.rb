@@ -66,7 +66,6 @@ class User < ActiveRecord::Base
 
   def user_stars
     a = subbed_averages
-    a.shift
     a
   end
 
@@ -113,6 +112,58 @@ class User < ActiveRecord::Base
     b = a.first.get_user
     User.find_by_id(b)
   end
+
+  def sim_list
+    a = correlation_list
+    b = Array.new
+    a.each do |user|
+      b.push user.get_similarity
+    end
+    b
+  end
+
+  def sim_sum
+    a = Array.new
+    b = sim_list
+    b.each do |s|
+      a.push s.abs
+    end
+    a.inject{|sum,x| sum + x }
+  end
+
+  def weights
+    a = sim_list
+    b = sim_sum
+    c = Array.new
+    a.each do |s|
+      c.push s / b
+    end
+    c
+  end
+
+  def predicted_rating_for(beer)
+    a = User.all :conditions => (self ? ["id != ?", self.id] : [])
+    b = Array.new
+    c = weights
+    a.each do |user|
+      if user.rating_for(beer)
+        b.push user.rating_for(beer).stars
+      else
+        b.push beer.average_rating
+      end
+    end
+    d = b.zip(c).map { |x,y| x*y }
+    e = d.inject{|sum,x| sum + x }
+    if e > 0
+      e
+    else
+      0
+    end
+  end
+
+    
+
+    
 
   class SimilarUser
     def initialize(w,h)
