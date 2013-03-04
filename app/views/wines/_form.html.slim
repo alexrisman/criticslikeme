@@ -1,9 +1,9 @@
-= form_for @beer do |f|
-  - if @beer.errors.any?
+= form_for @wine do |f|
+  - if @wine.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@beer.errors.count, "error")} prohibited this beer from being saved:"
+      h2 = "#{pluralize(@wine.errors.count, "error")} prohibited this wine from being saved:"
       ul
-        - @beer.errors.full_messages.each do |message|
+        - @wine.errors.full_messages.each do |message|
           li = message
 
   .field
@@ -19,7 +19,7 @@
     = f.label :location
     = f.text_field :location
   .field
-    =image_tag @beer.photo
+    =image_tag @wine.photo
     = f.label :photo
     br
     = f.file_field :photo

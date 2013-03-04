@@ -11,27 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224055720) do
-
-  create_table "beers", :force => true do |t|
-    t.string   "name"
-    t.text     "info",               :limit => 255
-    t.integer  "price"
-    t.string   "location"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20130304192223) do
 
   create_table "ratings", :force => true do |t|
     t.integer  "stars"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.integer  "beer_id"
+    t.integer  "wine_id"
     t.text     "review"
   end
 
@@ -42,6 +29,19 @@ ActiveRecord::Schema.define(:version => 20130224055720) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "token"
+  end
+
+  create_table "wines", :force => true do |t|
+    t.string   "name"
+    t.text     "info",               :limit => 255
+    t.integer  "price"
+    t.string   "location"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
 end
