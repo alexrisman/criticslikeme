@@ -1,0 +1,8 @@
+= form_tag login_path, :class=>"form-horizontal" do
+  = text_field_tag :email, params[:email], :placeholder => "Email", :id=>"inputEmail", :class=>"input-small"
+  = password_field_tag :password,'', :placeholder => "Password", :class=>"input-small"
+  = check_box_tag 'remember', true, true
+  |  Remember me
+  = submit_tag "Log in", :class=>"btn"
+  |    
+  =link_to "Or Sign up", new_user_path

@@ -1,13 +1,14 @@
 Belch::Application.routes.draw do
   
   get "beers/view_ratings" #Just for tuesday demo.
-  get "beers/wine" #Just for tuesday demo. 
+  get "beers/wine", :as => "winedotcom" #Just for tuesday demo. 
   
   match "beers/rate/:id" => "beers#rate", :as => "beers_rate"
   get "beers/recommend", :as => "beers_recommend"
   resources :beers
   
   get "login" => "sessions#new", :as => "login"
+  post "login" => "sessions#create", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
 
   resources :users
@@ -20,7 +21,7 @@ Belch::Application.routes.draw do
   get "home/beer2"
   get "home/beerlast"
   get "home/location"
-  resources :sessions
+  #resources :sessions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

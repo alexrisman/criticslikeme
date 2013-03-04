@@ -4,4 +4,5 @@ class Rating < ActiveRecord::Base
   belongs_to :user
   
   scope :toprated, order("stars DESC")
+  scope :lowrated, order("stars ASC")
 end

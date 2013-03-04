@@ -9,9 +9,9 @@ ul.nav.nav-tabs#myTab
   li.active
     a data-toggle="tab" href="#recent" Most Recent
   li
-    a data-toggle="tab" href="#toprated" Top Rated
+    a data-toggle="tab" href="#toprated" Highest Score
   li
-    a data-toggle="tab" href="#highest" Highest Score
+    a data-toggle="tab" href="#lowrated" Lowest Score
   li
     a data-toggle="tab" href="#criticslikeme" Critics Like Me
     
@@ -22,9 +22,13 @@ ul.nav.nav-tabs#myTab
   #toprated.tab-pane.fade
     -@toprated_ratings.each do |rating|
       = render :partial => "ratings", :locals => {:rating => rating}
-  #highest.tab-pane.fade ...
+  #lowrated.tab-pane.fade 
+    -@lowrated_ratings.each do |rating|
+      = render :partial => "ratings", :locals => {:rating => rating}
   #criticslikeme.tab-pane.fade
-    -@ratings.each do |rating|
-      = render :partial => "ratings", :locals => {:rating => rating} 
-
+    -if (current_user)
+      -@ratings.each do |rating|
+        = render :partial => "ratings", :locals => {:rating => rating} 
+    -else 
+      .alert Please sign in to view ratings sorted by Critics Like Me
     

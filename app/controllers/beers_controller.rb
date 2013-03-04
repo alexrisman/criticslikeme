@@ -65,6 +65,7 @@ class BeersController < ApplicationController
     
     @recent_ratings = b.ratings
     @toprated_ratings = b.ratings.toprated
+    @lowrated_ratings = b.ratings.lowrated
     render :wine, :layout => false
   end
   
