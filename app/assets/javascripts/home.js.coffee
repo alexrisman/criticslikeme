@@ -10,4 +10,6 @@ $(document).ready ->
        $("#rating").submit()
       
   });
+  
+  
     

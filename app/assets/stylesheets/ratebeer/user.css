@@ -1,0 +1,468 @@
+
+#CountriesBlock {display: visible;}
+#CountriesBlock.visible {display: none;}
+#StatesBlock {display: none;}
+#StatesBlock.visible {display: block;}
+#CanadaBlock {display: none;}
+#CanadaBlock.visible {display: block;}
+#EnglandBlock {display: none;}
+#EnglandBlock.visible {display: block;}
+#GermanyBlock {display: none;}
+#GermanyBlock.visible {display: block;}
+
+.geoStats {
+	padding-bottom: 20px; 
+	border-bottom: 1px solid #e2e2e2;
+}
+
+.tagLink a:hover{ padding: 4px; background: #336699; color: #fff;text-decoration: none;}
+
+
+
+#loading {
+	overflow: hidden;
+	float: right;
+}
+
+#loading2 {
+	overflow: hidden;
+	display: none;
+	float: left;
+}
+
+.statsTableHeader {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 17px;
+	font-weight: normal;
+	color: #999;
+}
+
+.statsTableHeader a {
+	text-decoration: none;
+}
+
+.statsHeader {
+	display: inline;
+	padding: 5px 10px 5px 10px;
+	margin: 0px;
+	background: #fff;
+	border-left: 1px solid #e2e2e2;
+	border-right: 1px solid #e2e2e2;
+	border-top: 1px solid #e2e2e2;
+	position: relative;
+}
+.statsHeader:hover{
+	background: #336699;
+}
+.statsHeader:hover a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.statsHeader.selected {
+	display: inline;
+	margin: 0px;
+	background: #fff;
+	border-left: 1px solid #e2e2e2;
+	border-right: 1px solid #e2e2e2;
+	border-top: 1px solid #e2e2e2;
+	border-bottom: 1px solid #fff;
+	position: relative;
+}
+
+.statsHeader.selected  a{
+	color: #999;
+}
+
+.timeHeader {
+	display: inline;
+	padding: 5px 10px 5px 10px;
+	margin: 0px;
+	background: #fff;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-top: 1px solid #fff;
+	position: relative;
+}
+
+.timeHeader.selected {
+	display: inline;
+	padding: 5px 10px 5px 10px;
+	margin: 0px;
+	background: #fff;
+	position: relative;
+	color: #999;
+	border-left: 1px solid #e2e2e2;
+	border-right: 1px solid #e2e2e2;
+	border-top: 1px solid #e2e2e2;
+	border-bottom: 1px solid #fff;
+}
+
+.timeHeader.selected  a{
+	color: #999;
+}
+
+
+.timeHeader:hover a{
+	color: #999;
+	text-decoration: none;
+}
+
+.smallBlue a {
+	font-family:Arial, sans-serif;
+	font-size:12px;
+	color: #336699;
+}
+
+.smallBlue a:visited {
+	font-family:Arial, sans-serif;
+	font-size:12px;
+	color: #336699;
+}
+
+.smallGray {
+	font-family:Arial, sans-serif;
+	font-size:11px;
+	color: #999;
+}
+
+.smallGrayItalic {
+	font-family:Arial, sans-serif;
+	font-size:11px;
+	font-style: italic;
+	color: #999;
+}
+
+.gobutton{
+	font-size: 11px;
+}
+
+.accountheader {
+	color: #fff;
+	font-size: 11px;
+}
+
+.accountheader a{
+	color: #fff
+}
+
+
+.articleSummary a{
+	font-weight: bold;
+	color: #336699;
+}
+
+.articleSummaryMore {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.articleSummaryMore a{
+	font-weight: bold;
+	color: #336699;
+}
+
+.break20px {
+	height: 20px;
+}
+
+
+.chartbarCell {
+    width: 40%;
+    padding: 0;
+}
+
+.chartbarCellStyle {
+    width: 60%;
+    padding: 0;
+}
+
+.chartbarCellStyle300px {
+    width: 200px;
+    padding: 0;
+}
+
+.chartbarCellStyleZero {
+    width: 5%;
+    padding: 0;
+}
+
+.chartbarCellStyleZeroLink {
+	width: 55%;
+	padding-left: 20px;
+	text-align: left;
+	font-weight: bold
+}
+
+.showMyMap {
+	margin-top: 10px;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+	#border: 1px solid #ccc;
+	#background:#f7f7f7;
+	background: url('/images/map-scale.gif') no-repeat center bottom;
+}
+
+.showMyPlaceMap {
+	margin-top: 10px;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+	#border: 1px solid #ccc;
+	#background:#f7f7f7;
+	background: url('/images/map-scale-places.gif') no-repeat center bottom;
+}
+
+.showMyMap img {
+	padding: 20px;
+}
+
+.showMyPlaceMap img {
+	padding: 20px;
+}
+
+div.chartbar {
+
+	background: url('/images/bgs/chart_right_end.gif') no-repeat right top;
+	overflow: hidden;
+}
+
+div.chartbarAvg {
+	height: 17px;
+	position: absolute; 
+	overflow: visible;
+	top: 0px;  
+	height: 17px; 
+	z-index: 1000;
+	border-right: 2px solid #ffbc00;
+	padding-top: 3px;
+	margin: 0 3px 0 0;
+}
+
+div.chartbar span {
+    display: block;
+    height: 17px;
+    margin: 0 3px 0 0;
+    padding: 3px 0.5em 0 0.5em;
+    background: #336699;
+    color: #fff;
+    font-weight: normal;
+    overflow: hidden;
+    background-image: url('/images/bgs/menu_blue_fade.gif');
+    background-repeat: repeat x
+}
+
+div.placeChartbar {
+    overflow: hidden;
+}
+
+div.placeChartbar span {
+    display: block;
+    height: 14px;
+    margin: 0 3px 0 0;
+    padding: 3px 0.5em 0 0.5em;
+    background: #336699;
+    color: #fff;
+	font-size: 11px;
+    font-weight: bold;
+    overflow: hidden;
+	background-image: url('/images/bgs/menu_blue_fade.gif');
+	background-repeat: repeat x
+}
+
+.break20px {
+	height: 20px;
+}
+
+.break10px{
+	height:10px;
+}
+
+/***** Data Table styles *****/
+/* used for TD elements in a data table's header row */
+.dataTableHeader {
+	font-family:Arial, sans-serif;
+	font-size:11px;
+	background-color: #FFFFCC;	
+}
+
+/*Standard data table cell*/
+.dataTableCell {
+}
+
+/*Light text data table*/
+.dataTableCellLight {
+	color: #999999;
+}
+
+/*primary data table row background color alternate */
+.dataTableRow2 {
+	background-color: #ffffcc;
+}
+
+/*alternate data table row background color alternate */
+.dataTableRowAlternate2 {
+	background-color: #Fff499;
+}
+
+/*primary data table row background color */
+.dataTableRow {
+	background-color: #F7F7F7;
+	padding: 2px;
+}
+
+/*alternate data table row background color */
+.dataTableRowAlternate {
+	background-color: #F0F0F0;
+	padding: 2px;
+}
+
+/*data table row background color used when the row represents the logged in user*/
+.dataTableRowMe {
+	background-color: #FFFFCC;
+}
+
+.dataTableBreak {
+    background-color: #D6E7EF;
+}
+
+
+#usermain {
+	width:800px;
+	padding:20px;
+	float:left;
+}
+
+
+div#twocol {
+	width: 1000px;
+	min-height:600px;
+	position: relative;
+	top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+	overflow: hidden;
+	background: #fff;
+	/*background-image: url(/images/bgs/twocol.gif);*/
+	background-repeat: repeat y;
+	background-position: top left;
+}
+
+#contentleft {
+	width:120px;
+	padding:0px 20px 0px 0px;
+	float:left;
+	padding-bottom: 32767px;
+	margin-bottom: -32767px;
+	}
+
+#contentcenter {
+	width:580px;
+	padding:20px;
+	float:left;
+	}
+
+#contentright {
+	width:180px;
+	padding-top:10px;
+	padding-left:10px;
+	padding-right:10px;
+	float:right;
+	padding-bottom: 32767px;
+	margin-bottom: -32767px;
+	}
+	
+
+#usersidemenu {
+	margin-top: 10px;
+	padding: 0;
+	width: 110px;
+}
+
+#usersidemenu ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 110px;
+} 
+
+#usersidemenu li {
+	float: left;
+	font-family:Arial, sans-serif;
+	margin: 0px;
+	padding-left: 10px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	width: 110px;
+}
+
+#usersidemenu a {
+	color: #336699;
+	display: block;
+	float: left;
+	margin: 0;
+	padding-left: 20px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	text-decoration: none;
+	font-weight: normal;
+	text-align: left;
+	width: 110px;
+	height: 15px;
+	border-bottom: 1px dotted #e0e0e0;
+}
+
+#usersidemenu a.selected {
+	color: #336699;
+	float: left;
+	margin: 0;
+	padding-left: 20px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: left;
+	height: 15px;
+	width: 100px;
+	background-color: #ffcf67;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.sitename {
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:20px;
+	color:#336699;
+	font-weight:bold;
+	text-align: left;
+	padding: 10px 10px 10px 0px;
+}
+
+.sitename2 {
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:20px;
+	color:#003366;
+	font-weight:bold;
+	text-align: left;
+	padding-bottom: 0px;
+}
+
+
+
+#usersidemenu a:hover {
+	color: #336699;
+	float: left;
+	margin: 0;
+	padding-left: 20px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	text-decoration: none;
+	font-weight:bold;
+	text-align: left;
+	width: 100px;
+	background: #ffcf67;
+}

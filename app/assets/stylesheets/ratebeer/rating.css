@@ -1,0 +1,97 @@
+
+.starlight {
+	color: #333;
+}
+#star-rating ul {
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	list-style: none;
+	line-height: 1;
+	margin: 3px;
+	padding: 0px;
+	width: 150px;
+	height: 30px;
+	position: relative;
+	background: url(/ratings/beer/rating.gif) top left repeat-x;
+}
+#star-rating li {
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	list-style: none;
+	vertical-align: baseline;
+	line-height: 1;
+	padding: 0px;
+	margin: 0px;
+	/*\*/
+	float: left;
+	/* */
+	overflow: visible;
+	white-space: normal;
+    background:transparent;
+}
+#star-rating li.current-rating {
+	background: url(/ratings/beer/rating.gif) left bottom;
+	position: absolute;
+	height: 30px;
+	display: block;
+	text-indent: -9000px;
+	z-index: 1;
+	line-height: normal;
+}
+#star-rating li a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+	
+	line-height: normal;
+	display: block;
+	width: 30px;
+	height: 30px;
+	text-decoration: none;
+	text-indent: -9000px;
+	z-index: 20;
+	position: absolute;
+	padding: 0px;
+	background-image: none;
+}
+#star-rating li a:hover {
+	line-height: normal;
+	background: url(/ratings/beer/rating.gif) left center;
+	z-index: 1;
+	left: 0px;
+}
+#star-rating a.star-1 {
+	left: 0px;
+}
+#star-rating a.star-1:hover {
+	width: 30px;
+}
+#star-rating a.star-2 {
+	left: 30px;
+}
+#star-rating a.star-2:hover {
+	width: 60px;
+}
+#star-rating a.star-3 {
+	left: 60px;
+}
+#star-rating a.star-3:hover {
+	width: 90px;
+}
+#star-rating a.star-4 {
+	left: 90px;
+}
+#star-rating a.star-4:hover {
+	width: 120px;
+}
+#star-rating a.star-5 {
+	left: 120px;
+}
+#star-rating a.star-5:hover {
+	width: 150px;
+}
