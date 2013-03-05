@@ -58,7 +58,7 @@ class WinesController < ApplicationController
     #demo purposes:
     #Auto-login
     if (!current_user)
-      cookies[:user_token] = {:value => User.first.token}
+      cookies[:user_token] = {:value => User.find_by_name("NUWeb").token}
     end
     
     #critics like me ratings
@@ -83,7 +83,7 @@ class WinesController < ApplicationController
       @patrick_ratings = b.ratings
       @patrick_prediction = 2.5
     end
-    if (u = User.find_by_name("alex")) 
+    if (u = User.find_by_name("Alex")) 
       @alex_ratings = u.similar_users.map {|sim_user|
         User.find(sim_user.get_user).rating_for(b)
       }.flatten 
