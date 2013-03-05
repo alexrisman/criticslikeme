@@ -66,7 +66,7 @@ class WinesController < ApplicationController
     if current_user
       @ratings = current_user.similar_users.map {|sim_user|
           User.find(sim_user.get_user).rating_for(b)
-        }.flatten.first(3)
+        }.flatten
       @prediction = current_user.predicted_rating_for(b)
     end
     
@@ -77,7 +77,7 @@ class WinesController < ApplicationController
     if (u = User.find_by_name("patrick")) 
       @patrick_ratings = u.similar_users.map {|sim_user|
         User.find(sim_user.get_user).rating_for(b)
-      }.flatten.first(3)
+      }.flatten
       @patrick_prediction = u.predicted_rating_for(b)
     else
       @patrick_ratings = b.ratings
@@ -86,7 +86,7 @@ class WinesController < ApplicationController
     if (u = User.find_by_name("Alex")) 
       @alex_ratings = u.similar_users.map {|sim_user|
         User.find(sim_user.get_user).rating_for(b)
-      }.flatten.first(3)
+      }.flatten
         @alex_prediction = u.predicted_rating_for(b)
     else
        @alex_ratings = b.ratings
@@ -95,7 +95,7 @@ class WinesController < ApplicationController
     if (u = User.find_by_name("Yee")) 
       @yee_ratings =  u.similar_users.map {|sim_user|
         User.find(sim_user.get_user).rating_for(b)
-      }.flatten.first(3)
+      }.flatten
         @yee_prediction = u.predicted_rating_for(b)
     else
       @yee_ratings =  b.ratings
