@@ -113,8 +113,13 @@ class User < ActiveRecord::Base
     User.find_by_id(b)
   end
 
+  def critics_like_me
+    similar_users.first(5)
+  end
+
   def sim_list
-    a = correlation_list
+    #a = correlation_list
+    a = critics_like_me
     b = Array.new
     a.each do |user|
       b.push user.get_similarity
@@ -141,8 +146,23 @@ class User < ActiveRecord::Base
     c
   end
 
+  def clm_id
+    a = critics_like_me
+    b = Array.new
+    a.each do |user|
+      b.push user.get_user
+    end
+    c = Array.new
+    b.each do |id|
+      c.push User.find_by_id(id)
+    end
+    c
+  end
+
+
   def predicted_rating_for(beer)
-    a = User.all :conditions => (self ? ["id != ?", self.id] : [])
+    #a = User.all :conditions => (self ? ["id != ?", self.id] : [])
+    a = clm_id
     b = Array.new
     c = weights
     a.each do |user|
