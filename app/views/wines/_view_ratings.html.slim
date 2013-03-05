@@ -1,10 +1,19 @@
 = stylesheet_link_tag    "bootstrap_and_overrides", :media => "all"
+= stylesheet_link_tag    "rating"
 = javascript_include_tag "twitter/bootstrap"
 = javascript_include_tag "jquery"
 = javascript_include_tag "jquery_ujs"
 = javascript_include_tag "jquery.raty"
 
-
+h3 
+  | User Reviews
+  ul.nav.nav-pills.nav-stacked.alert.alert-success#demobtns
+    li
+      a data-toggle="tab" href="#alex" Alex's Preferences
+    li
+      a data-toggle="tab" href="#patrick" Patrick's Preferences
+    li
+      a data-toggle="tab" href="#yee" Yee's Preferences
 ul.nav.nav-tabs#myTab
   li.active
     a data-toggle="tab" href="#recent" Most Recent
@@ -13,18 +22,8 @@ ul.nav.nav-tabs#myTab
   li
     a data-toggle="tab" href="#lowrated" Lowest Score
   li
-    a data-toggle="tab" href="#criticslikeme" Critics Like Me
-  li.dropdown
-    a.dropdown-toggle data-toggle="dropdown" href="#"
-      | Demo
-      b.caret
-    ul.dropdown-menu
-      li
-        a data-toggle="tab" href="#patrick" Patrick's Preferences
-      li
-        a data-toggle="tab" href="#alex" Alex's Preferences
-      li
-        a data-toggle="tab" href="#yee" Yee's Preferences
+    a#critictab data-toggle="tab" href="#criticslikeme" Critics Like Me
+        
     
 .tab-content
   #recent.tab-pane.fade.in.active

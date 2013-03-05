@@ -55,6 +55,12 @@ class WinesController < ApplicationController
   end
   
   def wine
+    #demo purposes:
+    #Auto-login
+    if (!current_user)
+      cookies[:user_token] = {:value => User.first.token}
+    end
+    
     #critics like me ratings
     b = Wine.find(1)
     if current_user
