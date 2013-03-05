@@ -17,7 +17,7 @@ html
           =link_to "Critics Like Me", root_path, :class=>"brand"
           ul.nav.nav-stacked
             -if current_user
-              li= link_to "View Sorted Reviews", beers_view_ratings_path
+              li= link_to "View Sorted Reviews", wines_view_ratings_path
             li= link_to "About", home_about_path
             -if current_user
               li= link_to "Logout", logout_path

@@ -3,11 +3,11 @@ class RatingsController < ApplicationController
     @rating = Rating.new(params[:rating])
     respond_to do |format|
       if @rating.save
-        format.html { redirect_to beers_rate_path(@rating.beer), notice: 'Rating was successfully created.' }
-        format.json { render json: @rating.beer, status: :created, location: @beer }
+        format.html { redirect_to wines_rate_path(@rating.wine), notice: 'Rating was successfully created.' }
+        format.json { render json: @rating.wine, status: :created, location: @wine }
       else
-        format.html { redirect_to beers_rate_path(@rating.beer), notice: 'Error' }
-        format.json { render json: @rating.beer.errors, status: :unprocessable_entity }
+        format.html { redirect_to wines_rate_path(@rating.wine), notice: 'Error' }
+        format.json { render json: @rating.wine.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -17,11 +17,11 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if @rating.update_attributes(params[:rating])
-        format.html { redirect_to beers_rate_path(@rating.beer), notice: 'Rating was successfully updated.' }
+        format.html { redirect_to wines_rate_path(@rating.wine), notice: 'Rating was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to beers_rate_path(@rating.beer), notice: 'Rating failed to updated.' }
-        format.json { render json: @beer.errors, status: :unprocessable_entity }
+        format.html { redirect_to wines_rate_path(@rating.wine), notice: 'Rating failed to updated.' }
+        format.json { render json: @wine.errors, status: :unprocessable_entity }
       end
     end
   end
