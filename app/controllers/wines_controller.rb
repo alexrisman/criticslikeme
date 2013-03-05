@@ -67,33 +67,40 @@ class WinesController < ApplicationController
       @ratings = current_user.similar_users.map {|sim_user|
           User.find(sim_user.get_user).rating_for(b)
         }.flatten
+      @prediction = current_user.predicted_rating_for(b)
     end
     
     @recent_ratings = b.ratings
     @toprated_ratings = b.ratings.toprated
     @lowrated_ratings = b.ratings.lowrated
     #Demo ratings
-    @patrick_ratings = if (u = User.find_by_name("patrick")) 
-      u.similar_users.map {|sim_user|
+    if (u = User.find_by_name("patrick")) 
+      @patrick_ratings = u.similar_users.map {|sim_user|
         User.find(sim_user.get_user).rating_for(b)
       }.flatten 
-      else
-         b.ratings
-      end
-    @alex_ratings = if (u = User.find_by_name("alex")) 
-        u.similar_users.map {|sim_user|
-          User.find(sim_user.get_user).rating_for(b)
-        }.flatten 
-        else
-           b.ratings
-        end
-    @yee_ratings =  if (u = User.find_by_name("Yee")) 
-          u.similar_users.map {|sim_user|
-            User.find(sim_user.get_user).rating_for(b)
-          }.flatten 
-          else
-             b.ratings
-          end
+      @patrick_prediction = u.predicted_rating_for(b)
+    else
+      @patrick_ratings = b.ratings
+      @patrick_prediction = 2.5
+    end
+    if (u = User.find_by_name("alex")) 
+      @alex_ratings = u.similar_users.map {|sim_user|
+        User.find(sim_user.get_user).rating_for(b)
+      }.flatten 
+        @alex_prediction = u.predicted_rating_for(b)
+    else
+       @alex_ratings = b.ratings
+       @alex_prediction = 2.5
+    end
+    if (u = User.find_by_name("Yee")) 
+      @yee_ratings =  u.similar_users.map {|sim_user|
+        User.find(sim_user.get_user).rating_for(b)
+      }.flatten 
+        @yee_prediction = u.predicted_rating_for(b)
+    else
+      @yee_ratings =  b.ratings
+      @yee_prediction = 2.5
+    end
     render :wine, :layout => false
   end
   

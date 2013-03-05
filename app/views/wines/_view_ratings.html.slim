@@ -37,17 +37,45 @@ ul.nav.nav-tabs#myTab
       = render :partial => "ratings", :locals => {:rating => rating}
   #criticslikeme.tab-pane.fade
     -if (current_user)
+      div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
+      small style="color: #666666; font-size: 12px; font-weight: bold;"
+        | Predicted Rating for you: 
+        =@prediction
+        .readstar data-number==@prediction
+      div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
+       
       -@ratings.each do |rating|
         = render :partial => "ratings", :locals => {:rating => rating} 
     -else 
       .alert Please sign in to view ratings sorted by Critics Like Me
   #patrick.tab-pane.fade
+    div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
+    small style="color: #666666; font-size: 12px; font-weight: bold;"
+      | Predicted Rating for you: 
+      =@patrick_prediction
+      .readstar data-number==@patrick_prediction
+    div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
+    
     -@patrick_ratings.each do |rating|
       = render :partial => "ratings", :locals => {:rating => rating}
   #alex.tab-pane.fade
+    div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
+    small style="color: #666666; font-size: 12px; font-weight: bold;"
+      | Predicted Rating for you: 
+      =@alex_prediction
+      .readstar data-number==@alex_prediction
+    div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
+    
     -@alex_ratings.each do |rating|
       = render :partial => "ratings", :locals => {:rating => rating}
   #yee.tab-pane.fade 
+    div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
+    small style="color: #666666; font-size: 12px; font-weight: bold;"
+      | Predicted Rating for you: 
+      =@yee_prediction
+      .readstar data-number==@yee_prediction
+    div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
+    
     -@yee_ratings.each do |rating|
       = render :partial => "ratings", :locals => {:rating => rating}
 javascript: 
