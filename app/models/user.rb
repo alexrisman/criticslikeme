@@ -92,6 +92,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def percent_match(user)
+    a = correlation(user)
+    b = (a * 100).round 
+    "#{b}%"
+  end
+
+
   def correlation_list
     a = Array.new
     b = User.all :conditions => (self ? ["id != ?", self.id] : [])
