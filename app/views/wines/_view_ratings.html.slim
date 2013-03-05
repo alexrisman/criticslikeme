@@ -40,7 +40,7 @@ ul.nav.nav-tabs#myTab
       div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
       small style="color: #666666; font-size: 12px; font-weight: bold;"
         | Predicted Rating for you: 
-        =@prediction
+        =number_with_precision @prediction, :precision => 2
         .readstar data-number==@prediction
       div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
        
@@ -52,7 +52,7 @@ ul.nav.nav-tabs#myTab
     div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
     small style="color: #666666; font-size: 12px; font-weight: bold;"
       | Predicted Rating for you: 
-      =@patrick_prediction
+      =number_with_precision @patrick_prediction, :precision => 2
       .readstar data-number==@patrick_prediction
     div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
     
@@ -62,7 +62,7 @@ ul.nav.nav-tabs#myTab
     div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
     small style="color: #666666; font-size: 12px; font-weight: bold;"
       | Predicted Rating for you: 
-      =@alex_prediction
+      =number_with_precision @alex_prediction, :precision => 2
       .readstar data-number==@alex_prediction
     div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
     
@@ -72,7 +72,7 @@ ul.nav.nav-tabs#myTab
     div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
     small style="color: #666666; font-size: 12px; font-weight: bold;"
       | Predicted Rating for you: 
-      =@yee_prediction
+      =number_with_precision @yee_prediction, :precision => 2
       .readstar data-number==@yee_prediction
     div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
     
