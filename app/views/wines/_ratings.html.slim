@@ -2,6 +2,8 @@
   div style="display:inline; padding: 0px 0px; font-size: 24px; font-weight: bold; color: #036;" title="3.4 out of 5.0"
   small style="color: #666666; font-size: 12px; font-weight: bold;"
     =link_to rating.user.name, rating.user
+    -if (clm)
+    	=current_user.percent_match rating.user
     .readstar data-number==rating.stars
     =rating.updated_at.strftime("%B %d, %Y %I:%M:%S%p")
   div style="padding: 10px 10px 20px 0px; border-bottom: 1px solid #e0e0e0; line-height: 1.5;"
