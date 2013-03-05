@@ -85,7 +85,7 @@ class WinesController < ApplicationController
     end
     if (u = User.find_by_name("Alex")) 
       @alex_ratings = u.similar_users.map {|sim_user|
-        User.find(sim_user.get_user).rating_for(b).first()
+        User.find(sim_user.get_user).rating_for(b)
       }.flatten.first(3)
         @alex_prediction = u.predicted_rating_for(b)
     else
