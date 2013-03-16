@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
   def percent_match(user)
     a = correlation(user)
     b = (a * 100).round 
-    "#{b}%"
+    b
   end
 
 
