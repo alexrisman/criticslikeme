@@ -1,5 +1,8 @@
 Belch::Application.routes.draw do
   
+  resources :events
+
+
   get "interests/view_ratings" #Just for tuesday demo.
   
   match "interests/rate/:id" => "interests#rate", :as => "interests_rate"
@@ -9,6 +12,7 @@ Belch::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   post "login" => "sessions#create", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
+  get "interest" => "interests#new", :as => "interest"
 
   resources :users
   resources :ratings
