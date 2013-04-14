@@ -1,11 +1,11 @@
-class RenameBeerToWine < ActiveRecord::Migration
+class RenameBeerToInterest < ActiveRecord::Migration
   def up
-    rename_table :beers, :wines
-    rename_column :ratings, :beer_id, :wine_id
+    rename_table :beers, :interests
+    rename_column :ratings, :beer_id, :interest_id
   end
 
   def down
-    rename_table :wines, :beers
-    rename_column :ratings, :wine_id, :beer_id
+    rename_table :interests, :beers
+    rename_column :ratings, :interest_id, :beer_id
   end
 end

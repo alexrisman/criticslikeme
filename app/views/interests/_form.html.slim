@@ -1,0 +1,28 @@
+= form_for @interest do |f|
+  - if @interest.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@interest.errors.count, "error")} prohibited this interest from being saved:"
+      ul
+        - @interest.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :info
+    = f.text_field :info
+  .field
+    = f.label :price
+    = f.number_field :price
+  .field
+    = f.label :location
+    = f.text_field :location
+  .field
+    =image_tag @interest.photo
+    = f.label :photo
+    br
+    = f.file_field :photo
+    br{clear="all"}
+  .actions = f.submit 'Save'
+  

@@ -11,27 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304192223) do
+ActiveRecord::Schema.define(:version => 20130414203923) do
 
-  create_table "ratings", :force => true do |t|
-    t.integer  "stars"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-    t.integer  "wine_id"
-    t.text     "review"
-  end
-
-  create_table "users", :force => true do |t|
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.string   "token"
-  end
-
-  create_table "wines", :force => true do |t|
+  create_table "interests", :force => true do |t|
     t.string   "name"
     t.text     "info",               :limit => 255
     t.integer  "price"
@@ -42,6 +24,24 @@ ActiveRecord::Schema.define(:version => 20130304192223) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "stars"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+    t.integer  "interest_id"
+    t.text     "review"
+  end
+
+  create_table "users", :force => true do |t|
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "token"
   end
 
 end

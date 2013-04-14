@@ -1,0 +1,25 @@
+h1 Listing interests
+
+table
+  tr
+    th Name
+    th Info
+    th Price
+    th Location
+    th
+    th
+    th
+
+  - @interests.each do |interest|
+    tr
+      td = interest.name
+      td = interest.info
+      td = interest.price
+      td = interest.location
+      td = link_to 'Show', interest
+      td = link_to 'Edit', edit_interest_path(interest)
+      td = link_to 'Destroy', interest, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Interest', new_interest_path

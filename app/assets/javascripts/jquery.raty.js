@@ -439,7 +439,7 @@
     click         : undefined,
     half          : false,
     halfShow      : true,
-    hints         : ['Hate It', 'Okay Wine', 'Like It', 'Love It', 'Favorite Wine'],
+    hints         : ['Hate It', 'Okay Interest', 'Like It', 'Love It', 'Favorite Interest'],
     iconRange     : undefined,
     mouseout      : undefined,
     mouseover     : undefined,

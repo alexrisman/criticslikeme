@@ -1,0 +1,15 @@
+= form_for @rating, :html => { :id => "rating" } do |f|
+  - if @rating.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@interest.errors.count, "error")} prohibited this interest from being saved:"
+      ul
+        - @rating.errors.full_messages.each do |message|
+          li = message
+  .star
+  .hidden#oldrating data-rating="#{@rating.stars}"
+  /= f.number_field :stars, :placeholder=> "1-5, 5 being highest"
+  = f.hidden_field :user_id, :value => current_user.id
+  = f.hidden_field :interest_id, :value => @interest.id
+  br
+  = f.text_area :review, :placeholder=>"What'd you think of the interest? (optional)"
+  .actions = f.submit 'Save', :class=> "btn"
