@@ -1,7 +1,6 @@
 Belch::Application.routes.draw do
   
   get "interests/view_ratings" #Just for tuesday demo.
-  get "interestdotcom" => "interests#interest", :as => "interestdotcom" #Just for tuesday demo. 
   
   match "interests/rate/:id" => "interests#rate", :as => "interests_rate"
   get "interests/recommend", :as => "interests_recommend"
