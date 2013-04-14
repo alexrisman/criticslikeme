@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
       else
         cookies[:user_token] = {:value => user.token}
       end
+      flash.now.alert = "Logged in! Awwww yeah."
       redirect_to root_path, :notice => "Logged in!"
     else
       flash.now.alert = "Invalid email or password"
@@ -20,7 +21,7 @@ class SessionsController < ApplicationController
   
   def destroy
     cookies.delete :user_token
-    redirect_to interestdotcom_path
+    redirect_to root_path
   end
   
   def chat

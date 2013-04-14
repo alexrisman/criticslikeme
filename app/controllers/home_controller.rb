@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_filter :authorize, :only => ["index", "recommend"]
+  before_filter :authorize, :only => ["recommend"]
   def index
   end
 
