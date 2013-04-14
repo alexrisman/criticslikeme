@@ -13,16 +13,16 @@ class InterestsController < ApplicationController
 
   # GET /interests/1
   # GET /interests/1.json
-  def show
-    @interest = Interest.find(params[:id])
-    if (current_user)
-      @ratings = current_user.ratings.find_by_interest_id(@interest.id)
-    end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @interest }
-    end
-  end
+  #def show
+  #  @interest = Interest.find(params[:id])
+  #  if (current_user)
+  #    @ratings = current_user.ratings.find_by_interest_id(@interest.id)
+  #  end
+  #  respond_to do |format|
+  #    format.html # show.html.erb
+  #    format.json { render json: @interest }
+  #  end
+  #end
   
   #def rate
   #  @interest = Interest.find(params[:id])
