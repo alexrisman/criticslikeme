@@ -1,25 +1,18 @@
 Belch::Application.routes.draw do
   
-  get "interests/view_ratings" #Just for tuesday demo.
-  
-  match "interests/rate/:id" => "interests#rate", :as => "interests_rate"
-  get "interests/recommend", :as => "interests_recommend"
-  resources :interests
+  #match "interests/rate/:id" => "interests#rate", :as => "interests_rate"
+  #get "interests/recommend", :as => "interests_recommend"
   
   get "login" => "sessions#new", :as => "login"
   post "login" => "sessions#create", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
-
+  
+  resources :interests
   resources :users
   resources :ratings
 
   get "home/index"
-  get "home/recommend"
-  get "home/info"
   get "home/about"
-  get "home/interest2"
-  get "home/interestlast"
-  get "home/location"
   #resources :sessions
 
   # The priority is based upon order of creation:

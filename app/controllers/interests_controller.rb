@@ -24,24 +24,24 @@ class InterestsController < ApplicationController
     end
   end
   
-  def rate
-    @interest = Interest.find(params[:id])
-    @nextinterest = Interest.order("id ASC").where("id > ?", @interest.id).first
-    @rating = current_user.ratings.find_by_interest_id(@interest.id) || Rating.new
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @interest }
-    end
-  end
-  
-  def recommend
-    @match = current_user.closest_neighbor
-    @recs = @match.ratings.where("stars>2")
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @interest }
-    end
-  end
+  #def rate
+  #  @interest = Interest.find(params[:id])
+  #  @nextinterest = Interest.order("id ASC").where("id > ?", @interest.id).first
+  #  @rating = current_user.ratings.find_by_interest_id(@interest.id) || Rating.new
+  #  respond_to do |format|
+  #    format.html # show.html.erb
+  #    format.json { render json: @interest }
+  #  end
+  #end
+  #
+  #def recommend
+  #  @match = current_user.closest_neighbor
+  #  @recs = @match.ratings.where("stars>2")
+  #  respond_to do |format|
+  #    format.html # show.html.erb
+  #    format.json { render json: @interest }
+  #  end
+  #end
   
   # GET /interests/new
   # GET /interests/new.json
@@ -54,17 +54,17 @@ class InterestsController < ApplicationController
     end
   end
   
-  def view_ratings
-    b = Interest.find(1)
-    if current_user
-      @ratings = current_user.similar_users.map {|sim_user|
-          User.find(sim_user.get_user).rating_for(b)
-        }.flatten
-    else
-      @ratings = b.ratings
-    end
-    render :view_ratings, :layout => false
-  end
+  #def view_ratings
+  #  b = Interest.find(1)
+  #  if current_user
+  #    @ratings = current_user.similar_users.map {|sim_user|
+  #        User.find(sim_user.get_user).rating_for(b)
+  #      }.flatten
+  #  else
+  #    @ratings = b.ratings
+  #  end
+  #  render :view_ratings, :layout => false
+  #end
 
   # GET /interests/1/edit
   def edit

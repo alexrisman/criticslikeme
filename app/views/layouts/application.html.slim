@@ -11,25 +11,22 @@ html
     meta content="yes" name="apple-mobile-web-app-capable"
     meta content="black" name="apple-mobile-web-app-status-bar-style"
   body
-    .container-narrow
+    .container
       .masthead
         ul.nav.nav-pills.pull-right
           li.active
-            =link_to "Home", "#"
+            =link_to "Home", root_path
           -if current_user
-            li
-              =link_to "Edit User Settings", "#"
             li
               =link_to "Log Out", logout_path
           -else
             li
               =link_to "Log In", login_path
             li
-              =link_to "Sign Up", "#"
+              =link_to "Sign Up", new_user_path
         h3.muted Confer
       hr
       ==yield
       hr
-        .footer
-          p © Company 2013
-    /! /container
+      .footer
+        p © Company 2013
