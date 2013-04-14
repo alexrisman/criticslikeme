@@ -7,8 +7,9 @@ Belch::Application.routes.draw do
   post "login" => "sessions#create", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
   
-  resources :events
-  resources :interests
+  resources :events do
+    resources :interests
+  end
   get "interest" => "interests#new", :as => "interest" #Delete later
 
   resources :users

@@ -1,9 +1,10 @@
 class InterestsController < ApplicationController
   before_filter :authorize, :only => "rate"
+  before_filter :get_event
   # GET /interests
   # GET /interests.json
   def index
-    @interests = Interest.all
+    @interests = @event.interests
 
     respond_to do |format|
       format.html # index.html.erb
@@ -53,6 +54,10 @@ class InterestsController < ApplicationController
       format.json { render json: @interest }
     end
   end
+
+  def get_event
+    @event = Event.find(params[:event_id])
+  end
   
   #def view_ratings
   #  b = Interest.find(1)
@@ -74,12 +79,12 @@ class InterestsController < ApplicationController
   # POST /interests
   # POST /interests.json
   def create
-    @interest = Interest.new(params[:interest])
+    @interest = @event.interests.new(params[:interest])
 
     respond_to do |format|
       if @interest.save
-        format.html { redirect_to @interest, notice: 'Interest was successfully created.' }
-        format.json { render json: @interest, status: :created, location: @interest }
+        format.html { redirect_to event_interests_path, notice: 'Interest was successfully created.' }
+        format.json { render json: [@event, @interest], status: :created, location: [@event, @interest] }
       else
         format.html { render action: "new" }
         format.json { render json: @interest.errors, status: :unprocessable_entity }
@@ -114,4 +119,5 @@ class InterestsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

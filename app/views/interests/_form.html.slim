@@ -1,4 +1,4 @@
-= form_for @interest do |f|
+= form_for([@event, @interest]) do |f|
   - if @interest.errors.any?
     #error_explanation
       h2 = "#{pluralize(@interest.errors.count, "error")} prohibited this interest from being saved:"
