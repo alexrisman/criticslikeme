@@ -1,0 +1,17 @@
+p#notice = notice
+h1=@interest.name
+p
+  =image_tag @interest.photo.url, :class=>"interest"
+p="$#{@interest.price}"
+p= @interest.info
+-if (@ratings)
+  p
+    strong Your Rating: 
+    =@ratings.stars
+p =link_to "Rate it", interests_rate_path(@interest), :class=>"btn btn-info btn-mini"
+-if (@interest.location.length > 0)
+  h2 Get it here!
+  h4="#{@interest.name} is available near you at #{@interest.location}."
+  p (The "B" is for interest)
+  = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@interest.location}&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C#{@interest.location}&sensor=false"
+  

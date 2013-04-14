@@ -1,11 +1,11 @@
 Belch::Application.routes.draw do
   
-  get "wines/view_ratings" #Just for tuesday demo.
-  get "winedotcom" => "wines#wine", :as => "winedotcom" #Just for tuesday demo. 
+  get "interests/view_ratings" #Just for tuesday demo.
+  get "interestdotcom" => "interests#interest", :as => "interestdotcom" #Just for tuesday demo. 
   
-  match "wines/rate/:id" => "wines#rate", :as => "wines_rate"
-  get "wines/recommend", :as => "wines_recommend"
-  resources :wines
+  match "interests/rate/:id" => "interests#rate", :as => "interests_rate"
+  get "interests/recommend", :as => "interests_recommend"
+  resources :interests
   
   get "login" => "sessions#new", :as => "login"
   post "login" => "sessions#create", :as => "login"
@@ -18,8 +18,8 @@ Belch::Application.routes.draw do
   get "home/recommend"
   get "home/info"
   get "home/about"
-  get "home/wine2"
-  get "home/winelast"
+  get "home/interest2"
+  get "home/interestlast"
   get "home/location"
   #resources :sessions
 

@@ -11,16 +11,16 @@ class SessionsController < ApplicationController
       else
         cookies[:user_token] = {:value => user.token}
       end
-      redirect_to winedotcom_path, :notice => "Logged in!"
+      redirect_to root_path, :notice => "Logged in!"
     else
       flash.now.alert = "Invalid email or password"
-      redirect_to winedotcom_path, notice: 'Invalid email or password'
+      redirect_to root_path, notice: 'Invalid email or password'
     end
   end
   
   def destroy
     cookies.delete :user_token
-    redirect_to winedotcom_path
+    redirect_to interestdotcom_path
   end
   
   def chat

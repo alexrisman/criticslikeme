@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   before_save { |user| user.email = email.downcase }
   has_many :ratings
-  has_many :wines, through: :ratings
+  has_many :interests, through: :ratings
   
   #Token to store in cookie
   before_create { generate_token(:token) }
@@ -27,20 +27,20 @@ class User < ActiveRecord::Base
   	end 
   end
   
-  def highest_rated_wine
+  def highest_rated_interest
     if ratings
       ratings.order("stars DESC").first
     end
   end
   
-  def rating_for(wine)
-    ratings.select {|rate| rate.wine == wine ? rate : nil }.first
+  def rating_for(interest)
+    ratings.select {|rate| rate.interest == interest ? rate : nil }.first
   end
   
   #Most Similar User
   def closest_neighbor
     User.all.each do |user|
-    	if highest_rated_wine && user.highest_rated_wine && user != self && highest_rated_wine.wine_id == user.highest_rated_wine.wine_id
+    	if highest_rated_interest && user.highest_rated_interest && user != self && highest_rated_interest.interest_id == user.highest_rated_interest.interest_id
     		return user
     	end
   	end
@@ -52,11 +52,11 @@ class User < ActiveRecord::Base
 #Real most similar user
   def subbed_averages
     a = Array.new
-    Wine.all.each do |wine|
-      if rating_for(wine)
-        a.push rating_for(wine).stars.to_f
+    Interest.all.each do |interest|
+      if rating_for(interest)
+        a.push rating_for(interest).stars.to_f
       else
-        a.push wine.average_rating
+        a.push interest.average_rating
       end
     end
     a
@@ -167,16 +167,16 @@ class User < ActiveRecord::Base
   end
 
 
-  def predicted_rating_for(wine)
+  def predicted_rating_for(interest)
     #a = User.all :conditions => (self ? ["id != ?", self.id] : [])
     a = clm_id
     b = Array.new
     c = weights
     a.each do |user|
-      if user.rating_for(wine)
-        b.push user.rating_for(wine).stars
+      if user.rating_for(interest)
+        b.push user.rating_for(interest).stars
       else
-        b.push wine.average_rating
+        b.push interest.average_rating
       end
     end
     d = b.zip(c).map { |x,y| x*y }

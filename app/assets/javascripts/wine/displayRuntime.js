@@ -1,1 +1,0 @@
-fluid.application.getManager(fluid.application.presentationTypes.display).setDisplayFormat({containerId:"display:1477:117261:pdp", runtime:"flash"});

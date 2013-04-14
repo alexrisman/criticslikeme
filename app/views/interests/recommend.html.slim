@@ -1,0 +1,7 @@
+p="Based on the interests you've rated, it seems like you have similar tastes with one of our users, #{@match.name}. Check out their top rated interests."
+-if (@recs.count > 0)
+  ul.nav.nav-tabs.nav-stacked
+    -@recs.each do |rating|
+      li =link_to rating.interest.name, rating.interest
+-else
+  .alert This user doesn't like any interests. Sorry. Refresh and try again.

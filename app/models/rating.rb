@@ -1,6 +1,6 @@
 class Rating < ActiveRecord::Base
-  attr_accessible :stars, :user_id, :wine_id, :review
-  belongs_to :wine
+  attr_accessible :stars, :user_id, :interest_id, :review
+  belongs_to :interest
   belongs_to :user
   
   scope :toprated, order("stars DESC")
