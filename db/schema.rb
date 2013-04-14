@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130414221418) do
+=======
+ActiveRecord::Schema.define(:version => 20130414220821) do
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.datetime "date"
+    t.text     "details"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+>>>>>>> cded834facf950836eb965575797093512b925b8
 
   create_table "interests", :force => true do |t|
     t.string   "name"

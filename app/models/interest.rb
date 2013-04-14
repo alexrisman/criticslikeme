@@ -1,6 +1,7 @@
 class Interest < ActiveRecord::Base
   attr_accessible :name
   belongs_to :user
+  belongs_to :event
   has_many :ratings
   has_many :users, through: :ratings
   
