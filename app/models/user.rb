@@ -44,8 +44,9 @@ class User < ActiveRecord::Base
     events.exists?(event) || owned_events.exists?(event)
   end
   
-  def get_sorted_ratings_for(event)
-    r = Rating.find_all_by_user_id_and_interest_id(id, event.interests.map{|x| x.id}, :order=>"stars") 
+  def get_sorted_interests_for(event)
+    (Rating.find_all_by_user_id_and_interest_id(id, event.interests.map{|x| x.id}, :order=>"stars").map{|x| Interest.find(x.id)}+ event.interests).uniq
+    
   end
   
   #Most Similar User
