@@ -23,6 +23,9 @@ p=@event.details
       -current_user.similar_users.each do |u|
        li
         =u.get_user.email
+        | -- 
+        =u.get_similarity*100
+        | % similar interests
   
 .row
   .span12
