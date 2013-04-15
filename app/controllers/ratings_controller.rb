@@ -25,4 +25,13 @@ class RatingsController < ApplicationController
       end
     end
   end
+  
+  def sort 
+    params[:interest].each_with_index do |id, index|
+      r = Rating.find_or_create_by_interest_id_and_user_id( id, current_user.id)  
+      r.stars = index + 1
+      r.save!
+    end
+    render nothing: true
+  end
 end

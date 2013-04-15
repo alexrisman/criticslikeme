@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   has_many :ratings
   has_many :interests, through: :ratings
   
+  has_and_belongs_to_many :events
+  has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
+  
   #Token to store in cookie
   before_create { generate_token(:token) }
   def generate_token(column)
@@ -35,6 +38,15 @@ class User < ActiveRecord::Base
   
   def rating_for(interest)
     ratings.select {|rate| rate.interest == interest ? rate : nil }.first
+  end
+  
+  def get_sorted_ratings_for(event)
+    r = Rating.find_all_by_user_id_and_interest_id(id, event.interests.map{|x| x.id}, :order=>"stars") 
+    if r.length > 0 
+      r
+    else
+      event.interests
+    end
   end
   
   #Most Similar User

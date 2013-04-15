@@ -1,23 +1,18 @@
-h1 Listing events
+h1 ="Welcome #{current_user.name}"
 
-table
-  tr
-    th Name
-    th Date
-    th Details
-    th
-    th
-    th
+-if @events.length < 1
+  h2 You haven't joined any events yet.
+-else
+  h2 Events you have joined
+  ul.nav.nav-pills.nav-stacked
+    -@events.each do |e|
+      li =link_to e.name, e
+hr
 
-  - @events.each do |event|
-    tr
-      td = event.name
-      td = event.date
-      td = event.details
-      td = link_to 'Show', event
-      td = link_to 'Edit', edit_event_path(event)
-      td = link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
+-if @owned_events.length > 0
+  h2 Events you have created
+  ul.nav.nav-pills.nav-stacked
+    -@owned_events.each do |e|
+      li =link_to e.name, e
 
-br
-
-= link_to 'New Event', new_event_path
+= link_to 'Create a new Event', new_event_path

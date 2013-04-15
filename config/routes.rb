@@ -13,7 +13,9 @@ Belch::Application.routes.draw do
   get "interest" => "interests#new", :as => "interest" #Delete later
 
   resources :users
-  resources :ratings
+  resources :ratings do
+    collection {post :sort}
+  end
 
   get "home/index"
   get "home/about"

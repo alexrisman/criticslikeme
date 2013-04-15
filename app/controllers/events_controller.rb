@@ -1,8 +1,11 @@
 class EventsController < ApplicationController
+  before_filter :authorize, :only => ["index", "new"]
+  
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @owned_events = current_user.owned_events
+    @events = current_user.events
 
     respond_to do |format|
       format.html # index.html.erb
