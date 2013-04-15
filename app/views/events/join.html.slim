@@ -1,0 +1,20 @@
+-if @event.nil?
+  h1 That event doesn't exist!
+-else
+  .hero-unit
+    h1=@event.name
+    small=@event.date
+    p=@event.details
+  -if current_user
+    h2 Joining this event?
+    =link_to "Join!", "#", {:class=>"btn btn-large btn-success"}
+    =link_to "No thanks", "#", {:class=>"btn btn-large btn-danger"}
+  -else
+    .row
+      .span2
+      .span4
+        h3 Log in
+        = render "sessions/new", :locals => { :event => @event }
+      .span4
+        h3 Sign up
+        = render "users/form", :locals => { :event => @event }

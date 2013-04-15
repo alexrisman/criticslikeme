@@ -40,13 +40,12 @@ class User < ActiveRecord::Base
     ratings.select {|rate| rate.interest == interest ? rate : nil }.first
   end
   
+  def is_part_of?(event)
+    events.exists?(event) || owned_events.exists?(event)
+  end
+  
   def get_sorted_ratings_for(event)
     r = Rating.find_all_by_user_id_and_interest_id(id, event.interests.map{|x| x.id}, :order=>"stars") 
-    if r.length > 0 
-      r
-    else
-      event.interests
-    end
   end
   
   #Most Similar User

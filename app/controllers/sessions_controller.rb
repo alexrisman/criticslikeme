@@ -11,6 +11,11 @@ class SessionsController < ApplicationController
       else
         cookies[:user_token] = {:value => user.token}
       end
+      
+      if (params[:event_id])
+        user.events << Event.find(params[:event_id])
+      end
+      
       flash.now.alert = "Logged in! Awwww yeah."
       redirect_to root_path, :notice => "Logged in!"
     else

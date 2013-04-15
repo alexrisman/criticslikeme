@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-
+    @sorted_ratings = current_user.get_sorted_ratings_for(@event)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
@@ -82,5 +82,15 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url }
       format.json { head :no_content }
     end
+  end
+  
+  def join
+    @event = Event.find_by_token params[:token]
+    
+    if current_user && current_user.is_part_of?(@event)
+      redirect_to @event
+    end
+    
+    @user = User.new
   end
 end

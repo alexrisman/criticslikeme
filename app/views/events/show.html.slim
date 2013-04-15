@@ -1,7 +1,10 @@
 p#notice = notice
 h2 =@event.name
 -if current_user == @event.admin
-  p = link_to 'Edit ', edit_event_path(@event)
+  p 
+    = link_to 'Edit ', edit_event_path(@event)
+    ' | Send this link to invite other people to the event: 
+    code=join_event_url @event.token
 
 p=@event.details
 
@@ -9,9 +12,14 @@ p=@event.details
   .span2 
     h3 My Interests
     ul#interestList data-update-url==sort_ratings_path
-      -current_user.get_sorted_ratings_for(@event).each do |r|
-        =content_tag_for :li, r.interest do
-          =r.interest.name
+      -if @sorted_ratings.length > 0
+        -@sorted_ratings.each do |r|
+          =content_tag_for :li, r.interest do
+            =r.interest.name
+      -else
+        -@event.interests.each do |i|
+          =content_tag_for :li, i do
+            =i.name
       -if current_user == @event.admin
         = link_to 'Create Interest', new_event_interest_path(@event)
   .span10 

@@ -15,5 +15,10 @@
     = f.password_field :password, :placeholder => "Password"
   .field
     = f.password_field :password_confirmation, :placeholder => "Retype Password"
-  .actions = f.submit 'Save'
 
+
+  -if @event.nil?
+    .actions = f.submit 'Save'
+  -else
+    = hidden_field_tag :event_id, @event.id
+    .actions = f.submit 'Sign up and join event', :class=>"btn btn-large btn-success"
