@@ -19,6 +19,10 @@ p=@event.details
         = link_to 'Create Interest', new_event_interest_path(@event)
   .span10 
     h3 People like me
+    ul
+      -current_user.similar_users.each do |u|
+       li
+        =u.get_user.email
   
 .row
   .span12

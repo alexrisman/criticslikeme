@@ -214,7 +214,7 @@ class User < ActiveRecord::Base
     end
 
     def get_user
-      @user
+      User.find @user
     end 
   end
 
