@@ -18,7 +18,7 @@ p=@event.details
           =i.name
       -if current_user == @event.admin
         = link_to 'Create Interest', new_event_interest_path(@event)
-      
+    =link_to "Save rankings", @event, :class=>"btn"
   .span9
     h3 
       | People like me 
