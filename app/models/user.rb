@@ -49,17 +49,17 @@ class User < ActiveRecord::Base
     
   end
   
-  #Most Similar User
-  def closest_neighbor
-    User.all.each do |user|
-    	if highest_rated_interest && user.highest_rated_interest && user != self && highest_rated_interest.interest_id == user.highest_rated_interest.interest_id
-    		return user
-    	end
-  	end
+  # #Most Similar User
+  # def closest_neighbor
+  #   User.all.each do |user|
+  #   	if highest_rated_interest && user.highest_rated_interest && user != self && highest_rated_interest.interest_id == user.highest_rated_interest.interest_id
+  #   		return user
+  #   	end
+  # 	end
   	
-  	User.all.sample(1).first
+  # 	User.all.sample(1).first
 
-  end
+  # end
 
 #Real most similar user
   def subbed_averages
