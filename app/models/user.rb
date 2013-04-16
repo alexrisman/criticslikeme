@@ -46,8 +46,17 @@ class User < ActiveRecord::Base
   
   def get_sorted_interests_for(event)
     (Rating.find_all_by_user_id_and_interest_id(id, event.interests.map{|x| x.id}, :order=>"stars").map{|x| Interest.find(x.interest_id)}+ event.interests).uniq
-    
   end
+
+  def get_interests_for(event)
+    a = Array.new
+    event.interests.each do |i|
+      a.push i.name
+    end
+    a
+  end
+
+
   
   # #Most Similar User
   # def closest_neighbor
@@ -111,17 +120,24 @@ class User < ActiveRecord::Base
   end
 
 
-  def correlation_list
+  def correlation_list(event)
     a = Array.new
     b = User.all :conditions => (self ? ["id != ?", self.id] : [])
     b.each do |user|
-      a.push SimilarUser.new(correlation(user), user.id)
+      if user.is_part_of?(event)
+        a.push user
+      end
     end
-    a
+    c = Array.new
+    a.each do |user|
+      c.push SimilarUser.new(correlation(user), user.id)
+    end
+    c
   end
+
   
-  def similar_users
-    a = correlation_list
+  def similar_users(event)
+    a = correlation_list(event)
     a.sort{|a,b| b.get_similarity <=>  a.get_similarity}
 
   end
@@ -218,6 +234,11 @@ class User < ActiveRecord::Base
     end 
   end
 
+  class InterestVector 
+    def initialize(a,b,c,d,e)
+      @first, @second, @third, @fourth, @fifth = a, b, c, d, e 
+    end
+  end
 
 
 

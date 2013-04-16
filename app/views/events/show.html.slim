@@ -12,12 +12,13 @@ p=@event.details
   .span2.alert.alert-info
     h3 My Interests
     small Drag and drop to sort most interested to least interested
-    ul#interestList data-update-url==sort_ratings_path
+    ol#interestList data-update-url==sort_ratings_path
       -current_user.get_sorted_interests_for(@event).each do |i|
-        =content_tag_for :li, i do
+        =content_tag_for(:li, i) do
           =i.name
       -if current_user == @event.admin
         = link_to 'Create Interest', new_event_interest_path(@event)
+      
   .span9
     h3 
       | People like me 
