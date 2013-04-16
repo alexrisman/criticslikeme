@@ -24,7 +24,7 @@ p=@event.details
       | People like me 
       small Based on my sorted interests
     ul
-      -current_user.similar_users.each do |u|
+      -current_user.similar_users(@event).each do |u|
        li
         =u.get_user.email
         | -- 
