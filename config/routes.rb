@@ -8,6 +8,7 @@ Belch::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   
   get "events/join/:token" => "events#join", :as =>"join_event"
+  post "events/joining" => "events#joining", :as =>"joining_event"
   resources :events do
     resources :interests
   end

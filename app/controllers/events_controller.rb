@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :authorize, :only => ["index", "new"]
+  before_filter :authorize, :only => ["index", "new", "show", "joining"]
   
   # GET /events
   # GET /events.json
@@ -92,5 +92,11 @@ class EventsController < ApplicationController
     end
     
     @user = User.new
+  end
+  
+  def joining
+    @event = Event.find(params[:event_id])
+    current_user.events << @event
+    redirect_to @event
   end
 end

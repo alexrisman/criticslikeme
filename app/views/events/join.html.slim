@@ -1,5 +1,5 @@
 -if @event.nil?
-  h1 That event doesn't exist!
+  h1 That event does not exist!
 -else
   .hero-unit
     h1=@event.name
@@ -7,8 +7,11 @@
     p=@event.details
   -if current_user
     h2 Joining this event?
-    =link_to "Join!", "#", {:class=>"btn btn-large btn-success"}
-    =link_to "No thanks", "#", {:class=>"btn btn-large btn-danger"}
+    
+    = form_tag joining_event_path, :class=>"inline" do
+      = hidden_field_tag :event_id, @event.id
+      = submit_tag "Join!", :class=>"btn btn-large btn-success"
+    =link_to "No thanks", root_path, {:class=>"btn btn-large btn-danger"}
   -else
     .row
       .span2
