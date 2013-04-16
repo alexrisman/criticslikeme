@@ -24,6 +24,13 @@ input{
 textarea{height: 200px; width: 60%;}
 
 
+/*Event Show*/
+ul#interestList li{
+  cursor: move;
+  border-bottom: dashed thin black;
+}
+
+
 /*Landing Page*/
 body {
   padding-top: 20px;
