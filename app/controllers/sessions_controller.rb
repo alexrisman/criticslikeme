@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
     @user.linkedin_secret = omniauth['credentials']['secret']
     @user.save!
     cookies[:user_token] = @user.token
-    redirect_to root_path, :notice => "Logged in!"
   end
   
   def destroy
