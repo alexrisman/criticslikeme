@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :linkedin_token, :linkedin_secret, :linkedin_authhash
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  validates_presence_of :password, :on => :create
-  before_save { |user| user.email = email.downcase }
+  #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  #validates_presence_of :password, :on => :create
+  #before_save { |user| user.email = email.downcase }
   has_many :ratings
   has_many :interests, through: :ratings
   
@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
   
   #Password Stuffs
-  has_secure_password
+  #has_secure_password
   def self.authenticate(token, password)
     find_by_token(token).try(:authenticate, password)
   end

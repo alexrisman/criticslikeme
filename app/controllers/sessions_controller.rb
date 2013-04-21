@@ -4,24 +4,13 @@ class SessionsController < ApplicationController
   end
   
   def create
-    user = User.find_by_email(params[:email].downcase)
-    if user && user.authenticate(params[:password] ) 
-      if (params[:remember] == "true")
-        cookies.permanent[:user_token] = {:value => user.token}
-      else
-        cookies[:user_token] = {:value => user.token}
-      end
-      
-      if (params[:event_id])
-        user.events << Event.find(params[:event_id])
-      end
-      
-      flash.now.alert = "Logged in! Awwww yeah."
-      redirect_to root_path, :notice => "Logged in!"
-    else
-      flash.now.alert = "Invalid email or password"
-      redirect_to login_path, notice: 'Invalid email or password'
-    end
+    client = LinkedIn::Client.new("q1iihtxz0jdp", "zcRTqafcns6LqZwG")
+    omniauth = request.env["omniauth.auth"]
+    @user = User.find_or_create_by_linkedin_authhash(omniauth['uid'])
+    @user.linkedin_token = omniauth['credentials']['token']
+    @user.linkedin_secret = omniauth['credentials']['secret']
+    @user.save!
+    cookies[:user_token] = @user.token
   end
   
   def destroy

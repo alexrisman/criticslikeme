@@ -21,9 +21,7 @@ html
               =link_to "Log Out", logout_path
           -else
             li
-              =link_to "Log In", login_path
-            li
-              =link_to "Sign Up", new_user_path
+              =link_to "Log In with LinkedIn", linkedin_login_path
         h3.muted Confer
       hr
       ==yield

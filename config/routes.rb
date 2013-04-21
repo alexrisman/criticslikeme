@@ -4,7 +4,7 @@ Belch::Application.routes.draw do
   #get "interests/recommend", :as => "interests_recommend"
   
   get "login" => "sessions#new", :as => "login"
-  post "login" => "sessions#create", :as => "login"
+  get "login_callback" => "sessions#create", :as => "login_callback"
   get "logout" => "sessions#destroy", :as => "logout"
   
   get "events/join/:token" => "events#join", :as =>"join_event"
@@ -21,6 +21,12 @@ Belch::Application.routes.draw do
 
   get "home/index"
   get "home/about"
+  
+  #Linkedin routes
+  get "auth/index" => "auth#index"
+  get "auth/callback", :as => "auth_callback"
+  get "auth/linkedin", :as => "linkedin_login"
+  get '/auth/:provider/callback', to: 'sessions#create'
   #resources :sessions
 
   # The priority is based upon order of creation:

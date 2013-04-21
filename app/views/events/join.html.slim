@@ -14,10 +14,11 @@
     =link_to "No thanks", root_path, {:class=>"btn btn-large btn-danger"}
   -else
     .row
-      .span2
-      .span4
-        h3 Log in
-        = render "sessions/new", :locals => { :event => @event }
-      .span4
-        h3 Sign up
-        = render "users/form", :locals => { :event => @event }
+      =link_to "Log In with LinkedIn", linkedin_login_path, :class=> "btn btn-large btn-success", :target=>"_new"
+      /.span2
+      /.span4
+      /  h3 Log in
+      /  = render "sessions/new", :locals => { :event => @event }
+      /.span4
+      /  h3 Sign up
+      /  = render "users/form", :locals => { :event => @event }
