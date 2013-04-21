@@ -55,9 +55,13 @@ gem "twitter-bootstrap-rails"
 gem "squeel"
 
 #Location grabber
-gem "geocoder"
+gem "geocoder" #Do we need this? 
 
 # file upload management
 gem "paperclip", "~> 2.7"
 gem "aws-sdk"
 
+# LinkedIn stuff
+gem 'omniauth'
+gem 'omniauth-linkedin'
+gem "linkedin"
