@@ -2,7 +2,7 @@
   h1 That event does not exist!
 -else
   .hero-unit
-    h1=@event.name
+    h1#event=@event.name
     small=@event.date
     p=@event.details
   -if current_user
