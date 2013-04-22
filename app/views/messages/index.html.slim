@@ -1,0 +1,24 @@
+h1 Messages
+
+table.table.table-hover
+  tr
+    th From
+    th Content
+    th 
+
+  - @users.each do |u|
+    -m = messages_between(current_user, u)
+    -if any_unread? m 
+      tr.unread
+        td = link_to u.name, view_messages_path(u)
+        td = link_to m.last.content, view_messages_path(u)
+        td = link_to m.last.created_at, view_messages_path(u)
+    -else
+      tr
+        td = link_to u.name, view_messages_path(u)
+        td = link_to m.last.content, view_messages_path(u)
+        td = link_to m.last.created_at, view_messages_path(u)
+
+br
+
+= link_to 'New Message', new_message_path

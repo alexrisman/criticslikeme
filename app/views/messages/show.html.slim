@@ -1,0 +1,11 @@
+p#notice = notice
+
+-@messages.each do |m|
+  li
+    h3
+      =m.sender.name
+      |   
+      small=m.created_at
+    =m.content
+= render :partial => 'form', :locals => { :user => @user }
+= link_to 'Back', messages_path

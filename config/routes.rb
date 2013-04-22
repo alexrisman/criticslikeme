@@ -1,7 +1,6 @@
 Belch::Application.routes.draw do
   
-  #match "interests/rate/:id" => "interests#rate", :as => "interests_rate"
-  #get "interests/recommend", :as => "interests_recommend"
+  #resources :messages
   
   get "login" => "sessions#new", :as => "login"
   get "login_callback" => "sessions#create", :as => "login_callback"
@@ -27,7 +26,12 @@ Belch::Application.routes.draw do
   get "auth/callback", :as => "auth_callback"
   get "auth/linkedin", :as => "linkedin_login"
   get '/auth/:provider/callback', to: 'sessions#create'
-  #resources :sessions
+  
+  
+  #Messaging
+  get "messages/index", :as => "messages"
+  get "messages/:user_id" => "messages#show", :as => "view_messages"
+  post "messages" => "messages#create"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
