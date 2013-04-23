@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#splash {
+#splash, #joinsplash {
   width: 100%;
   background-image: url("header.png");
   background-size: 100% auto;
@@ -13,16 +13,13 @@
   filter: dropshadow(color=#000, offx=0, offy=2);
   
   h1 { 
-    font-size: 80px;
     font-weight: normal;
     padding-top: 95px;
-    padding-right: 30px;
   }
   p {
     font-size: 24px;
     width: 300px;
     float: right;
-    padding-right: 30px;
     clear: both;
     margin-top: 15px;
     
@@ -35,8 +32,29 @@
   }  
 }
 
+#splash { 
+  h1 {font-size: 80px;}
+  h1, p {padding-right: 30px;}
+}
+
+
+#joinsplash {
+  height: 300px;
+  background-size: auto 300px;
+  margin-bottom: 10px;
+  h1 {padding-top: 40px;}
+  p {width: 100%;}
+  h1, p {
+    padding-right: 10px;
+    width: 95%}
+}
+
+img.event_banner {
+  margin: 0 auto;
+  display: block;
+}
+
 .join {
   float: right;
   display: block;
-  margin-top: 10px;
 }
