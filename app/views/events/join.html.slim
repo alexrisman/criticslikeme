@@ -1,24 +1,23 @@
+#splash
+  h1 Break the ice
+  p Meet new people at conferences and discover common interests and experiences.
+
+
 -if @event.nil?
   h1 That event does not exist!
 -else
-  .hero-unit
-    h1#event=@event.name
-    small=@event.date
-    p=@event.details
   -if current_user
-    h2 Joining this event?
-    
-    = form_tag joining_event_path, :class=>"inline" do
+    = form_tag joining_event_path, :class=>"inline join" do
       = hidden_field_tag :event_id, @event.id
       = submit_tag "Join!", :class=>"btn btn-large btn-success"
     =link_to "No thanks", root_path, {:class=>"btn btn-large btn-danger"}
   -else
-    .row
-      =link_to "Log In with LinkedIn", linkedin_login_path, :class=> "btn btn-large btn-success", :target=>"_new"
-      /.span2
-      /.span4
-      /  h3 Log in
-      /  = render "sessions/new", :locals => { :event => @event }
-      /.span4
-      /  h3 Sign up
-      /  = render "users/form", :locals => { :event => @event }
+    =link_to "Log In with LinkedIn", linkedin_login_path, :class=> "btn btn-large btn-success join", :target=>"_new"
+    
+  h1#event
+    =@event.name
+    |   
+    small=translate_time @event.date
+  p=@event.details
+  
+  
