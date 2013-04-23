@@ -2,8 +2,55 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+table#inbox {
+  td:first-child {
+    font-size: 24px;
+  }
+  
+  a {display: block;}
+}
 tr.unread {
   font-weight: bold;
   
-  a {display: block;}
+}
+
+ul.messages {
+  list-style: none;
+  margin: 0 auto;
+  max-width: 800px;
+  
+  li {
+    border-bottom: solid thin black;
+    padding: 10px;
+    padding-bottom: 0px;
+    
+    &.contact {
+      background-color: rgb(231, 231, 231);
+    }
+    
+    h3 {display: inline;}
+    
+    p {
+      margin-left: 20px;
+    }
+  }
+}
+
+form#new_message {
+  margin: 0 auto;
+  max-width: 800px;
+  margin-top: 30px;
+  
+  textarea {
+    height: 100px;
+    width: 600px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  .btn {
+    height: 100px;
+    width: 190px;
+  }
 }

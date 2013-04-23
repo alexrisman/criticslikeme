@@ -1,6 +1,6 @@
 h1 Messages
 
-table.table.table-hover
+table.table.table-hover#inbox
   tr
     th From
     th Content
@@ -8,17 +8,7 @@ table.table.table-hover
 
   - @users.each do |u|
     -m = messages_between(current_user, u)
-    -if any_unread? m 
-      tr.unread
-        td = link_to u.name, view_messages_path(u)
-        td = link_to m.last.content, view_messages_path(u)
-        td = link_to m.last.created_at, view_messages_path(u)
-    -else
-      tr
-        td = link_to u.name, view_messages_path(u)
-        td = link_to m.last.content, view_messages_path(u)
-        td = link_to m.last.created_at, view_messages_path(u)
-
-br
-
-= link_to 'New Message', new_message_path
+    tr class==(any_unread?(m)  ? "unread" : "")
+      td = link_to u.name, view_messages_path(u)
+      td = link_to summarize(m.last.content, 10), view_messages_path(u)
+      td = link_to translate_time(m.last.created_at), view_messages_path(u)

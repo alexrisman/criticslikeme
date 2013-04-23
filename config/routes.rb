@@ -29,9 +29,10 @@ Belch::Application.routes.draw do
   
   
   #Messaging
+  get "messages" => "messages#index"
   get "messages/index", :as => "messages"
   get "messages/:user_id" => "messages#show", :as => "view_messages"
-  post "messages" => "messages#create"
+  post "messages" => "messages#create", :as => "messages"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

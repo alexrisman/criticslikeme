@@ -6,10 +6,8 @@
         - @message.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :content
-    = f.text_area :content
+  = f.text_area :content, :placeholder=>"Write a reply"
   = f.hidden_field :sender_id, :value => current_user.id
   = f.hidden_field :recipient_id, :value => user.id
   = f.hidden_field :is_read, :value => false
-  .actions = f.submit 'Send'
+  = f.submit 'Send Message', :class=>"btn"
