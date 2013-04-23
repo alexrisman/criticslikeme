@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
  :first_name, 
  :last_name, 
  :title,
+ :company_name,
  :industry, 
  :linkedin_url,
  :last_company_name_1,
