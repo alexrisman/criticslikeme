@@ -25,7 +25,9 @@ p=@event.details
       small Based on my sorted interests
     ul
       -current_user.similar_users(@event).each do |u|
-       li="#{u.get_user.name} (#{u.get_user.email}) -- #{u.get_similarity*100}% similar interests"
+       li
+        ="#{u.get_user.name} (#{u.get_user.email}) "
+        = link_to "Send message", view_messages_path(u.get_user)
   
 .row
   .span12

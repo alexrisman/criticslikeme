@@ -15,6 +15,16 @@ class ApplicationController < ActionController::Base
   end
   helper_method :client_profile
   
+  def messages_between(user1, user2) 
+    Message.where{((sender_id == user1.id) & (recipient_id == user2.id)) | ((sender_id == user2.id) & (recipient_id == user1.id))}
+  end
+  helper_method :messages_between
+  
+  def get_unread_message_count (user)
+    Message.where{(recipient_id == user.id) & (is_read == false)}.count
+  end
+  helper_method :get_unread_message_count
+  
   def authorize 
     redirect_to login_url alert: "Not logged in!" if current_user.nil?
   end

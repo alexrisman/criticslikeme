@@ -1,0 +1,12 @@
+p#notice = notice
+
+ul.messages
+  -@messages.each do |m|
+    li class==(m.sender == current_user ? "" : "contact")
+      h3
+        =m.sender.name
+        |   
+        small.pull-right=translate_time m.created_at
+      p=m.content
+= render :partial => 'form', :locals => { :user => @user }
+= link_to 'Back to inbox', messages_path

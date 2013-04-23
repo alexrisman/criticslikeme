@@ -1,0 +1,13 @@
+= form_for @message do |f|
+  - if @message.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@message.errors.count, "error")} prohibited this message from being saved:"
+      ul
+        - @message.errors.full_messages.each do |message|
+          li = message
+
+  = f.text_area :content, :placeholder=>"Write a reply"
+  = f.hidden_field :sender_id, :value => current_user.id
+  = f.hidden_field :recipient_id, :value => user.id
+  = f.hidden_field :is_read, :value => false
+  = f.submit 'Send Message', :class=>"btn"

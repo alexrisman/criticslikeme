@@ -17,6 +17,7 @@ html
           li
             =link_to "Home", root_path
           -if current_user
+            li = link_to pluralize(get_unread_message_count(current_user), "new message"), messages_path
             li
               =link_to "Log Out", logout_path
           -else
