@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     if current_user
       @client = LinkedIn::Client.new("q1iihtxz0jdp", "zcRTqafcns6LqZwG")
       @client.authorize_from_access(current_user.linkedin_token, current_user.linkedin_secret)
-      @client.profile(:fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections"])
+      @client.profile(:fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections", "educations", "three-past-positions"])
     end
   end
   helper_method :client_profile

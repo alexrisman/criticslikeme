@@ -1,5 +1,26 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :linkedin_token, :linkedin_secret, :linkedin_authhash
+  attr_accessible :name, :email, :password, :password_confirmation, :linkedin_token, :linkedin_secret, :linkedin_authhash, :picture_url, 
+ :first_name, 
+ :last_name, 
+ :title,
+ :industry, 
+ :linkedin_url,
+ :last_company_name_1,
+ :last_title_1, 
+ :last_industry_1,
+ :last_location_1,
+ :last_company_name_2, 
+ :last_title_2, 
+ :last_industry_2, 
+ :last_location_2, 
+ :last_company_name_3, 
+ :last_title_3, 
+ :last_industry_3, 
+ :last_location_3, 
+ :location_string, 
+ :school_1, 
+ :school_2, 
+ :school_3, 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   #validates_presence_of :password, :on => :create
@@ -119,8 +140,7 @@ class User < ActiveRecord::Base
     b
   end
 
-
-  def correlation_list(event)
+  def coattendees(event)
     a = Array.new
     b = User.all :conditions => (self ? ["id != ?", self.id] : [])
     b.each do |user|
@@ -128,6 +148,10 @@ class User < ActiveRecord::Base
         a.push user
       end
     end
+    a
+  end
+  def correlation_list(event)
+    a = coattendees(event)
     c = Array.new
     a.each do |user|
       c.push SimilarUser.new(correlation(user), user.id)
@@ -239,6 +263,32 @@ class User < ActiveRecord::Base
       @first, @second, @third, @fourth, @fifth = a, b, c, d, e 
     end
   end
+
+  #Linkedin Matching
+
+  def shares_location(event)
+    a = coattendees(event)
+    b = Array.new
+    a.each do |u|
+      if location_string == u.location_string
+        b.push u
+      end
+    end
+    b
+  end
+
+  def shares_industry(event)
+    a = coattendees(event)
+    b = Array.new
+    a.each do |u|
+      if industry == u.industry
+        b.push u
+      end
+    end
+    b
+  end
+
+
 
 
 

@@ -10,7 +10,19 @@ class SessionsController < ApplicationController
     @user.linkedin_token = omniauth['credentials']['token']
     @user.linkedin_secret = omniauth['credentials']['secret']
     @user.save!
+    
     cookies[:user_token] = @user.token
+    c = client_profile
+    @user.location_string = c.location.name
+    @user.first_name = c.first_name
+    @user.last_name = c.last_name
+    @user.picture_url = c.picture_url
+    @user.title = c.headline
+    @user.industry = c.industry
+    
+
+    @user.save!
+
   end
   
   def destroy
