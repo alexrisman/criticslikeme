@@ -1,0 +1,8 @@
+li
+  =image_tag u.picture_url
+  h3 
+    ="#{u.first_name} #{u.last_name} "
+    small=link_to "View LinkedIn Profile", u.linkedin_url 
+  p= u.title
+  p= u.industry
+  p= link_to  "Send message", view_messages_path(u)

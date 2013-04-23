@@ -27,12 +27,20 @@
       h3 
         | People like me 
         small Based on my LinkedIn Profile
-      ul
-        -current_user.similar_users(@event).each do |u|
-         li
-          ="#{u.get_user.name} (#{u.get_user.email}) "
-          = link_to "Send message", view_messages_path(u.get_user)
-  
+      ul.likeme
+        li.nav-header="People in #{current_user.industry}"
+        -if @shares_industry && @shares_industry.count > 0
+          -@shares_industry.each do |u| 
+            = render :partial => 'user_li', :locals => { :u => u }
+        -else
+          li There are no people on Confr right now in your industry. Check back again later.
+      ul.likeme
+        li.nav-header="People living in #{current_user.location_string}"
+        -if @shares_location && @shares_location.count > 0
+          -@shares_location.each do |u|
+            = render :partial => 'user_li', :locals => { :u => u }
+        -else
+          li There are no people on Confr right now from your location. Check back again later.
 .row
   .span12
     -if current_user == @event.admin

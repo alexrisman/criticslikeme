@@ -19,6 +19,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @attendance_count = @event.users.count + 1 #plus 1 for admin
     #@sorted_ratings = current_user.get_sorted_ratings_for(@event)
+    
+    @shares_industry = current_user.shares_industry(@event)
+    @shares_location = current_user.shares_location(@event)
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
