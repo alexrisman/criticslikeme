@@ -1,33 +1,37 @@
-p#notice = notice
-h2 =@event.name
--if current_user == @event.admin
-  p 
-    = link_to 'Edit ', edit_event_path(@event)
-    ' | Send this link to invite other people to the event: 
-    code=join_event_url @event.token
-
-p=@event.details
-
 .row
-  .span2.alert.alert-info
-    h3 My Interests
-    small Drag and drop to sort most interested to least interested
-    ol#interestList data-update-url==sort_ratings_path
-      -current_user.get_sorted_interests_for(@event).each do |i|
-        =content_tag_for(:li, i) do
-          =i.name
+  .span3
+    #joinsplash
+      h1 Break the ice
+      p Meet new people at conferences and discover common interests and experiences.
+
+  .span8
+    -if @event.nil?
+      h1 That event does not exist!
+    -else
+      h1#event
+        =@event.name
+        br
+        small=translate_time @event.date
       -if current_user == @event.admin
-        = link_to 'Create Interest', new_event_interest_path(@event)
-    =link_to "Save rankings", @event, :class=>"btn"
-  .span9
-    h3 
-      | People like me 
-      small Based on my sorted interests
-    ul
-      -current_user.similar_users(@event).each do |u|
-       li
-        ="#{u.get_user.name} (#{u.get_user.email}) "
-        = link_to "Send message", view_messages_path(u.get_user)
+        p 
+          = link_to 'Edit ', edit_event_path(@event)
+          ' | Send this link to invite other people to the event: 
+          code=join_event_url @event.token
+      =image_tag "KTC2013.jpg", :class=>"event_banner"
+      
+      .alert.alert-info#attendance_count
+        strong="Hi #{current_user.name}. "
+        ="There are #{@attendance_count} attendees from this conference on Confr."
+
+
+      h3 
+        | People like me 
+        small Based on my LinkedIn Profile
+      ul
+        -current_user.similar_users(@event).each do |u|
+         li
+          ="#{u.get_user.name} (#{u.get_user.email}) "
+          = link_to "Send message", view_messages_path(u.get_user)
   
 .row
   .span12
