@@ -22,6 +22,13 @@ class EventsController < ApplicationController
     
     @shares_industry = current_user.shares_industry(@event)
     @shares_location = current_user.shares_location(@event)
+    @shares_company = current_user.shares_company(@event)
+    @shares_last_company = current_user.shares_last_company(@event)
+    @shares_last_company_2 = current_user.shares_last_company_2(@event)
+    @shares_last_company_3 = current_user.shares_last_company_3(@event)
+    @shares_education = current_user.shares_education(@event)
+    @shares_last_education_1 = current_user.shares_last_education_1(@event)
+    @shares_last_education_2 = current_user.shares_last_education_2(@event)
     
     respond_to do |format|
       format.html # show.html.erb
