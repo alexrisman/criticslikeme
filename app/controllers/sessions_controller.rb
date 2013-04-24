@@ -19,7 +19,8 @@ class SessionsController < ApplicationController
     @user.picture_url = c.picture_url
     @user.title = c.headline
     @user.industry = c.industry
-    @user.company_name = c.three_current_positions.all[0].company.name
+    current = c.three_current_positions.all
+    (current) ? @user.company_name = current[0].company.name : false
     @user.linkedin_url = c.public_profile_url
     arr = c.three_past_positions.all
     if arr[0]
