@@ -20,7 +20,7 @@
           = submit_tag "Join!", :class=>"btn btn-large btn-success"
         =link_to "No thanks", root_path, {:class=>"btn btn-danger nothanks_btn"}
       -else
-        =link_to "Log In with LinkedIn", linkedin_login_path, :class=> "btn btn-large btn-success join", :target=>"_new"
+        =link_to "Log In with LinkedIn", linkedin_login_path, :class=> "btn btn-large btn-success join_form", :target=>"_new"
       p=@event.details
   
   
