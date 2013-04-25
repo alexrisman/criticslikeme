@@ -1,8 +1,6 @@
 Belch::Application.routes.draw do
   
   #resources :messages
-  
-  get "login" => "sessions#new", :as => "login"
   get "login_callback" => "sessions#create", :as => "login_callback"
   get "logout" => "sessions#destroy", :as => "logout"
   

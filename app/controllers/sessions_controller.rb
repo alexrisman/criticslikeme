@@ -1,8 +1,4 @@
 class SessionsController < ApplicationController
-  # Manages the user login sessions/cookies
-  def new
-  end
-  
   def create
     client = LinkedIn::Client.new("q1iihtxz0jdp", "zcRTqafcns6LqZwG")
     omniauth = request.env["omniauth.auth"]
@@ -52,9 +48,6 @@ class SessionsController < ApplicationController
   def destroy
     cookies.delete :user_token
     redirect_to root_path
-  end
-  
-  def chat
   end
   
 end
