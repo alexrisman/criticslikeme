@@ -28,5 +28,13 @@ class ApplicationController < ActionController::Base
   def authorize 
     redirect_to root_path alert: "Not logged in!" if current_user.nil?
   end
+
+  def authorize_edit(user)
+    current_user == user
+  end
+  def authorize_edit2(event)
+    current_user.id == event.admin_id
+  end
+
 end
 

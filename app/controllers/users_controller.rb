@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render json: current_user }
     end
   end
 
@@ -36,6 +36,9 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    if !authorize_edit(@user)
+      render :template => "sessions/restricted"
+    end
   end
 
   # POST /users
@@ -78,11 +81,18 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
+    if @user == current_user
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to logout_path }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: 'You cannot delete other users' }
+        format.json { head :no_content }
+      end
     end
+
   end
 end
