@@ -6,15 +6,15 @@ Belch::Application.routes.draw do
   
   get "events/join/:token" => "events#join", :as =>"join_event"
   post "events/joining" => "events#joining", :as =>"joining_event"
-  resources :events do
+  resources :events, :except => :destroy do
     resources :interests
   end
   get "interest" => "interests#new", :as => "interest" #Delete later
 
-  resources :users
-  resources :ratings do
-    collection {post :sort}
-  end
+  resources :users, :only => [:create]
+  #resources :ratings do
+  #  collection {post :sort}
+  #end
 
   get "home/index"
   get "home/about"
