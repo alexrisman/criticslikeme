@@ -13,7 +13,7 @@ h1 ="Welcome #{client_profile.first_name}"
   ul.nav.nav-pills.nav-stacked
     -@events.each do |e|
       li =link_to e.name, e
-hr
+/hr
 
 -if @owned_events.length > 0
   h2 Events you have created
@@ -21,4 +21,4 @@ hr
     -@owned_events.each do |e|
       li =link_to e.name, e
 
-= link_to 'Create a new Event', new_event_path
+/= link_to 'Create a new Event', new_event_path
