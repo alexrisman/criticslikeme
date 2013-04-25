@@ -2,12 +2,18 @@ h1 ="Welcome #{client_profile.first_name}"
 
 -if @events.length < 1
   h2 You haven't joined any events yet.
+  -if Event.last
+    .alert 
+      h4
+        | Would you like to join the 
+        =link_to "Kellogg Tech Conference", join_event_path(Event.last.token)
+        | ? 
 -else
   h2 Events you have joined
   ul.nav.nav-pills.nav-stacked
     -@events.each do |e|
       li =link_to e.name, e
-hr
+/hr
 
 -if @owned_events.length > 0
   h2 Events you have created
@@ -15,4 +21,4 @@ hr
     -@owned_events.each do |e|
       li =link_to e.name, e
 
-= link_to 'Create a new Event', new_event_path
+/= link_to 'Create a new Event', new_event_path

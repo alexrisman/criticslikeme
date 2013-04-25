@@ -1,7 +1,10 @@
+-if (@user.events.nil? || @user.events.length < 1) && Event.last
+  .gototechconf data-url==join_event_path(Event.last.token)
 javascript:
   if (window.opener != null && window.opener.document.getElementById("event") != null) {
     window.opener.location.reload();
     window.close()
   } else {
-    window.location.replace("/");
+    if ($(".gototechconf").length > 0) {window.location.replace($(".gototechconf").data("url"))}
+    else {window.location.replace("/");}
   }
