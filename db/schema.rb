@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430221918) do
+ActiveRecord::Schema.define(:version => 20130430223846) do
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(:version => 20130430221918) do
     t.string   "school_2"
     t.string   "school_3"
     t.string   "company_name"
-    t.string   "schools"
-    t.string   "jobs"
+    t.text     "jobs"
+    t.text     "schools"
   end
 
 end
