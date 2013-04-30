@@ -24,7 +24,7 @@ Belch::Application.routes.draw do
   get "auth/callback", :as => "auth_callback"
   get "auth/linkedin", :as => "linkedin_login"
   get '/auth/:provider/callback', to: 'sessions#create'
-  
+  get "/auth/failure", to: 'home#index'
   
   #Messaging
   get "messages" => "messages#index"

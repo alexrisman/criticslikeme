@@ -21,14 +21,17 @@ class User < ActiveRecord::Base
  :location_string, 
  :school_1, 
  :school_2, 
- :school_3, 
+ :school_3,
+ :schools,
+ :jobs 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   #validates_presence_of :password, :on => :create
   #before_save { |user| user.email = email.downcase }
   has_many :ratings
   has_many :interests, through: :ratings
-  
+  serialize :schools 
+  serialize :jobs
   has_and_belongs_to_many :events
   has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
   
@@ -401,6 +404,39 @@ class User < ActiveRecord::Base
     a.each do |u|
       if school_3 
         if school_3 == u.school_1
+          b.push u
+        elsif school_3 == u.school_2
+          b.push u
+        elsif school_3 == u.school_3
+          b.push u
+        end
+      end
+    end
+    b
+  end
+
+  def school_names
+    a = schools
+    b = Array.new
+    a.each do |s|
+      b.push s.school_name
+    end
+    b
+  end
+  def company_names
+    a = jobs
+    b = Array.new
+    a.each do |p|
+      b.push p.company.name
+    end
+    b
+  end
+  def shares(event, attribute, function)
+    a = coattendees(event)
+    b = Array.new
+    a.each do |u|
+      if attribute 
+        if attribute == u.school_1
           b.push u
         elsif school_3 == u.school_2
           b.push u

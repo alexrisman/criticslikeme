@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
     @user.picture_url = c.picture_url
     @user.title = c.headline
     @user.industry = c.industry
+    @user.email = c.email_address
     #current = c.three_current_positions.all
     (c.three_current_positions.all) ? @user.company_name = c.three_current_positions.all[0].company.name : false
     @user.linkedin_url = c.public_profile_url
@@ -41,6 +42,8 @@ class SessionsController < ApplicationController
       (ed[1]) ? @user.school_2 = ed[1].school_name : false
       (ed[2]) ? @user.school_3 = ed[2].school_name : false
     end
+    (c.educations.all) ? @user.schools = c.educations.all : false
+    (c.positions.all) ? @user.jobs = c.positions.all : false
     @user.name = [@user.first_name, " ", @user.last_name].join
     
 
