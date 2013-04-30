@@ -1,5 +1,6 @@
 p#notice = notice
 
+h2="Messages between you & #{@user.name}"
 ul.messages
   -@messages.each do |m|
     li class==(m.sender == current_user ? "" : "contact")

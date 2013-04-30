@@ -6,6 +6,7 @@
   width: 100%;
   background-image: url("header.png");
   background-size: 100% auto;
+  background-repeat: no-repeat;
   height: 420px;
   color: white;
   text-align: right;
@@ -41,6 +42,7 @@
 #joinsplash {
   height: 300px;
   background-size: auto 300px;
+  background-repeat: no-repeat;
   margin-bottom: 10px;
   h1 {padding-top: 40px;}
   p {width: 100%;}
@@ -54,11 +56,13 @@ img.event_banner {
   display: block;
 }
 
-.join {
-  float: right;
-  display: block;
+.nothanks_btn {
+  margin-left: 10px;
 }
 
+.join_form {
+  margin-top:10px;
+}
 
 
 
