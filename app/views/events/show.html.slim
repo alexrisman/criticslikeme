@@ -17,7 +17,7 @@
           = link_to 'Edit ', edit_event_path(@event)
           ' | Send this link to invite other people to the event: 
           code=join_event_url @event.token
-      =image_tag "KTC2013.jpg", :class=>"event_banner"
+      =image_tag @event.banner.url, :class=>"event_banner"
       
       .alert.alert-info#attendance_count
         strong="Hi #{current_user.name}. "
