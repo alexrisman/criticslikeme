@@ -12,7 +12,7 @@
         =@event.name
         br
         small=translate_time @event.date
-      =image_tag "KTC2013.jpg", :class=>"event_banner"
+      =image_tag @event.banner.url, :class=>"event_banner"
       
       -if current_user
         = form_tag joining_event_path, :class=>"inline join_form" do
