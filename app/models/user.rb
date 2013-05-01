@@ -23,7 +23,9 @@ class User < ActiveRecord::Base
  :school_2, 
  :school_3,
  :schools,
- :jobs 
+ :jobs,
+ :school_names,
+ :company_names
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   #validates_presence_of :password, :on => :create
@@ -32,6 +34,8 @@ class User < ActiveRecord::Base
   has_many :interests, through: :ratings
   serialize :schools 
   serialize :jobs
+  serialize :school_names
+  serialize :company_names
   has_and_belongs_to_many :events
   has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
   
@@ -415,38 +419,123 @@ class User < ActiveRecord::Base
     b
   end
 
-  def school_names
-    a = schools
-    b = Array.new
-    a.each do |s|
-      b.push s.school_name
-    end
-    b
-  end
-  def company_names
-    a = jobs
-    b = Array.new
-    a.each do |p|
-      b.push p.company.name
-    end
-    b
-  end
-  def shares(event, attribute, function)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if attribute 
-        if attribute == u.school_1
-          b.push u
-        elsif school_3 == u.school_2
-          b.push u
-        elsif school_3 == u.school_3
-          b.push u
+  # def school_names
+  #   a = schools
+  #   b = Array.new
+  #   a.each do |s|
+  #     b.push s.school_name
+  #   end
+  #   b.uniq
+  # end
+  # def company_names
+  #   a = jobs
+  #   b = Array.new
+  #   a.each do |p|
+  #     b.push p.company.name
+  #   end
+  #   b.uniq
+  # end
+
+  def shares_attributes(attri, comparison, people)
+    c = Array.new
+    comparison.each do |s|
+      people.each do |u|
+        d = Array.new
+        e = u.attributes
+        f = e[attri]
+        if f.include?(s)
+          d.push u
+        end
+        if d.length > 0
+          c.push d
         end
       end
     end
-    b
+    if c.length > 0
+      c
+    end
   end
+  def shares_single_attribute(attri, comparison, people)
+    c = Array.new
+    people.each do |u|
+      e = u.attributes
+      f = e[attri]
+      if f == comparison
+        c.push u
+      end
+    end
+    if c.length > 0
+      c
+    end
+  end
+ def shares_attribute(event, attri)
+    a = coattendees(event)
+    b = attributes
+    c = b[attri]
+    if c.kind_of?(Array)
+      shares_attributes(attri, c, a)
+    else
+      shares_single_attribute(attri, c, a)
+    end
+  end
+  # def shares_schools(event)
+  #   a = coattendees(event)
+  #   b = school_names
+  #   c = Array.new
+  #   b.each do |s|
+  #     a.each do |u|
+  #       d = Array.new
+  #       if u.school_names.include?(s)
+  #         d.push u
+  #       end
+  #       c.push d
+  #     end
+  #   end
+  #   c
+  # end
+  # def shares_schools_with(user)
+  #   b = school_names
+  #   c = Array.new
+  #   b.each do |s|
+  #     if user.school_names.include?(s)
+  #       c.push s
+  #     end
+  #   end
+  #   c
+  # end
+  def shares_attributes_with(mine, his)
+    d = Array.new
+    mine.each do |m|
+      if his.include?(m)
+        d.push m
+      end
+    end
+    if d.length > 0
+      d
+    end
+  end
+  def shares_single_attribute_with(mine, hers)
+    if mine == hers
+      mine
+    end
+  end
+
+    
+  def shares_attribute_with(user, attri)
+    b = attributes
+    c = attributes[attri]
+    d = user.attributes
+    e = d[attri]
+    if c.kind_of?(Array)
+      shares_attributes_with(c, e)
+    else
+      if c == e
+        c
+      end
+    end
+  end
+
+
 
 
 

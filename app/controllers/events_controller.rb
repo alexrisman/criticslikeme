@@ -39,7 +39,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
-    if current_user.name != "Yee Wai" && current_user.name && "Patrick Hadley" && current_user.name != "Alex Risman"
+    if current_user.name != "Yee Wai" && current_user.name != "Patrick Hadley" && current_user.name != "Alex Risman"
       redirect_to root_path
     else
       @event = Event.new
