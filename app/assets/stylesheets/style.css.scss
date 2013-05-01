@@ -1,16 +1,6 @@
-img.interest {
-  max-width: 175px;
-  max-height: 275px;
-  margin: 0 auto;
-}
-
 #main {
   text-align: center;
   margin: 0 auto;
-}
-
-.star {
-  display: inline;
 }
 
 input{
@@ -23,6 +13,10 @@ input{
 
 textarea{height: 200px; width: 60%;}
 
+.navbar {
+  line-height: 30px;
+}
+
 
 /*Event Show*/
 ul#interestList li{
@@ -32,36 +26,45 @@ ul#interestList li{
 
 
 /*Landing Page*/
-body {
-  padding-top: 20px;
-  padding-bottom: 40px;
+/*Mobile + Tablet version*/
+@media (max-width: 979px) {
+  body#homeindex{
+    background-image: url("header.png");
+    background-size: auto 600px;
+    background-position: right top;
+    color: white;
+  
+    #splash {
+      display: table;
+      width: 100%;
+  
+  
+      h1 {
+        font-size: 3.75em;
+        text-align: right;
+        font-weight: normal;
+      }
+  
+      p {
+        text-align: right;
+        float: right;
+        width: 300px;
+        display: table;
+        clear: both;
+        font-size: 1.5em;
+        line-height: 1em;
+        font-weight: lighter;
+        margin-top: 1em;
+      
+        a {
+          margin-top: 2em;
+          text-align: center;
+          width: 180px;
+        }
+      }
+    }
+  }
 }
-
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  margin: 60px 0;
-  text-align: center;
-}
-.jumbotron h1 {
-  font-size: 72px;
-  line-height: 1;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 60px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-
-
 /*About page */
 ul#listus {
   list-style: none;

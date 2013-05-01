@@ -13,6 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20130502184056) do
 
+<<<<<<< HEAD
+=======
+  create_table "conversations", :force => true do |t|
+    t.string   "subject",    :default => ""
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+>>>>>>> Mobilfied landing page
   create_table "events", :force => true do |t|
     t.string   "name"
     t.datetime "date"
@@ -90,10 +99,24 @@ ActiveRecord::Schema.define(:version => 20130502184056) do
     t.string   "school_2"
     t.string   "school_3"
     t.string   "company_name"
+<<<<<<< HEAD
     t.text     "jobs"
     t.text     "schools"
     t.text     "school_names"
     t.text     "company_names"
+=======
+<<<<<<< HEAD
+    t.string   "school_names"
+    t.string   "company_names"
+    t.text     "jobs"
+    t.text     "schools"
+=======
+    t.text     "jobs"
+    t.text     "schools"
+    t.string   "school_names"
+    t.string   "company_names"
+>>>>>>> Mobilfied landing page
+>>>>>>> Mobilfied landing page
   end
 
 end
