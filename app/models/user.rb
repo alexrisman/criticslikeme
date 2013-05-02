@@ -442,7 +442,10 @@ class User < ActiveRecord::Base
       people.each do |u|
         d = Array.new
         e = u.attributes
-        f = e[attri]
+        if e[attri]
+          f = e[attri]
+        else
+          f = []
         if f.include?(s)
           d.push u
         end
@@ -532,7 +535,10 @@ class User < ActiveRecord::Base
     b = attributes
     c = attributes[attri]
     d = user.attributes
-    e = d[attri]
+    if d[attri]
+      e = d[attri]
+    else
+      e = []
     if c.kind_of?(Array)
       shares_attributes_with(c, e)
     else
