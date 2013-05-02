@@ -15,9 +15,6 @@ ul#inbox {
     }
     a:hover {text-decoration: none;}
     
-    &:hover {
-      background-color: #eee;
-    }
     
     h3 {
       display: inline-block;
@@ -36,6 +33,10 @@ ul#inbox {
       padding-right: 5px;
     }
   }
+}
+
+ul#listevents li:hover, ul#inbox li:hover {
+  background-color: #eee;
 }
 
 .unread {

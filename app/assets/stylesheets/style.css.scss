@@ -28,6 +28,8 @@ textarea{height: 200px; width: 60%;}
   }
 }
 
+.centertext {text-align: center;}
+
 /*Event Show*/
 ul#interestList li{
   cursor: move;
@@ -80,16 +82,23 @@ ul#interestList li{
 /*About page */
 ul#listus {
   list-style: none;
-  margin: 0;
   clear: both;
   display: table;
   
+  h3 {
+    .small {
+      display: inline;
+      font-size: .75em;
+      color: gray;
+      margin: 0;
+    }
+  }
   li {
     float: left;
     
     img {
       float: left;
-      padding-right: 5px;
+      margin-right: 2%;
     }
   }
 }
