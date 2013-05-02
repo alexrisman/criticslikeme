@@ -538,6 +538,7 @@ class User < ActiveRecord::Base
     if d[attri]
       e = d[attri]
     else
+    end
       e = []
     if c.kind_of?(Array)
       shares_attributes_with(c, e)
