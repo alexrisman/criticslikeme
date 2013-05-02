@@ -1,13 +1,25 @@
 p#notice = notice
-
-h2="Messages between you & #{@user.name}"
-ul.messages
-  -@messages.each do |m|
-    li class==(m.sender == current_user ? "" : "contact")
-      h3
-        =m.sender.name
-        |   
-        small.pull-right=translate_time m.created_at
-      p=m.content
-= render :partial => 'form', :locals => { :user => @user }
+.row-fluid
+  .span4#profile
+    h2
+      span.padleft =@user.name
+    =image_tag @user.picture_url, :class=>"pull-left"
+    small=link_to "View LinkedIn Profile", @user.linkedin_url, :target => '_blank'
+    p
+      em= @user.title
+      br
+      span.grey= @user.industry
+    h4 Common Ground
+  .span8  
+    h2 
+      span.padleft Messages
+    ul.messages
+      -@messages.each do |m|
+        li class==(m.sender == current_user ? "" : "contact")
+          h3
+            =m.sender.name
+            |   
+            small.pull-right=translate_time m.created_at
+          p=m.content
+    = render :partial => 'form', :locals => { :user => @user }
 = link_to 'Back to inbox', messages_path
