@@ -17,6 +17,14 @@ textarea{height: 200px; width: 60%;}
   line-height: 30px;
 }
 
+.noleft {
+  margin-left: 0;
+}
+@media (min-width: 980px) {
+  .noleftwide {
+    margin-left: 0;
+  }
+}
 
 /*Event Show*/
 ul#interestList li{
@@ -28,6 +36,8 @@ ul#interestList li{
 /*Landing Page*/
 /*Mobile + Tablet version*/
 @media (max-width: 979px) {
+  .container {width: auto;}
+  
   body#homeindex{
     background-image: url("header.png");
     background-size: auto 600px;

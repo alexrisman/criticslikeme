@@ -1,33 +1,38 @@
-.row
-  .span3
-    #joinsplash
-      h1 Break the ice
-      p Meet new people at conferences and discover common interests and experiences.
+-if @event.nil?
+  .row.noleft
+    h1 That event does not exist!.row
+-else
+  .row.noleft
+    h1#event
+      =@event.name
+      br
+      small=translate_time @event.date
+    -if current_user == @event.admin
+      p 
+        = link_to 'Edit ', edit_event_path(@event)
+        ' | Send this link to invite other people to the event: 
+        code=join_event_url @event.token
+    =image_tag @event.banner.url, :class=>"event_banner"
+  
+    .alert.alert-info#attendance_count.hidden-desktop
+      strong="Hi #{current_user.name}. "
+      ="There are #{@attendance_count} attendees from this conference on Confr."
 
-  .span8
-    -if @event.nil?
-      h1 That event does not exist!
-    -else
-      h1#event
-        =@event.name
-        br
-        small=translate_time @event.date
-      -if current_user == @event.admin
-        p 
-          = link_to 'Edit ', edit_event_path(@event)
-          ' | Send this link to invite other people to the event: 
-          code=join_event_url @event.token
-      =image_tag @event.banner.url, :class=>"event_banner"
-      
-      .alert.alert-info#attendance_count
-        strong="Hi #{current_user.name}. "
-        ="There are #{@attendance_count} attendees from this conference on Confr."
-
-
-      h3 
-        | People like me 
-        small Based on my LinkedIn Profile
-        
+  .row
+    .span3.visible-desktop
+      ul.nav.nav-tabs.nav-stacked
+        li.header=link_to "People Like Me", "#"
+        = render :partial => 'nav_li', :locals => { :name => current_user.industry, :count => @shares_industry.count }
+        = render :partial => 'nav_li', :locals => { :name => current_user.company_name, :count => @shares_company.count }
+        = render :partial => 'nav_li', :locals => { :name => current_user.last_company_name_1, :count => @shares_last_company.count }
+        = render :partial => 'nav_li', :locals => { :name => current_user.last_company_name_2, :count => @shares_last_company_2.count }
+        = render :partial => 'nav_li', :locals => { :name => current_user.last_company_name_3, :count => @shares_last_company_3.count }
+        = render :partial => 'nav_li', :locals => { :name => current_user.location_string, :count => @shares_location.count }
+        = render :partial => 'nav_li', :locals => { :name => current_user.school_1, :count => @shares_education.count }
+        = render :partial => 'nav_li', :locals => { :name => current_user.school_2, :count => @shares_last_education_1.count }
+        = render :partial => 'nav_li', :locals => { :name => current_user.school_3, :count => @shares_last_education_2.count }
+        li=link_to "All (#{@event.users.count})", "#cool!"
+    .span9.noleftwide
       = render :partial => 'likeme_ul', :locals => { :name => current_user.industry, :verb_phrase => "are in", :user_array => @shares_industry }
       = render :partial => 'likeme_ul', :locals => { :name => current_user.company_name, :verb_phrase => "work(ed) for", :user_array => @shares_company }
       = render :partial => 'likeme_ul', :locals => { :name => current_user.last_company_name_1, :verb_phrase => "work(ed) for", :user_array => @shares_last_company }

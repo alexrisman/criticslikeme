@@ -4,8 +4,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @owned_events = current_user.owned_events
-    @events = current_user.events
+    @events = current_user.owned_events + current_user.events
+    @past_events = @events.select {|e| e.date < Time.now}
+    @upcoming_events = @events.select {|e| e.date > Time.now}
 
     respond_to do |format|
       format.html # index.html.erb

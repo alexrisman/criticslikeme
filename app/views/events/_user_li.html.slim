@@ -1,8 +1,8 @@
 li
   =image_tag u.picture_url
-  h3 
-    ="#{u.first_name} #{u.last_name} "
-    small=link_to "View LinkedIn Profile", u.linkedin_url, :target => '_blank'
-  p= u.title
-  p= u.industry
-  p= link_to "Send message", view_messages_path(u)
+  h3="#{u.first_name} #{u.last_name} "
+  small=link_to "View LinkedIn Profile", u.linkedin_url, :target => '_blank'
+  p
+    em= u.title
+  p.grey= u.industry
+  p.msg= link_to "Send message", view_messages_path(u)
