@@ -446,6 +446,7 @@ class User < ActiveRecord::Base
           f = e[attri]
         else
           f = []
+        end
         if f.include?(s)
           d.push u
         end
@@ -538,8 +539,8 @@ class User < ActiveRecord::Base
     if d[attri]
       e = d[attri]
     else
-    end
       e = []
+    end
     if c.kind_of?(Array)
       shares_attributes_with(c, e)
     else
