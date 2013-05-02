@@ -439,8 +439,8 @@ class User < ActiveRecord::Base
   def shares_attributes(attri, comparison, people)
     c = Array.new
     comparison.each do |s|
+      d = Array.new
       people.each do |u|
-        d = Array.new
         e = u.attributes
         if e[attri]
           f = e[attri]
@@ -453,8 +453,8 @@ class User < ActiveRecord::Base
         # if d.length > 0
         #   c.push d
         # end
-        c.push d
       end
+      c.push d
     end
     c
     # if c.length > 0
