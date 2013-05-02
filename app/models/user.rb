@@ -550,6 +550,24 @@ class User < ActiveRecord::Base
     end
   end
 
+  def attribute_list
+    a = attributes
+    b = Array.new
+    a.each_key {|key| b.push key}
+    b
+  end
+
+  def shared_list(user)
+    a = attribute_list
+    b = Array.new
+    a.each do |attri|
+      b.push shares_attribute_with(user, attri)
+    end
+    b.flatten.uniq.compact
+  end
+
+
+
 
 
 
