@@ -21,15 +21,11 @@ class EventsController < ApplicationController
     @attendance_count = @event.users.count + 1 #plus 1 for admin
     #@sorted_ratings = current_user.get_sorted_ratings_for(@event)
     
-    @shares_industry = current_user.shares_industry(@event)
-    @shares_location = current_user.shares_location(@event)
-    @shares_company = current_user.shares_company(@event)
-    @shares_last_company = current_user.shares_last_company(@event)
-    @shares_last_company_2 = current_user.shares_last_company_2(@event)
-    @shares_last_company_3 = current_user.shares_last_company_3(@event)
-    @shares_education = current_user.shares_education(@event)
-    @shares_last_education_1 = current_user.shares_last_education_1(@event)
-    @shares_last_education_2 = current_user.shares_last_education_2(@event)
+    @shares_industry = current_user.shares_attribute(@event, "industry")
+    @shares_location = current_user.shares_attribute(@event, "location_string")
+    @shares_companies = current_user.shares_attribute(@event, "company_names")
+    @shares_schools = current_user.shares_attribute(@event, "school_names")
+    
     
     respond_to do |format|
       format.html # show.html.erb

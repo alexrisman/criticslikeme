@@ -204,8 +204,9 @@ ul.likeme {
     float: left;
     
     &.navheader {
-      font-size: 18px;
-      font-weight: normal;
+      font-size: 2em;
+      line-height: 1em;
+      font-weight: 100;
       text-shadow: none;
       background-color: $teal;
       color: white;

@@ -24,25 +24,20 @@
       ul.nav.nav-tabs.nav-stacked.navlikeme#sticky
         li.header=link_to "People Like Me", "#"
         = render :partial => 'nav_li', :locals => { :name => current_user.industry, :count => @shares_industry.count }
-        = render :partial => 'nav_li', :locals => { :name => current_user.company_name, :count => @shares_company.count }
-        = render :partial => 'nav_li', :locals => { :name => current_user.last_company_name_1, :count => @shares_last_company.count }
-        = render :partial => 'nav_li', :locals => { :name => current_user.last_company_name_2, :count => @shares_last_company_2.count }
-        = render :partial => 'nav_li', :locals => { :name => current_user.last_company_name_3, :count => @shares_last_company_3.count }
+        -@shares_companies.each_with_index do |sc, index|
+          = render :partial => 'nav_li', :locals => { :name => current_user.company_names[index], :count => sc.count }
         = render :partial => 'nav_li', :locals => { :name => current_user.location_string, :count => @shares_location.count }
-        = render :partial => 'nav_li', :locals => { :name => current_user.school_1, :count => @shares_education.count }
-        = render :partial => 'nav_li', :locals => { :name => current_user.school_2, :count => @shares_last_education_1.count }
-        = render :partial => 'nav_li', :locals => { :name => current_user.school_3, :count => @shares_last_education_2.count }
+        -@shares_schools.each_with_index do |ss, index|
+          = render :partial => 'nav_li', :locals => { :name => current_user.school_names[index], :count => ss.count }
         li=link_to "All (#{@event.users.count})", "#cool"
+        
     .span9.noleftwide
       = render :partial => 'likeme_ul', :locals => { :name => current_user.industry, :verb_phrase => "are in", :user_array => @shares_industry }
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.company_name, :verb_phrase => "work(ed) for", :user_array => @shares_company }
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.last_company_name_1, :verb_phrase => "work(ed) for", :user_array => @shares_last_company }
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.last_company_name_2, :verb_phrase => "work(ed) for", :user_array => @shares_last_company_2 }
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.last_company_name_3, :verb_phrase => "work(ed) for", :user_array => @shares_last_company_3 }
+      -@shares_companies.each_with_index do |sc, index|
+        = render :partial => 'likeme_ul', :locals => { :name => current_user.company_names[index], :verb_phrase => "work(ed) for", :user_array => sc }
       = render :partial => 'likeme_ul', :locals => { :name => current_user.location_string, :verb_phrase => "are living in", :user_array => @shares_location }
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.school_1, :verb_phrase => "went to", :user_array => @shares_education }
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.school_2, :verb_phrase => "went to", :user_array => @shares_last_education_1 }
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.school_3, :verb_phrase => "went to", :user_array => @shares_last_education_2 }
+      -@shares_schools.each_with_index do |ss, index|
+        = render :partial => 'likeme_ul', :locals => { :name => current_user.school_names[index], :verb_phrase => "went to", :user_array => ss }
       = render :partial => 'likeme_ul', :locals => { :name => "cool", :verb_phrase => "may or may not be like you, but still might be ", :user_array => @event.users }
 
             
