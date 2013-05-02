@@ -446,14 +446,16 @@ class User < ActiveRecord::Base
         if f.include?(s)
           d.push u
         end
-        if d.length > 0
-          c.push d
-        end
+        # if d.length > 0
+        #   c.push d
+        # end
+        c.push d
       end
     end
-    if c.length > 0
-      c
-    end
+    c
+    # if c.length > 0
+    #   c
+    # end
   end
   def shares_single_attribute(attri, comparison, people)
     c = Array.new
@@ -464,9 +466,14 @@ class User < ActiveRecord::Base
         c.push u
       end
     end
-    if c.length > 0
-      c
-    end
+    # if c.length > 0
+    #   c
+    # end
+    c
+  end
+  def shares_attribute_list(event, attri)
+    a = shares_attribute(event, attri)
+    a.flatten.uniq
   end
  def shares_attribute(event, attri)
     a = coattendees(event)
