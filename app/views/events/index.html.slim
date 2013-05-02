@@ -15,28 +15,23 @@ h1 ="Welcome #{client_profile.first_name}"
     -@upcoming_events.each do |e|
       li 
         h3
-          -if e.admin == current_user
-            =image_tag "icon_crown.png", :class=>"crown", :alt=>"You created this event!"
-          =link_to e.name, e
-          .small=e.date
-        =link_to image_tag(e.banner.url), e
+          a href==event_path(e)
+            -if e.admin == current_user
+              =image_tag "icon_crown.png", :class=>"crown", :alt=>"You created this event!"
+            =e.name
+            .small=e.date
+            =image_tag(e.banner.url)
   h2 
     span.padleft Past Events
   ul.nav.nav-pills.nav-stacked#listevents
     -@past_events.each do |e|
       li 
         h3
-          -if e.admin == current_user
-            =image_tag "icon_crown.png", :class=>"crown", :alt=>"You created this event!"
-          =link_to e.name, e
-          .small=e.date
-        =link_to image_tag(e.banner.url), e
-/hr
+          a href==event_path(e)
+            -if e.admin == current_user
+              =image_tag "icon_crown.png", :class=>"crown", :alt=>"You created this event!"
+            =e.name
+            .small=e.date
+            =image_tag(e.banner.url)
 
-/-if @owned_events.length > 0
-/  h2 Events you have created
-/  ul.nav.nav-pills.nav-stacked
-/    -@owned_events.each do |e|
-/      li =link_to e.name, e
-/
 /= link_to 'Create a new Event', new_event_path

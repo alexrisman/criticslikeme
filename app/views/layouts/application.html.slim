@@ -13,19 +13,19 @@ html
     meta name="google-site-verification" content="43-38ExNRBd7uzVP36VP-ZeHACc3yFjg0BjbaDC_QD8"
   body id==controller.controller_name+controller.action_name
     .container
-      .navbar.navbar-inverse.navbar-static-top
+      .navbar.navbar-static-top
         .navbar-inner
           =link_to "Confr", root_path, :class=>"brand"
           ul.nav.pull-right
-            li.visible-desktop=link_to "About Us", home_about_path
             li=link_to image_tag("nav_about.png"), home_about_path
             -if current_user
-              li.visible-desktop= link_to pluralize(get_unread_message_count(current_user), "new message"), messages_path
-              li= link_to image_tag("nav_messages.png"), messages_path
-              li.visible-desktop=link_to "Log Out", logout_path
+              li
+                -if get_unread_message_count(current_user) > 0
+                  = link_to image_tag("nav_messages_new.png"), messages_path
+                -else
+                  = link_to image_tag("nav_messages.png"), messages_path
               li= link_to image_tag("nav_logout.png"), logout_path
             -else
-              li.visible-desktop =link_to "Log In with LinkedIn", linkedin_login_path
               li=link_to image_tag("nav_login.png"), linkedin_login_path
       ==yield
       hr

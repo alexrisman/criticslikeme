@@ -129,6 +129,10 @@ h2 {
 }
 
 ul#listevents {
+  a {
+    display: table;
+    width: 100%;
+  }
   li {
     
     h3 {
@@ -142,6 +146,7 @@ ul#listevents {
     }
     
     img {
+      margin-top: 1%;
       max-width: 100%;
       height: auto;
     }
@@ -229,3 +234,15 @@ ul.likeme {
     }
   }
 }
+
+
+
+.stick {
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+  border-radius: 0 0 0.5em 0.5em;
+  margin-left: 0;
+}
+#unalloc-span {padding-top:40px;}
+#sticky {}

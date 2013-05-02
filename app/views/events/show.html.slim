@@ -2,7 +2,7 @@
   .row.noleft
     h1 That event does not exist!.row
 -else
-  .row.noleft
+  .row-fluid.noleft
     h1#event
       =@event.name
       br
@@ -20,7 +20,8 @@
 
   .row
     .span3.visible-desktop
-      ul.nav.nav-tabs.nav-stacked
+      #sticky-anchor
+      ul.nav.nav-tabs.nav-stacked.navlikeme#sticky
         li.header=link_to "People Like Me", "#"
         = render :partial => 'nav_li', :locals => { :name => current_user.industry, :count => @shares_industry.count }
         = render :partial => 'nav_li', :locals => { :name => current_user.company_name, :count => @shares_company.count }
@@ -31,7 +32,7 @@
         = render :partial => 'nav_li', :locals => { :name => current_user.school_1, :count => @shares_education.count }
         = render :partial => 'nav_li', :locals => { :name => current_user.school_2, :count => @shares_last_education_1.count }
         = render :partial => 'nav_li', :locals => { :name => current_user.school_3, :count => @shares_last_education_2.count }
-        li=link_to "All (#{@event.users.count})", "#cool!"
+        li=link_to "All (#{@event.users.count})", "#cool"
     .span9.noleftwide
       = render :partial => 'likeme_ul', :locals => { :name => current_user.industry, :verb_phrase => "are in", :user_array => @shares_industry }
       = render :partial => 'likeme_ul', :locals => { :name => current_user.company_name, :verb_phrase => "work(ed) for", :user_array => @shares_company }
@@ -42,7 +43,7 @@
       = render :partial => 'likeme_ul', :locals => { :name => current_user.school_1, :verb_phrase => "went to", :user_array => @shares_education }
       = render :partial => 'likeme_ul', :locals => { :name => current_user.school_2, :verb_phrase => "went to", :user_array => @shares_last_education_1 }
       = render :partial => 'likeme_ul', :locals => { :name => current_user.school_3, :verb_phrase => "went to", :user_array => @shares_last_education_2 }
-      = render :partial => 'likeme_ul', :locals => { :name => "cool!", :verb_phrase => "may or may not be like you, but still might be ", :user_array => @event.users }
+      = render :partial => 'likeme_ul', :locals => { :name => "cool", :verb_phrase => "may or may not be like you, but still might be ", :user_array => @event.users }
 
             
 .row
