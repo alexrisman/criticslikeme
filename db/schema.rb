@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502184056) do
+ActiveRecord::Schema.define(:version => 20130502192935) do
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20130502184056) do
   add_index "receipts", ["notification_id"], :name => "index_receipts_on_notification_id"
 
   create_table "users", :force => true do |t|
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
@@ -113,23 +113,7 @@ ActiveRecord::Schema.define(:version => 20130502184056) do
     t.string   "title"
     t.string   "industry"
     t.string   "linkedin_url"
-    t.string   "last_company_name_1"
-    t.string   "last_title_1"
-    t.string   "last_industry_1"
-    t.string   "last_location_1"
-    t.string   "last_company_name_2"
-    t.string   "last_title_2"
-    t.string   "last_industry_2"
-    t.string   "last_location_2"
-    t.string   "last_company_name_3"
-    t.string   "last_title_3"
-    t.string   "last_industry_3"
-    t.string   "last_location_3"
     t.string   "location_string"
-    t.string   "school_1"
-    t.string   "school_2"
-    t.string   "school_3"
-    t.string   "company_name"
     t.text     "jobs"
     t.text     "schools"
     t.text     "school_names"

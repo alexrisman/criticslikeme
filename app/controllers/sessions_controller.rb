@@ -16,51 +16,18 @@ class SessionsController < ApplicationController
     @user.title = c.headline
     @user.industry = c.industry
     @user.email = c.email_address
-    #current = c.three_current_positions.all
-    (c.three_current_positions.all) ? @user.company_name = c.three_current_positions.all[0].company.name : false
     @user.linkedin_url = c.public_profile_url
-    if (arr = c.three_past_positions.all)
-      if arr[0]
-        @user.last_company_name_1 = arr[0].company.name
-        @user.last_title_1 = c.three_past_positions.all[0].title
-        @user.last_industry_1 = c.three_past_positions.all[0].company.industry
-      end
-      if arr[1]
-        @user.last_company_name_2 = arr[1].company.name
-        @user.last_title_2 = c.three_past_positions.all[1].title
-        @user.last_industry_2 = c.three_past_positions.all[1].company.industry
-      end
-      if arr[2]
-        @user.last_company_name_3 = arr[2].company.name
-        @user.last_title_3 = c.three_past_positions.all[2].title
-        @user.last_industry_3 = c.three_past_positions.all[2].company.industry
-      end
-    end
-    
-    if (ed = c.educations.all)
-      (ed[0]) ? @user.school_1 = ed[0].school_name : false
-      (ed[1]) ? @user.school_2 = ed[1].school_name : false
-      (ed[2]) ? @user.school_3 = ed[2].school_name : false
-    end
     if c.educations.all 
       @user.schools = c.educations.all
       a = Array.new
-      @user.schools.each do |s|
-        a.push s.school_name
-      end
-      @user.school_names = a.uniq
+      @user.school_names = @user.schools.collect { |j| j.school_name }.uniq
     end
     if c.positions.all 
       @user.jobs = c.positions.all
       a = Array.new
-      @user.jobs.each do |j|
-        a.push j.company.name
-      end
-      @user.company_names = a.uniq
+      @user.company_names = @user.jobs.collect { |j| j.company.name }.uniq
     end
        
-
-    (c.positions.all) ? @user.jobs = c.positions.all : false
     @user.name = [@user.first_name, " ", @user.last_name].join
     
 
