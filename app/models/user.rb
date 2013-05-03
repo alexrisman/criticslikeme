@@ -545,9 +545,11 @@ class User < ActiveRecord::Base
     a = attribute_list
     b = Array.new
     a.each do |attri|
-      b.push shares_attribute_with(user, attri)
+      if attri.kind_of?(String) || attri.kind_of?(Array)
+        b.push shares_attribute_with(user, attri)
+      end
     end
-    b.flatten.uniq.compact
+    c = b.flatten.uniq.compact
   end
 
 
