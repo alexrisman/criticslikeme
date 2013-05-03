@@ -130,30 +130,10 @@ ActiveRecord::Schema.define(:version => 20130502184056) do
     t.string   "school_2"
     t.string   "school_3"
     t.string   "company_name"
-<<<<<<< HEAD
-<<<<<<< HEAD
     t.text     "jobs"
     t.text     "schools"
     t.text     "school_names"
     t.text     "company_names"
-=======
-<<<<<<< HEAD
-    t.string   "school_names"
-    t.string   "company_names"
-    t.text     "jobs"
-    t.text     "schools"
-=======
-=======
->>>>>>> Integrate with user shares attributes
-    t.text     "jobs"
-    t.text     "schools"
-    t.string   "school_names"
-    t.string   "company_names"
-<<<<<<< HEAD
->>>>>>> Mobilfied landing page
->>>>>>> Mobilfied landing page
-=======
->>>>>>> Integrate with user shares attributes
   end
 
 end

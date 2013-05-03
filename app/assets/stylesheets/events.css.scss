@@ -32,12 +32,28 @@ $teal: #0badb3;
     }
   }
 }
-@media (min-width: 768px) {
-   #joinsplash {
-    height: 360px;
-    background-size: auto 420px;
-    background-repeat: no-repeat;
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #splash {
+    background-image: none;
+  }
+}
+
+@media (min-width: 980px){
+  #splash {
     background-image: url("header.png");
+  }
+}
+@media (min-width: 768px) {
+  #joinsplash {
+    background-image: url("header.png");
+  }
+}
+@media (min-width: 768px) {
+   #splash, #joinsplash {
+    height: 360px;
+    background-size: auto 450px;
+    background-repeat: no-repeat;
     background-position: bottom center;
     margin-bottom: 10px;
     width: 100%;
@@ -112,6 +128,7 @@ h2 {
 @media (min-width: 768px) {
   span.padleft {
     padding-left: 20px;
+    display: block;
   } 
 }
 
