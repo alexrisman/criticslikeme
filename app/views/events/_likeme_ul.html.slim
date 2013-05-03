@@ -1,8 +1,9 @@
 -if name
-  ul.likeme
-    li.nav-header="People who #{verb_phrase} #{name}"
+  ul.likeme id==name.tr(" ", "_")
+    li.navheader
+      span.padleft="People who #{verb_phrase} #{name}"
     -if user_array && user_array.count > 0
       -user_array.each do |u|
         = render :partial => 'user_li', :locals => { :u => u }
     -else
-      li ="There are no people on Confr right now who #{verb_phrase} #{name} right now. Check back again later."
+      li.none ="There are no people on Confr right now who #{verb_phrase} #{name} right now. Check back again later."
