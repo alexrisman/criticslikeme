@@ -15,7 +15,11 @@ class MessagesController < ApplicationController
   # GET /messages/1.json
   def show
     @user = User.find params[:user_id]
-    @common_ground = current_user.shared_list @user
+    if current_user == @user
+      @common_ground = ["Our records indicate that you are in fact you, and what you have in common with you is everything. What an incredible coincidence!"]
+    else
+      @common_ground = current_user.shared_list @user
+    end
     @messages = messages_between(current_user, @user)
     @message = Message.new
     
