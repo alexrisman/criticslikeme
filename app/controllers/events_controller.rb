@@ -25,12 +25,17 @@ class EventsController < ApplicationController
     @shares_location = current_user.shares_attribute(@event, "location_string")
     @shares_companies = current_user.shares_attribute(@event, "company_names")
     @shares_schools = current_user.shares_attribute(@event, "school_names")
+    @coattendees = current_user.coattendees(@event)
     
     
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
     end
+  end
+    def search
+    show
+    render :index
   end
 
   # GET /events/new

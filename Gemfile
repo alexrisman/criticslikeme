@@ -65,3 +65,6 @@ gem "aws-sdk"
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem "linkedin"
+
+#Searching
+gem 'ransack'
