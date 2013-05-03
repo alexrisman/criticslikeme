@@ -559,11 +559,12 @@ class User < ActiveRecord::Base
 
   def shared_list(user)
     a = attribute_list
-    b = Array.new
-    a.each do |attri|
-      b.push shares_attribute_with(user, attri)
-    end
-    b.flatten.uniq.compact
+    a.map {|attri| 
+      sa = shares_attribute_with(user, attri)
+      if sa && !sa.kind_of?(Array) && sa.acts_like_string?
+        sa
+      end
+    }.flatten.uniq.compact
   end
 
 

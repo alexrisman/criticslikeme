@@ -9,7 +9,11 @@ p#notice = notice
       em= @user.title
       br
       span.grey= @user.industry
-    h4 Common Ground
+    ul#commonground
+      li
+        h4 Common Ground
+      -@common_ground.each do |att|
+        li=att
   .span8  
     h2 
       span.padleft Messages

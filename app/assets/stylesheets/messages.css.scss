@@ -48,6 +48,11 @@ ul#listevents li:hover, ul#inbox li:hover {
 #profile {
   img {padding-right: 2%;}
 }
+ul#commonground {
+  clear: both;
+  li:first-child {list-style: none;}
+}
+
 ul.messages {
   list-style: none;
   margin: 0 auto;

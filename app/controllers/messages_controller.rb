@@ -15,6 +15,7 @@ class MessagesController < ApplicationController
   # GET /messages/1.json
   def show
     @user = User.find params[:user_id]
+    @common_ground = current_user.shared_list @user
     @messages = messages_between(current_user, @user)
     @message = Message.new
     
