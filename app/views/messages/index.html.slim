@@ -1,15 +1,16 @@
-h1 Messages
-
-table.table.table-hover#inbox
-  tr
-    th Messages between you and
-    th Last message sent
-    th 
-
+h2 
+  span.padleft Messages
+ul#inbox
   - @users.each do |u|
     -m = messages_between(current_user, u)
     -if (m.count > 0)
-      tr class==(any_unread?(m)  ? "unread" : "")
-        td = link_to u.name, view_messages_path(u)
-        td = link_to summarize(m.last.content, 10), view_messages_path(u)
-        td = link_to translate_time(m.last.created_at), view_messages_path(u)
+      li class==(any_unread?(m)  ? "unread" : "")
+        a href==view_messages_path(u)
+          =image_tag(u.picture_url)
+          h3=u.name
+          p
+            =translate_time(m.last.created_at)
+            br
+            =(m.last.sender == current_user)? "You said: " : "#{m.last.sender.first_name} said: "
+            span.grey=summarize(m.last.content, 10)
+      
