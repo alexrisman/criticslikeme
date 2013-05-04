@@ -17,24 +17,28 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
-    @attendance_count = @event.users.count + 1 #plus 1 for admin
-    #@sorted_ratings = current_user.get_sorted_ratings_for(@event)
-    
-    @shares_industry = current_user.shares_attribute(@event, "industry")
-    @shares_location = current_user.shares_attribute(@event, "location_string")
-    @shares_companies = current_user.shares_attribute(@event, "company_names")
-    @shares_schools = current_user.shares_attribute(@event, "school_names")
-    @coattendees = current_user.coattendees(@event)
-    
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @event }
+    @event = Event.find_by_id(params[:id])
+    if !@event
+      render :template => "sessions/notfound"
+    else
+      @attendance_count = @event.users.count + 1 #plus 1 for admin
+      #@sorted_ratings = current_user.get_sorted_ratings_for(@event)
+      
+      @shares_industry = current_user.shares_attribute(@event, "industry")
+      @shares_location = current_user.shares_attribute(@event, "location_string")
+      @shares_companies = current_user.shares_attribute(@event, "company_names")
+      @shares_schools = current_user.shares_attribute(@event, "school_names")
+      @coattendees = current_user.coattendees(@event)
+      
+      
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @event }
+      end
     end
   end
     def search
-    show
+    
     render :index
   end
 
