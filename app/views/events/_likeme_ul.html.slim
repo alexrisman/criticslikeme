@@ -1,7 +1,7 @@
 -if name
   ul.likeme id==name.tr(" ", "_")
     li.navheader
-      span.padleft="People who #{verb_phrase} #{name}"
+      span.padleft="People who #{verb_phrase} #{name} (#{user_array.count})"
     -if user_array && user_array.count > 0
       -user_array.each_with_index do |u, i|
         = render :partial => 'user_li', :locals => { :u => u, :hidemore => (i>7) ? "hidemore" : "showmore" }

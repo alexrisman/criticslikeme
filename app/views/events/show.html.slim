@@ -29,7 +29,7 @@
         = render :partial => 'nav_li', :locals => { :name => current_user.location_string, :count => @shares_location.count }
         -@shares_schools.each_with_index do |ss, index|
           = render :partial => 'nav_li', :locals => { :name => current_user.school_names[index], :count => ss.count }
-        li=link_to "All (#{@event.users.count})", "#cool"
+        li=link_to "All (#{@event.users.count - 1})", "#cool"
         
     .span9.noleftwide
       = render :partial => 'likeme_ul', :locals => { :name => current_user.industry, :verb_phrase => "are in", :user_array => @shares_industry }
