@@ -29,7 +29,9 @@ class EventsController < ApplicationController
       @shares_companies = current_user.shares_attribute(@event, "company_names")
       @shares_schools = current_user.shares_attribute(@event, "school_names")
       @coattendees = current_user.coattendees(@event)
-      
+      @shares_languages = current_user.shares_attribute(@event, "languages")
+      @shares_connections = current_user.shares_attribute_list(@event, "connections")
+
       @index = 0
       
       respond_to do |format|

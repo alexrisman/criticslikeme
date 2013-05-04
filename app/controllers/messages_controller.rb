@@ -21,7 +21,8 @@ class MessagesController < ApplicationController
       if current_user == @user
         @common_ground = ["Our records indicate that you are in fact you, and what you have in common with you is everything. What an incredible coincidence!"]
       else
-        @common_ground = current_user.shared_list @user
+        a = current_user.shared_list(@user).push current_user.shared_connections(@user)
+        @common_ground = a.flatten.compact
       end
       @messages = messages_between(current_user, @user)
       @message = Message.new

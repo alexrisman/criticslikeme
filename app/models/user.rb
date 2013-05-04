@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
  :schools,
  :jobs,
  :school_names,
- :company_names
+ :company_names,
+ :connections,
+ :languages
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   #validates_presence_of :password, :on => :create
@@ -20,6 +22,8 @@ class User < ActiveRecord::Base
   serialize :jobs
   serialize :school_names
   serialize :company_names
+  serialize :languages
+  serialize :connections
   has_and_belongs_to_many :events
   has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
   
@@ -533,6 +537,10 @@ class User < ActiveRecord::Base
       end
     end
   end
+  def shared_connections(user)
+    a = shares_attribute_with(user, "connections")
+    (shares_attribute_with(user, "connections")) ? a.map {|c| c[:name] + ", " + c[:headline]} : nil
+  end
 
   def attribute_list
     a = attributes
@@ -543,7 +551,11 @@ class User < ActiveRecord::Base
 
   def shorter_list
     a = attribute_list
-    b = ["jobs", "schools", "id", "created_at", "updated_at", "name", "email", "password_digest", "token", "linkedin_authhash", "linkedin_token", "linkedin_secret", "picture_url", "first_name", "last_name", "linkedin_url"]
+    b = ["jobs", "schools", "id", "created_at", 
+      "updated_at", "name", "email", "password_digest", 
+      "token", "linkedin_authhash", "linkedin_token", 
+      "linkedin_secret", "picture_url", "first_name", 
+      "last_name", "linkedin_url", "connections"]
     b.each do |u|
       a.delete(u)
     end
@@ -559,6 +571,9 @@ class User < ActiveRecord::Base
     c = b.flatten.uniq.compact
     d = c.map {|t| t.to_s}
   end
+
+
+
 
 
 

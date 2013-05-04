@@ -27,6 +27,26 @@ class SessionsController < ApplicationController
       a = Array.new
       @user.company_names = @user.jobs.collect { |j| j.company.name }.uniq
     end
+    if c.languages
+      a = c.languages.all
+      @user.languages = a.map {|l| l.language.name}
+      @user.languages.delete("English")
+    else
+      @user.languages = []
+    end
+    if c.connections.all
+      a = c.connections.all
+      @user.connections = []
+      a.each do |f|
+        n = "#{f.first_name}" + " " + "#{f.last_name}"
+        b = {name: n, headline: f.headline, 
+          url: (f.site_standard_profile_request) ? f.site_standard_profile_request.url : nil}
+        @user.connections.push b unless b[:url] == nil
+      end
+    end
+
+
+
        
     @user.name = [@user.first_name, " ", @user.last_name].join
     

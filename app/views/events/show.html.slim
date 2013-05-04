@@ -38,6 +38,9 @@
       = render :partial => 'likeme_ul', :locals => { :name => current_user.location_string, :verb_phrase => "are living in", :user_array => @shares_location }
       -@shares_schools.each_with_index do |ss, index|
         = render :partial => 'likeme_ul', :locals => { :name => current_user.school_names[index], :verb_phrase => "went to", :user_array => ss }
+      -@shares_languages.each_with_index do |ss, index|
+        = render :partial => 'likeme_ul', :locals => { :name => current_user.languages[index], :verb_phrase => "speak", :user_array => ss }
+      = render :partial => 'likeme_ul', :locals => { :name => " do", :verb_phrase => "know someone I", :user_array => @shares_connections }
       = render :partial => 'likeme_ul', :locals => { :name => "cool", :verb_phrase => "may or may not be like you, but still might be ", :user_array => @coattendees }
 
             
