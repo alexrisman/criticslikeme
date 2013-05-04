@@ -25,9 +25,9 @@ function sticky_relocate() {
   var window_top = $(window).scrollTop();
   var div_top = $('#sticky-anchor').offset().top;
   if (window_top > div_top) {
-    $('#sticky').addClass('stick');
+    $('#sticky').addClass('stick span3');
   } else {
-    $('#sticky').removeClass('stick');
+    $('#sticky').removeClass('stick span3');
   }
 }
 
