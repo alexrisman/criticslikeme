@@ -541,8 +541,17 @@ class User < ActiveRecord::Base
     b
   end
 
-  def shared_list(user)
+  def shorter_list
     a = attribute_list
+    b = ["jobs", "schools", "id", "created_at", "updated_at", "name", "email", "password_digest", "token", "linkedin_authhash", "linkedin_token", "linkedin_secret", "picture_url", "first_name", "last_name", "linkedin_url"]
+    b.each do |u|
+      a.delete(u)
+    end
+    a
+  end
+
+  def shared_list(user)
+    a = shorter_list
     b = Array.new
     a.each do |attri|
       b.push shares_attribute_with(user, attri)
