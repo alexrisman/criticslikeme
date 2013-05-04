@@ -30,6 +30,7 @@ class EventsController < ApplicationController
       @shares_schools = current_user.shares_attribute(@event, "school_names")
       @coattendees = current_user.coattendees(@event)
       
+      @index = 0
       
       respond_to do |format|
         format.html # show.html.erb
