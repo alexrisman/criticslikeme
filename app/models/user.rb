@@ -36,8 +36,8 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
   def default_values
-    self.languages = [] if self.languages.nil?
-    self.connections = [] if self.connections.nil?
+    self.languages ||= [] if self.languages.nil?
+    self.connections ||= [] if self.connections.nil?
   end
   
   #Password Stuffs
