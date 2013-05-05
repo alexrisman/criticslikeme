@@ -4,7 +4,7 @@ li class==hidemore
   -else
     =image_tag "default_profile.gif"
   h3=link_to "#{u.first_name} #{u.last_name}", view_messages_path(u)
-  small=link_to "View LinkedIn Profile", u.linkedin_url, :target => '_blank'
+  =link_to "View LinkedIn Profile", u.linkedin_url, :target => '_blank'
   p
     em= u.title
 
