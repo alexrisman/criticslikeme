@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   serialize :connections
   has_and_belongs_to_many :events
   has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
+  before_save :default_values
   
   #Token to store in cookie
   before_create { generate_token(:token) }
@@ -33,6 +34,10 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+  def default_values
+    self.languages = [] if self.languages.nil?
+    self.connections = [] if self.connections.nil?
   end
   
   #Password Stuffs
@@ -539,6 +544,7 @@ class User < ActiveRecord::Base
   end
   def shared_connections(user)
     a = shares_attribute_with(user, "connections")
+    
     (shares_attribute_with(user, "connections")) ? a.map {|c| c[:name] + ", " + c[:headline]} : nil
   end
 
