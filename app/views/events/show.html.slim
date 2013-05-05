@@ -29,6 +29,8 @@
         = render :partial => 'nav_li', :locals => { :name => current_user.location_string, :count => @shares_location.count }
         -@shares_schools.each_with_index do |ss, index|
           = render :partial => 'nav_li', :locals => { :name => current_user.school_names[index], :count => ss.count }
+        -@shares_languages.each_with_index do |ss, index|
+          = render :partial => 'nav_li', :locals => { :name => current_user.languages[index], :count => ss.count }
         li=link_to "All (#{@event.users.count - 1})", "#cool"
         
     .span9.noleftwide
@@ -40,7 +42,7 @@
         = render :partial => 'likeme_ul', :locals => { :name => current_user.school_names[index], :verb_phrase => "went to", :user_array => ss }
       -@shares_languages.each_with_index do |ss, index|
         = render :partial => 'likeme_ul', :locals => { :name => current_user.languages[index], :verb_phrase => "speak", :user_array => ss }
-      = render :partial => 'likeme_ul', :locals => { :name => " do", :verb_phrase => "know someone I", :user_array => @shares_connections }
+      /= render :partial => 'likeme_ul', :locals => { :name => " do", :verb_phrase => "know someone I", :user_array => @shares_connections }
       = render :partial => 'likeme_ul', :locals => { :name => "cool", :verb_phrase => "may or may not be like you, but still might be ", :user_array => @coattendees }
 
             

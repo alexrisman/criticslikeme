@@ -6,7 +6,10 @@ ul#inbox
     -if (m.count > 0)
       li class==(any_unread?(m)  ? "unread" : "")
         a href==view_messages_path(u)
-          =image_tag(u.picture_url)
+          -if u.picture_url
+            =image_tag u.picture_url
+          -else
+            =image_tag "default_profile.gif"
           h3=u.name
           p
             =translate_time(m.last.created_at)

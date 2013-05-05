@@ -3,7 +3,10 @@ p#notice = notice
   .span4#profile
     h2
       span.padleft =@user.name
-    =image_tag @user.picture_url, :class=>"pull-left"
+    -if @user.picture_url
+      =image_tag @user.picture_url, :class=>"pull-left"
+    -else
+      =image_tag "default_profile.gif", :class=>"pull-left"
     small=link_to "View LinkedIn Profile", @user.linkedin_url, :target => '_blank'
     p
       em= @user.title
@@ -14,6 +17,8 @@ p#notice = notice
         h4 Common Ground
       -@common_ground.each do |att|
         li=att
+      - if @common_ground.count < 1
+        p We could find any similarities based on your LinkedIn profiles. 
   .span8  
     h2 
       span.padleft Messages

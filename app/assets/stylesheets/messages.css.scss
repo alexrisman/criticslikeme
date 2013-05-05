@@ -31,6 +31,8 @@ ul#inbox {
     img {
       float: left;
       padding-right: 5px;
+      width: 80px;
+      height: auto;
     }
   }
 }
@@ -46,7 +48,10 @@ ul#listevents li:hover, ul#inbox li:hover {
 
 
 #profile {
-  img {padding-right: 2%;}
+  img {
+    padding-right: 2%;
+    width: 80px;
+    height: auto;}
 }
 ul#commonground {
   clear: both;
