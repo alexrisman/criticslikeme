@@ -1,10 +1,11 @@
--if (@user.events.nil? || @user.events.length < 1) && Event.last
-  .gototechconf data-url==join_event_path(Event.last.token)
+-if @closest_event
+  .goto data-url==join_event_path(@closest_event.token)
+  
 javascript:
   if (window.opener != null && window.opener.document && window.opener.document.getElementById("event") != null) {
     window.opener.location.reload();
     window.close()
   } else {
-    if ($(".gototechconf").length > 0) {window.location.replace($(".gototechconf").data("url"))}
+    if ($(".goto").length > 0) {window.location.replace($(".goto").data("url"))}
     else {window.location.replace("/");}
   }
