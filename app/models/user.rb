@@ -142,15 +142,9 @@ class User < ActiveRecord::Base
   end
 
   def coattendees(event)
-    a = Array.new
-    b = User.all :conditions => (self ? ["id != ?", self.id] : [])
-    b.each do |user|
-      if user.is_part_of?(event)
-        a.push user
-      end
-    end
-    a
+    User.all(:conditions => (["id !=?", self.id])).select {|u| u.is_part_of?(event)}
   end
+  
   def correlation_list(event)
     a = coattendees(event)
     c = Array.new

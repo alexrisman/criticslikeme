@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   has_many :interests
   has_and_belongs_to_many :users
   belongs_to :admin, :class_name => "User"
+  default_scope order("date")
   
   options = if Rails.env.production? && ENV['S3_BUCKET_NAME']
     {:storage => :s3,

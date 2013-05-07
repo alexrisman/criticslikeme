@@ -16,7 +16,7 @@
   
     .alert.alert-info#attendance_count.hidden-desktop
       strong="Hi #{current_user.name}. "
-      ="There are #{@attendance_count} attendees from this conference on Confr."
+      ="There are #{@coattendees.count} attendees from this conference on Confr."
 
   .row
     .span3.visible-desktop
@@ -31,7 +31,7 @@
           = render :partial => 'nav_li', :locals => { :name => current_user.school_names[index], :count => ss.count }
         -@shares_languages.each_with_index do |ss, index|
           = render :partial => 'nav_li', :locals => { :name => current_user.languages[index], :count => ss.count }
-        li=link_to "All (#{@event.users.count - 1})", "#cool"
+        li=link_to "All (#{@coattendees.count})", "#cool"
         
     .span9.noleftwide
       = render :partial => 'likeme_ul', :locals => { :name => current_user.industry, :verb_phrase => "are in", :user_array => @shares_industry }
