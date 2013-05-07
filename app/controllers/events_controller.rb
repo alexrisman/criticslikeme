@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = current_user.owned_events + current_user.events
-    @past_events = @events.select {|e| e.date < Time.now}
+    @past_events = @events.select {|e| e.date < Time.now}.reverse
     @upcoming_events = @events.select {|e| e.date > Time.now}
 
     respond_to do |format|
