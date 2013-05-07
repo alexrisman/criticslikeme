@@ -45,14 +45,10 @@ class SessionsController < ApplicationController
       end
     end
 
-
-
-       
     @user.name = [@user.first_name, " ", @user.last_name].join
-    
-
     @user.save!
 
+    @closest_event = Event.all.select {|e| e.date > Time.now}.first
   end
   
   def destroy
