@@ -68,5 +68,3 @@ gem "linkedin"
 
 #Searching
 gem 'ransack'
-#Maybe this will fix the timeout thing?
-gem 'pg'
