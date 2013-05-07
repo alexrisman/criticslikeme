@@ -30,7 +30,7 @@ class EventsController < ApplicationController
       @shares_schools = current_user.shares_attribute(@event, "school_names")
       @coattendees = current_user.coattendees(@event)
       @shares_languages = current_user.shares_attribute(@event, "languages")
-      @shares_connections = current_user.shares_attribute_list(@event, "connections")
+      #@shares_connections = current_user.shares_attribute_list(@event, "connections")
 
       @index = 0
       
