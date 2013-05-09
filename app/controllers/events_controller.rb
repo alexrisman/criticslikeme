@@ -18,6 +18,8 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find_by_id(params[:id])
+    @search = @event.users.search(params[:q])
+    @narusers = @search.result
     if !@event
       render :template => "sessions/notfound"
     else
@@ -40,10 +42,7 @@ class EventsController < ApplicationController
       end
     end
   end
-    def search
-    
-    render :index
-  end
+
 
   # GET /events/new
   # GET /events/new.json

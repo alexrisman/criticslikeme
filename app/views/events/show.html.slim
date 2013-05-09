@@ -34,6 +34,12 @@
         li=link_to "All (#{@coattendees.count})", "#cool"
         
     .span9.noleftwide
+      = search_form_for @search do |f|
+        .field
+          = f.label :name_or_school_names_or_company_names_or_location_string_cont, "Contains"
+          = f.text_field :name_or_school_names_or_company_names_or_location_string_or_industry_or_languages_cont
+        = f.hidden_field :events_token_cont, :value => @event.token
+        .actions = f.submit 'Search'
       = render :partial => 'likeme_ul', :locals => { :name => current_user.industry, :verb_phrase => "are in", :user_array => @shares_industry }
       -@shares_companies.each_with_index do |sc, index|
         = render :partial => 'likeme_ul', :locals => { :name => current_user.company_names[index], :verb_phrase => "work(ed) for", :user_array => sc }

@@ -1,5 +1,9 @@
 h1 Listing users
-
+/= search_form_for @search do |f|
+        .field
+          = f.label :name_cont, "Name Contains"
+          = f.text_field :name_cont
+        .actions = f.submit 'Search'
 table
   tr
     th Name

@@ -11,13 +11,14 @@ Belch::Application.routes.draw do
   end
   get "interest" => "interests#new", :as => "interest" #Delete later
 
-  resources :users, :only => [:create]
+  resources :users #, :only => [:create]
   #resources :ratings do
   #  collection {post :sort}
   #end
 
   get "home/index"
   get "home/about"
+
   
   #Linkedin routes
   get "auth/index" => "auth#index"
