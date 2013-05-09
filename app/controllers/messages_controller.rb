@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @users = (Message.pluck(:sender_id) + Message.pluck(:recipient_id)).uniq.delete_if {|x| x == current_user.id}.map{|x| User.find(x)}.reverse
+    @users = (Message.pluck(:sender_id) + Message.pluck(:recipient_id)).uniq.delete_if {|x| x == current_user.id}.map{|x| User.find_by_id(x)}.reverse.compact
 
     respond_to do |format|
       format.html # index.html.erb
