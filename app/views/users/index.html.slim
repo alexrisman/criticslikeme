@@ -6,19 +6,17 @@ h1 Listing users
         .actions = f.submit 'Search'
 table
   tr
-    th Name
-    th Email
-    th
+    th = sort_link @search, :shared_count, "Sorted by similarity to you"
     th
     th
 
   - @users.each do |user|
     tr
-      td =user.name
-      td=user.email
-      td = link_to 'Show', user
-      td = link_to 'Edit', edit_user_path(user)
-      td = link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
+      td = link_to user.name, view_messages_path(user)
+      td /=user.email
+      td /= link_to 'Show', user
+      td /= link_to 'Edit', edit_user_path(user)
+      td /= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
 
 br
 

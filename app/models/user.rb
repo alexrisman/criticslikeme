@@ -572,6 +572,11 @@ class User < ActiveRecord::Base
     d = c.map {|t| t.to_s}
   end
 
+  def shared_count(user)
+    a = shared_list(user)
+    a.count
+  end
+
 
 
 

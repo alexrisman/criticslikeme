@@ -11,7 +11,7 @@ Belch::Application.routes.draw do
   end
   get "interest" => "interests#new", :as => "interest" #Delete later
 
-  resources :users #, :only => [:create]
+  resources :users , :only => [:create, :index]
   #resources :ratings do
   #  collection {post :sort}
   #end
