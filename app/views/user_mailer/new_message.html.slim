@@ -1,6 +1,9 @@
 html
   body
-    h1="You received a message from #{@message.sender.name} on Confr!"
+    h1
+      =link_to "You received a message from #{@message.sender.name} on Confr!", view_messages_url(@message.sender)
     p
-      =link_to "Sign on and read the message", view_messages_url(@message.sender)
+      strong="#{@message.sender.name} said:"
+      =@message.content.split[0..(49)].join(" ") + (@message.content.split.size > 49 ? "... " : "") 
+      =link_to " Sign in to reply", view_messages_url(@message.sender)
     
