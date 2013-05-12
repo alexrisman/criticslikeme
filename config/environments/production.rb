@@ -19,6 +19,18 @@ Belch::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+  
+  # Action Mailer
+  config.action_controller.perform_caching = false
+  config.action_mailer.default_url_options = { :host => 'confr.us' }
+  ActionMailer::Base.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => ENV['EMAIL_USER'],
+    :password             => ENV['EMAIL_PASS'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH

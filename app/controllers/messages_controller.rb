@@ -50,6 +50,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
+        UserMailer.new_message(@message).deliver
         format.html { redirect_to view_messages_path(@message.recipient), notice: 'Message was successfully created.' }
         format.json { render json: @message, status: :created, location: @message }
       end
