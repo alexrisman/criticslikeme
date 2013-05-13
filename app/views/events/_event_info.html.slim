@@ -1,0 +1,15 @@
+.row-fluid.noleft
+  h1#event
+    =event.name
+    br
+    small=translate_time event.date
+  -if current_user == event.admin
+    p 
+      = link_to 'Edit ', edit_event_path(event)
+      ' | Send this link to invite other people to the event: 
+      code=join_event_url event.token
+  =image_tag event.banner.url, :class=>"event_banner"
+
+  .alert.alert-info#attendance_count.hidden-desktop
+    strong="Hi #{current_user.name}. "
+    ="There are #{count} attendees from this conference on Confr."

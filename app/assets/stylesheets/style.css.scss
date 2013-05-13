@@ -36,6 +36,15 @@ ul#interestList li{
   border-bottom: dashed thin black;
 }
 
+a {
+  form {
+    margin-bottom: 0;
+    
+    .input-append {
+      margin-bottom: 0;
+    }
+  }
+}
 
 /*Landing Page*/
 /*Mobile + Tablet version*/

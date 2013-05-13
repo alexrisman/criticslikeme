@@ -2,27 +2,22 @@
   .row.noleft
     h1 That event does not exist!.row
 -else
-  .row-fluid.noleft
-    h1#event
-      =@event.name
-      br
-      small=translate_time @event.date
-    -if current_user == @event.admin
-      p 
-        = link_to 'Edit ', edit_event_path(@event)
-        ' | Send this link to invite other people to the event: 
-        code=join_event_url @event.token
-    =image_tag @event.banner.url, :class=>"event_banner"
-  
-    .alert.alert-info#attendance_count.hidden-desktop
-      strong="Hi #{current_user.name}. "
-      ="There are #{@coattendees.count} attendees from this conference on Confr."
-
+  = render :partial => 'event_info', :locals => { :event => @event, :count => @coattendees.count }
   .row
     .span3.visible-desktop
       #sticky-anchor
       ul.nav.nav-tabs.nav-stacked.navlikeme#sticky
-        li.header=link_to "People Like Me", "#"
+        li
+          h2 
+            span.padleft People Like Me
+        li
+          a
+            = search_form_for @search do |f|
+              = f.hidden_field :events_token_cont, :value => @event.token
+              .input-append
+                = f.text_field :name_or_school_names_or_company_names_or_location_string_or_industry_or_languages_cont, :placeholder=>"Name, school, work, etc", :class=>"input-medium"
+                = f.submit 'Search', :class=>"btn"
+            
         = render :partial => 'nav_li', :locals => { :name => current_user.industry, :count => @shares_industry.count }
         -@shares_companies.each_with_index do |sc, index|
           = render :partial => 'nav_li', :locals => { :name => current_user.company_names[index], :count => sc.count }
@@ -34,12 +29,6 @@
         li=link_to "All (#{@coattendees.count})", "#cool"
         
     .span9.noleftwide
-      = search_form_for @search do |f|
-        .field
-          = f.label :name_or_school_names_or_company_names_or_location_string_cont, "Contains"
-          = f.text_field :name_or_school_names_or_company_names_or_location_string_or_industry_or_languages_cont
-        = f.hidden_field :events_token_cont, :value => @event.token
-        .actions = f.submit 'Search'
       = render :partial => 'likeme_ul', :locals => { :name => current_user.industry, :verb_phrase => "are in", :user_array => @shares_industry }
       -@shares_companies.each_with_index do |sc, index|
         = render :partial => 'likeme_ul', :locals => { :name => current_user.company_names[index], :verb_phrase => "work(ed) for", :user_array => sc }
