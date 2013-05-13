@@ -1,8 +1,20 @@
 h1 ="Welcome #{client_profile.first_name}"
 
+
 -if @events.length < 1
-  h2 You have not joined any events yet.
-  -if Event.last
+  h2 
+    span.padleft You haven't joined any events yet. Here's what's happening on Confr.
+  ul.nav.nav-pills.nav-stacked#listevents
+    -@all_events.each do |e|
+      li 
+        h3
+          a href==join_event_path(e.token)
+            -if e.admin == current_user
+              =image_tag "icon_crown.png", :class=>"crown", :alt=>"You created this event!"
+            =e.name
+            .small=e.date
+            =image_tag(e.banner.url)
+  /-if Event.last
     .alert 
       h4
         | Would you like to join the 
@@ -28,6 +40,18 @@ h1 ="Welcome #{client_profile.first_name}"
       li 
         h3
           a href==event_path(e)
+            -if e.admin == current_user
+              =image_tag "icon_crown.png", :class=>"crown", :alt=>"You created this event!"
+            =e.name
+            .small=e.date
+            =image_tag(e.banner.url)
+  h2 
+    span.padleft Other events on Confr
+  ul.nav.nav-pills.nav-stacked#listevents
+    -@other_events.each do |e|
+      li 
+        h3
+          a href==join_event_path(e.token)
             -if e.admin == current_user
               =image_tag "icon_crown.png", :class=>"crown", :alt=>"You created this event!"
             =e.name

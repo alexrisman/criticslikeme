@@ -7,6 +7,8 @@ class EventsController < ApplicationController
     @events = current_user.owned_events + current_user.events
     @past_events = @events.select {|e| e.date < Time.now}.reverse
     @upcoming_events = @events.select {|e| e.date > Time.now}
+    @all_events = Event.all
+    @other_events = @all_events.select {|e| !@events.include?(e) }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,8 +20,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find_by_id(params[:id])
-    @search = @event.users.search(params[:q])
-    @narusers = @search.result
+    @search = User.search(params[:q])
     if !@event
       render :template => "sessions/notfound"
     else
