@@ -38,6 +38,11 @@ class User < ActiveRecord::Base
   def default_values
     self.languages ||= [] if self.languages.nil?
     self.connections ||= [] if self.connections.nil?
+    self.schools ||= [] if self.schools.nil?
+    self.school_names ||= [] if self.school_names.nil?
+    self.jobs ||= [] if self.jobs.nil?
+    self.company_names ||= [] if self.company_names.nil?
+    
   end
   
   #Password Stuffs
