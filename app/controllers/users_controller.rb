@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     #@users = User.all
     @search = User.search(params[:q])
-    @users = @search.result
+    @users = @search.result.sort{|x, y| current_user.shared_count(y) <=> current_user.shared_count(x) }
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: current_user }
