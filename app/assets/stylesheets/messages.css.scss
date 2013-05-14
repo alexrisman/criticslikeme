@@ -2,17 +2,60 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-table#inbox {
-  td:first-child {
-    font-size: 24px;
+ul#inbox {
+  list-style: none;
+  margin: 0;
+  li {
+    display: table;
+    width: 96%;
+    padding: 2%;
+    a {
+      display: table;
+      width: 100%;
+    }
+    a:hover {text-decoration: none;}
+    
+    
+    h3 {
+      display: inline-block;
+      margin: 0;
+      margin-top: -10px;
+      color: black;
+    }
+    p {
+      color: #444;
+    }
+    span.darkgrey {
+      color: #444;
+    }
+    img {
+      float: left;
+      padding-right: 5px;
+      width: 80px;
+      height: auto;
+    }
   }
-  
-  a {display: block;}
 }
-tr.unread {
+
+ul#listevents li:hover, ul#inbox li:hover {
+  background-color: #eee;
+}
+
+.unread {
   font-weight: bold;
   
+}
+
+
+#profile {
+  img {
+    padding-right: 2%;
+    width: 80px;
+    height: auto;}
+}
+ul#commonground {
+  clear: both;
+  li:first-child {list-style: none;}
 }
 
 ul.messages {
@@ -44,13 +87,8 @@ form#new_message {
   
   textarea {
     height: 100px;
-    width: 600px;
+    width: 100%;
     margin-top: 10px;
     margin-right: 10px;
-  }
-  
-  .btn {
-    height: 100px;
-    width: 190px;
   }
 }

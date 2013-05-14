@@ -58,10 +58,13 @@ gem "squeel"
 gem "geocoder" #Do we need this? 
 
 # file upload management
-gem "paperclip", "~> 2.7"
+gem "paperclip", "~> 3.0"
 gem "aws-sdk"
 
 # LinkedIn stuff
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem "linkedin"
+
+#Searching
+gem 'ransack'

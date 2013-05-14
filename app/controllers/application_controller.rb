@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     if current_user
       @client = LinkedIn::Client.new("q1iihtxz0jdp", "zcRTqafcns6LqZwG")
       @client.authorize_from_access(current_user.linkedin_token, current_user.linkedin_secret)
-      @client.profile(:fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections", "educations", "three-past-positions", "three-current-positions"])
+      @client.profile(:fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections", "educations", "three-past-positions", "three-current-positions", "positions", "languages"])
     end
   end
   helper_method :client_profile
@@ -28,5 +28,13 @@ class ApplicationController < ActionController::Base
   def authorize 
     redirect_to root_path alert: "Not logged in!" if current_user.nil?
   end
+
+  def authorize_edit(user)
+    current_user == user
+  end
+  def authorize_edit2(event)
+    current_user.id == event.admin_id
+  end
+
 end
 

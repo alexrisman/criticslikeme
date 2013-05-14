@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130423205244) do
+ActiveRecord::Schema.define(:version => 20130504081630) do
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
@@ -23,10 +23,14 @@ ActiveRecord::Schema.define(:version => 20130423205244) do
     t.string   "name"
     t.datetime "date"
     t.text     "details"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "admin_id"
     t.string   "token"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
   end
 
   create_table "events_users", :id => false, :force => true do |t|
@@ -94,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20130423205244) do
   add_index "receipts", ["notification_id"], :name => "index_receipts_on_notification_id"
 
   create_table "users", :force => true do |t|
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
@@ -109,23 +113,13 @@ ActiveRecord::Schema.define(:version => 20130423205244) do
     t.string   "title"
     t.string   "industry"
     t.string   "linkedin_url"
-    t.string   "last_company_name_1"
-    t.string   "last_title_1"
-    t.string   "last_industry_1"
-    t.string   "last_location_1"
-    t.string   "last_company_name_2"
-    t.string   "last_title_2"
-    t.string   "last_industry_2"
-    t.string   "last_location_2"
-    t.string   "last_company_name_3"
-    t.string   "last_title_3"
-    t.string   "last_industry_3"
-    t.string   "last_location_3"
     t.string   "location_string"
-    t.string   "school_1"
-    t.string   "school_2"
-    t.string   "school_3"
-    t.string   "company_name"
+    t.text     "jobs"
+    t.text     "schools"
+    t.text     "school_names"
+    t.text     "company_names"
+    t.text     "languages"
+    t.text     "connections"
   end
 
 end

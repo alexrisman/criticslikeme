@@ -16,3 +16,4 @@
 
 #Ignore all uploaded photos
 /public/system/photos
+/public/system/events
