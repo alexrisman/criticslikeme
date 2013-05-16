@@ -1,21 +1,15 @@
-h1 Listing users
+= render :partial => 'events/event_info', :locals => { :event => @event, :count => @coattendees.count }
 
-table
-  tr
-    th Name
-    th Email
-    th
-    th
-    th
 
-  - @users.each do |user|
-    tr
-      td =user.name
-      td=user.email
-      td = link_to 'Show', user
-      td = link_to 'Edit', edit_user_path(user)
-      td = link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
 
-br
-
-= link_to 'New User', new_user_path
+.span3
+  h2
+    span.padleft Search
+  = search_form_for @search do |f|
+    = f.hidden_field :events_token_cont, :value => @event.token
+    .input-append
+      = f.text_field :name_or_school_names_or_company_names_or_location_string_or_industry_or_languages_cont, :placeholder=>"Name, school, work, etc", :class=>"input-medium"
+      = f.submit 'Search', :class=>"btn"
+      
+.span9.noleftwide
+  = render :partial => 'events/likeme_ul', :locals => { :name => @search_value, :verb_phrase => "are relevant to", :user_array => @users}

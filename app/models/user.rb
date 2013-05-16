@@ -3,34 +3,30 @@ class User < ActiveRecord::Base
  :first_name, 
  :last_name, 
  :title,
- :company_name,
  :industry, 
  :linkedin_url,
- :last_company_name_1,
- :last_title_1, 
- :last_industry_1,
- :last_location_1,
- :last_company_name_2, 
- :last_title_2, 
- :last_industry_2, 
- :last_location_2, 
- :last_company_name_3, 
- :last_title_3, 
- :last_industry_3, 
- :last_location_3, 
  :location_string, 
- :school_1, 
- :school_2, 
- :school_3, 
+ :schools,
+ :jobs,
+ :school_names,
+ :company_names,
+ :connections,
+ :languages
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   #validates_presence_of :password, :on => :create
   #before_save { |user| user.email = email.downcase }
   has_many :ratings
   has_many :interests, through: :ratings
-  
+  serialize :schools 
+  serialize :jobs
+  serialize :school_names
+  serialize :company_names
+  serialize :languages
+  serialize :connections
   has_and_belongs_to_many :events
   has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
+  before_save :default_values
   
   #Token to store in cookie
   before_create { generate_token(:token) }
@@ -38,6 +34,15 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+  def default_values
+    self.languages ||= [] if self.languages.nil?
+    self.connections ||= [] if self.connections.nil?
+    self.schools ||= [] if self.schools.nil?
+    self.school_names ||= [] if self.school_names.nil?
+    self.jobs ||= [] if self.jobs.nil?
+    self.company_names ||= [] if self.company_names.nil?
+    
   end
   
   #Password Stuffs
@@ -142,15 +147,9 @@ class User < ActiveRecord::Base
   end
 
   def coattendees(event)
-    a = Array.new
-    b = User.all :conditions => (self ? ["id != ?", self.id] : [])
-    b.each do |user|
-      if user.is_part_of?(event)
-        a.push user
-      end
-    end
-    a
+    User.all(:conditions => (["id !=?", self.id])).select {|u| u.is_part_of?(event)}
   end
+  
   def correlation_list(event)
     a = coattendees(event)
     c = Array.new
@@ -267,150 +266,328 @@ class User < ActiveRecord::Base
 
   #Linkedin Matching
 
-  def shares_location(event)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if location_string == u.location_string
-        b.push u
+  # def shares_location(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if location_string == u.location_string
+  #       b.push u
+  #     end
+  #   end
+  #   b
+  # end
+
+  # def shares_industry(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if industry == u.industry
+  #       b.push u
+  #     end
+  #   end
+  #   b
+  # end
+
+  # def shares_company(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if company_name 
+  #       if company_name == u.company_name
+  #         b.push u
+  #       elsif company_name == u.last_company_name_1
+  #         b.push u
+  #       elsif company_name == u.last_company_name_2
+  #         b.push u
+  #       elsif company_name == u.last_company_name_3
+  #         b.push u
+  #       end
+  #     end
+  #   end
+  #   b
+  # end
+
+  # def shares_last_company(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if last_company_name_1 
+  #       if last_company_name_1 == u.company_name
+  #         b.push u
+  #       elsif last_company_name_1 == u.last_company_name_1
+  #         b.push u
+  #       elsif last_company_name_1 == u.last_company_name_2
+  #         b.push u
+  #       elsif last_company_name_1 == u.last_company_name_3
+  #         b.push u
+  #       end
+  #     end
+  #   end
+  #   b
+  # end
+  # def shares_last_company_2(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if last_company_name_2 
+  #       if last_company_name_2 == u.company_name
+  #         b.push u
+  #       elsif last_company_name_2 == u.last_company_name_1
+  #         b.push u
+  #       elsif last_company_name_2 == u.last_company_name_2
+  #         b.push u
+  #       elsif last_company_name_2 == u.last_company_name_3
+  #         b.push u
+  #       end
+  #     end
+  #   end
+  #   b
+  # end
+  # def shares_last_company_3(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if last_company_name_3 
+  #       if last_company_name_3 == u.company_name
+  #         b.push u
+  #       elsif last_company_name_3 == u.last_company_name_1
+  #         b.push u
+  #       elsif last_company_name_3 == u.last_company_name_2
+  #         b.push u
+  #       elsif last_company_name_3 == u.last_company_name_3
+  #         b.push u
+  #       end
+  #     end
+  #   end
+  #   b
+  # end
+
+  # def shares_education(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if school_1 
+  #       if school_1 == u.school_1
+  #         b.push u
+  #       elsif school_1 == u.school_2
+  #         b.push u
+  #       elsif school_1 == u.school_3
+  #         b.push u
+  #       end
+  #     end
+  #   end
+  #   b
+  # end
+  # def shares_last_education_1(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if school_2 
+  #       if school_2 == u.school_1
+  #         b.push u
+  #       elsif school_2 == u.school_2
+  #         b.push u
+  #       elsif school_2 == u.school_3
+  #         b.push u
+  #       end
+  #     end
+  #   end
+  #   b
+  # end
+  # def shares_last_education_2(event)
+  #   a = coattendees(event)
+  #   b = Array.new
+  #   a.each do |u|
+  #     if school_3 
+  #       if school_3 == u.school_1
+  #         b.push u
+  #       elsif school_3 == u.school_2
+  #         b.push u
+  #       elsif school_3 == u.school_3
+  #         b.push u
+  #       end
+  #     end
+  #   end
+  #   b
+  # end
+
+  # def school_names
+  #   a = schools
+  #   b = Array.new
+  #   a.each do |s|
+  #     b.push s.school_name
+  #   end
+  #   b.uniq
+  # end
+  # def company_names
+  #   a = jobs
+  #   b = Array.new
+  #   a.each do |p|
+  #     b.push p.company.name
+  #   end
+  #   b.uniq
+  # end
+
+  def shares_attributes(attri, comparison, people)
+    c = Array.new
+    comparison.each do |s|
+      d = Array.new
+      people.each do |u|
+        e = u.attributes
+        if e[attri]
+          f = e[attri]
+        else
+          f = []
+        end
+        if f.include?(s)
+          d.push u
+        end
+        # if d.length > 0
+        #   c.push d
+        # end
+      end
+      c.push d
+    end
+    c
+    # if c.length > 0
+    #   c
+    # end
+  end
+  def shares_single_attribute(attri, comparison, people)
+    c = Array.new
+    people.each do |u|
+      e = u.attributes
+      f = e[attri]
+      if f == comparison
+        c.push u
       end
     end
+    # if c.length > 0
+    #   c
+    # end
+    c
+  end
+  def shares_attribute_list(event, attri)
+    a = shares_attribute(event, attri)
+    a.flatten.uniq
+  end
+ def shares_attribute(event, attri)
+    a = coattendees(event)
+    b = attributes
+    c = b[attri]
+    if c.kind_of?(Array)
+      shares_attributes(attri, c, a)
+    else
+      shares_single_attribute(attri, c, a)
+    end
+  end
+  # def shares_schools(event)
+  #   a = coattendees(event)
+  #   b = school_names
+  #   c = Array.new
+  #   b.each do |s|
+  #     a.each do |u|
+  #       d = Array.new
+  #       if u.school_names.include?(s)
+  #         d.push u
+  #       end
+  #       c.push d
+  #     end
+  #   end
+  #   c
+  # end
+  # def shares_schools_with(user)
+  #   b = school_names
+  #   c = Array.new
+  #   b.each do |s|
+  #     if user.school_names.include?(s)
+  #       c.push s
+  #     end
+  #   end
+  #   c
+  # end
+  def shares_attributes_with(mine, his)
+    d = Array.new
+    mine.each do |m|
+      if his.include?(m)
+        d.push m
+      end
+    end
+    if d.length > 0
+      d
+    end
+  end
+  def shares_single_attribute_with(mine, hers)
+    if mine == hers
+      mine
+    end
+  end
+
+    
+  def shares_attribute_with(user, attri)
+    b = attributes
+    c = attributes[attri]
+    d = user.attributes
+    if d[attri]
+      e = d[attri]
+    else
+      e = []
+    end
+    if c.kind_of?(Array)
+      shares_attributes_with(c, e)
+    else
+      if c == e
+        c
+      end
+    end
+  end
+  def shared_connections(user)
+    a = shares_attribute_with(user, "connections")
+    
+    (shares_attribute_with(user, "connections")) ? a.map {|c| c[:name] + ", " + c[:headline]} : nil
+  end
+
+  def attribute_list
+    a = attributes
+    b = Array.new
+    a.each_key {|key| b.push key}
     b
   end
 
-  def shares_industry(event)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if industry == u.industry
-        b.push u
-      end
+  def shorter_list
+    a = attribute_list
+    b = ["jobs", "schools", "id", "created_at", 
+      "updated_at", "name", "email", "password_digest", 
+      "token", "linkedin_authhash", "linkedin_token", 
+      "linkedin_secret", "picture_url", "first_name", 
+      "last_name", "linkedin_url", "connections"]
+    b.each do |u|
+      a.delete(u)
     end
-    b
+    a
   end
 
-  def shares_company(event)
-    a = coattendees(event)
+  def shared_list(user)
+    a = shorter_list
     b = Array.new
-    a.each do |u|
-      if company_name 
-        if company_name == u.company_name
-          b.push u
-        elsif company_name == u.last_company_name_1
-          b.push u
-        elsif company_name == u.last_company_name_2
-          b.push u
-        elsif company_name == u.last_company_name_3
-          b.push u
-        end
-      end
+    a.each do |attri|
+      b.push shares_attribute_with(user, attri)
     end
-    b
+    c = b.flatten.uniq.compact
+    d = c.map {|t| t.to_s}
   end
 
-  def shares_last_company(event)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if last_company_name_1 
-        if last_company_name_1 == u.company_name
-          b.push u
-        elsif last_company_name_1 == u.last_company_name_1
-          b.push u
-        elsif last_company_name_1 == u.last_company_name_2
-          b.push u
-        elsif last_company_name_1 == u.last_company_name_3
-          b.push u
-        end
-      end
-    end
-    b
-  end
-  def shares_last_company_2(event)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if last_company_name_2 
-        if last_company_name_2 == u.company_name
-          b.push u
-        elsif last_company_name_2 == u.last_company_name_1
-          b.push u
-        elsif last_company_name_2 == u.last_company_name_2
-          b.push u
-        elsif last_company_name_2 == u.last_company_name_3
-          b.push u
-        end
-      end
-    end
-    b
-  end
-  def shares_last_company_3(event)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if last_company_name_3 
-        if last_company_name_3 == u.company_name
-          b.push u
-        elsif last_company_name_3 == u.last_company_name_1
-          b.push u
-        elsif last_company_name_3 == u.last_company_name_2
-          b.push u
-        elsif last_company_name_3 == u.last_company_name_3
-          b.push u
-        end
-      end
-    end
-    b
+  def shared_count(user)
+    a = shared_list(user)
+    a.count
   end
 
-  def shares_education(event)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if school_1 
-        if school_1 == u.school_1
-          b.push u
-        elsif school_1 == u.school_2
-          b.push u
-        elsif school_1 == u.school_3
-          b.push u
-        end
-      end
-    end
-    b
-  end
-  def shares_last_education_1(event)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if school_2 
-        if school_2 == u.school_1
-          b.push u
-        elsif school_2 == u.school_2
-          b.push u
-        elsif school_2 == u.school_3
-          b.push u
-        end
-      end
-    end
-    b
-  end
-  def shares_last_education_2(event)
-    a = coattendees(event)
-    b = Array.new
-    a.each do |u|
-      if school_3 
-        if school_3 == u.school_1
-          b.push u
-        elsif school_3 == u.school_2
-          b.push u
-        elsif school_3 == u.school_3
-          b.push u
-        end
-      end
-    end
-    b
-  end
+
+
+
+
+
+
 
 
 
