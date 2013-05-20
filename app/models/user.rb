@@ -545,7 +545,7 @@ class User < ActiveRecord::Base
     a = self.connections
     b = user.connections
     d = shares_attributes_with(a, b)
-    (d[0]) ? e = d.select {|c| c.first_name != "private" && c.first_name != nil && c.headline_string != nil} : e = []
+    (d) ? e = d.select {|c| c.first_name != "private" && c.first_name != nil && c.headline_string != nil} : e = []
     (e[0]) ? e.map {|f| f.full_name + ", " + f.headline_string} : nil
   end
 
