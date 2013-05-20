@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20130520022821) do
 
   create_table "connections", :force => true do |t|
@@ -66,6 +67,38 @@ ActiveRecord::Schema.define(:version => 20130520022821) do
     t.datetime "updated_at",   :null => false
   end
 
+<<<<<<< HEAD
+=======
+  create_table "metrics", :force => true do |t|
+    t.string   "ipaddress"
+    t.integer  "user_id"
+    t.string   "location"
+    t.string   "user_agent"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.string   "type"
+    t.text     "body"
+    t.string   "subject",              :default => ""
+    t.integer  "sender_id"
+    t.string   "sender_type"
+    t.integer  "conversation_id"
+    t.boolean  "draft",                :default => false
+    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                              :null => false
+    t.integer  "notified_object_id"
+    t.string   "notified_object_type"
+    t.string   "notification_code"
+    t.string   "attachment"
+    t.boolean  "global",               :default => false
+    t.datetime "expires"
+  end
+
+  add_index "notifications", ["conversation_id"], :name => "index_notifications_on_conversation_id"
+
+>>>>>>> 1a0507c14d2d933739fdb3b2f86b42fd1051c3de
   create_table "ratings", :force => true do |t|
     t.integer  "stars"
     t.datetime "created_at",  :null => false

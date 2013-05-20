@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :ratings
   has_many :interests, through: :ratings
   has_and_belongs_to_many :connections
+  has_many :metrics
   serialize :schools 
   serialize :jobs
   serialize :school_names
