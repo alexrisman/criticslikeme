@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   #before_save { |user| user.email = email.downcase }
   has_many :ratings
   has_many :interests, through: :ratings
+  has_many :metrics
+  
   serialize :schools 
   serialize :jobs
   serialize :school_names
