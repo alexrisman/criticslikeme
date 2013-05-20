@@ -6,6 +6,19 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
   
+  def record_metric
+    m = Metric.new
+    if current_user
+      m.user = current_user
+    end
+    m.ipaddress = request.remote_ip
+    m.location = request.fullpath
+    m.user_agent = request.user_agent
+    m.save!
+  end
+  helper_method :record_metric
+  before_filter :record_metric
+  
   def client_profile
     if current_user
       @client = LinkedIn::Client.new("q1iihtxz0jdp", "zcRTqafcns6LqZwG")

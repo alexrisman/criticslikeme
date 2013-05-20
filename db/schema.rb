@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130504081630) do
+ActiveRecord::Schema.define(:version => 20130520010352) do
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(:version => 20130504081630) do
     t.boolean  "is_read"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "metrics", :force => true do |t|
+    t.string   "ipaddress"
+    t.integer  "user_id"
+    t.string   "location"
+    t.string   "user_agent"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "notifications", :force => true do |t|
