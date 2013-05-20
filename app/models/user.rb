@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
  :jobs,
  :school_names,
  :company_names,
- :connections,
  :languages
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
@@ -18,12 +17,12 @@ class User < ActiveRecord::Base
   #before_save { |user| user.email = email.downcase }
   has_many :ratings
   has_many :interests, through: :ratings
+  has_and_belongs_to_many :connections
   serialize :schools 
   serialize :jobs
   serialize :school_names
   serialize :company_names
   serialize :languages
-  serialize :connections
   has_and_belongs_to_many :events
   has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
   before_save :default_values
@@ -542,9 +541,11 @@ class User < ActiveRecord::Base
     end
   end
   def shared_connections(user)
-    a = shares_attribute_with(user, "connections")
-    
-    (shares_attribute_with(user, "connections")) ? a.map {|c| c[:name] + ", " + c[:headline]} : nil
+    a = self.connections
+    b = user.connections
+    d = shares_attributes_with(a, b)
+    (d[0]) ? e = d.select {|c| c.first_name != "private" && c.first_name != nil && c.headline_string != nil} : e = []
+    (e[0]) ? e.map {|f| f.full_name + ", " + f.headline_string} : nil
   end
 
   def attribute_list
@@ -560,7 +561,7 @@ class User < ActiveRecord::Base
       "updated_at", "name", "email", "password_digest", 
       "token", "linkedin_authhash", "linkedin_token", 
       "linkedin_secret", "picture_url", "first_name", 
-      "last_name", "linkedin_url", "connections"]
+      "last_name", "linkedin_url"]
     b.each do |u|
       a.delete(u)
     end
