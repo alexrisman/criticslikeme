@@ -68,3 +68,6 @@ gem "linkedin"
 
 #Searching
 gem 'ransack'
+
+#analytics and pinging
+gem 'newrelic_rpm'
