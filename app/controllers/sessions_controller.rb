@@ -61,8 +61,6 @@ class SessionsController < ApplicationController
 
     @user.name = [@user.first_name, " ", @user.last_name].join
     @user.save!
-
-    @closest_event = Event.all(:order => "date").select {|e| e.date && e.date > Time.now}.first
   end
   
   def destroy
