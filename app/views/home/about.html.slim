@@ -1,23 +1,39 @@
-h1.centertext 
+h1.centertext.webelieve
   em We believe in starting great conversations
-h2
-  span.padleft Our Team
-ul#listus
-  li
-    =image_tag "yee.png", :class=> "img-polaroid"
-    h3 
-      | Yee Wai 
-      .small (The Coder)
-    p Yee is an undergraduate senior at Northwestern University studying Computer Science within the McCormick School of Engineering. Yee was a Web Apprentice at GOOD Worldwide, LLC over the summer in Los Angeles, CA, and was also previously working as an intern at the Northwestern HARP Project (educational software). When Yee is not coding in Ruby on Rails, she dreaming about coding in rails, as well as visualizing a killer front end user design.
-  li
-    =image_tag "alex.png", :class=> "img-polaroid"
-    h3 
-      | Alex Risman 
-      .small (The Mather)
-    p Alex is an undergraduate senior at Northwestern University studying Economics and Applied Mathematics. Alex has recently been working as a research assistant for the Northwestern Institute on Complex Systems (NICO). Alex enjoys uncovering insights from "Big Data", and presenting these insights to users in order to enrich their lives. Alex's secret algorithm is what makes this site different from the rest.
-  li
-    =image_tag "patrick.png", :class=> "img-polaroid"
-    h3 
-      | Patrick Hadley 
-      .small (The MBAer)
-    p Patrick is a second year MBA student at the Kellogg School of Managment, studying Entrepreneurship, Marketing, Design and Operations. He was previously working as an Aerospace Engineer at Honeywell Aerospace, and met up with Alex and Yee at Northwestern's NUvention Web course, in which the three of them came up with the idea to help make networking at conferences just a little less awkward for people.
+.row
+  .span3.visible-desktop
+    #sticky-anchor
+    ul.nav.nav-tabs.nav-stacked.navlikeme#sticky
+      li
+        h2 
+          span.padleft About Confr
+      li=link_to "How it works", "#howitworks"
+      li=link_to "FAQ", "#faq"
+      li=link_to "Meet the Team", "#Team"
+  .span9.noleftwide
+    ul.likeme
+      li.navheader#howitworks
+        span.padleft How it Works
+      li.about
+        p Confr is a webapp that allows you to connect with other conference attendees prior to the conference. We match you up with other attendees based on similar interests and experiences, to help reduce the awkwardness of networking at conferences.
+        p To use Confr simply just:
+        ul
+          li Click on the link: www.confr.us
+          li Log-in with your LinkedIn account info
+          li Join the conference you’ll be attending
+          li See people who share similar experiences and interests as you
+        p What's next? - Now, you can either send attendees a message, use their picture to find them at the conference, or just view their full LinkedIn profile ahead of time. The idea is to provide "icebreakers" that give attendees something in common to start a conversation with. We suggest you log in periodically up until the conference, to check to see who else has joined.
+      li.navheader#faq
+        span.padleft Frequently Asked Questions
+      li.about
+        ul.qa
+          li.q How is this different than other conference tools/apps?
+          li.a At Confr, we focus solely on enabling networking at your conferences.We focus just on this one goal, and we feel we can do it better than anyone else out there right now
+          li.q Is it a native app?
+          li.a No, we felt that having an app that people had to download was adding an unnecessary barrier for users 
+          li.q Which events has Confr been at in the past?
+          li.a We’ve been at three conferences in the last month, and more events each week.  The three conferences were the Kellogg Tech Conference, Entrepreneurs@nu, and Greater
+
+    = render :partial => 'events/likeme_ul', :locals => { :name => "Team", :verb_phrase => "are part of the Confr", :user_array => @users}
+    
+  

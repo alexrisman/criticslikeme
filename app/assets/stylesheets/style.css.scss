@@ -113,3 +113,37 @@ ul#listus {
     }
   }
 }
+
+h1.webelieve {
+  font-weight: 200;
+}
+
+ul.likeme {
+  li.about {
+    width: 96%;
+    padding: 2%;
+    
+    p {
+      font-size: 16;
+      line-height: 20px;
+      margin-bottom: .75em;
+    }
+    
+    ul {
+      li {
+        width: 100%;
+        padding-top: 0;
+        list-style: disc;
+      }
+    }
+    
+    ul.qa {
+      margin-left: 0;
+      li.q {
+        font-size: 24px;
+        padding-top: 10px;
+        margin-left: 0;
+      }
+    }
+  }
+}
