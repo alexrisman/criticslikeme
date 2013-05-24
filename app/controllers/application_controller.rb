@@ -2,9 +2,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   def current_user
-    @current_user ||=User.find_by_token!(cookies[:user_token]) if cookies[:user_token]
+    @current_user ||=User.find_by_token(cookies[:user_token]) if cookies[:user_token]
   end
   helper_method :current_user
+  
+  def record_metric
+    m = Metric.new
+    if current_user
+      m.user = current_user
+    end
+    m.ipaddress = request.remote_ip
+    m.location = request.fullpath
+    m.user_agent = request.user_agent
+    m.save!
+  end
+  helper_method :record_metric
+  before_filter :record_metric
   
   def client_profile
     if current_user

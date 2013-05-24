@@ -34,21 +34,33 @@ class SessionsController < ApplicationController
     else
       @user.languages = []
     end
-    # if c.connections.all
-    #   a = c.connections.all
-    #   @user.connections = []
-    #   a.each do |f|
-    #     n = "#{f.first_name}" + " " + "#{f.last_name}"
-    #     b = {name: n, headline: f.headline, 
-    #       url: (f.site_standard_profile_request) ? f.site_standard_profile_request.url : nil}
-    #     @user.connections.push b unless b[:url] == nil
-    #   end
-    # end
+    if c.connections.all
+      a = c.connections.all
+      a.each do |f|
+        di = f.id
+        if Connection.find_by_l_id(di)
+          c = Connection.find_by_l_id(di)
+          if !@user.connections.include?(c)
+            @user.connections << c
+          end
+        else
+          c = Connection.new
+          c.first_name = f.first_name
+          c.last_name = f.last_name
+          c.full_name = "#{f.first_name}" + " " + "#{f.last_name}"
+          c.headline_string = f.headline
+          (f.location) ? c.location = f.location.name : false
+          c.l_id = f.id
+          c.picture_url = f.picture_url
+          (f.site_standard_profile_request) ? c.profile_url = f.site_standard_profile_request.url : false
+          c.save!
+          @user.connections << c
+        end
+      end
+    end
 
     @user.name = [@user.first_name, " ", @user.last_name].join
     @user.save!
-
-    @closest_event = Event.all(:order => "date").select {|e| e.date && e.date > Time.now}.first
   end
   
   def destroy

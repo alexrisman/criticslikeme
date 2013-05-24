@@ -13,6 +13,7 @@ group :development do
   gem 'sqlite3'
   gem "debugger"
   gem "better_errors"
+  gem 'railroady'
 end
 
 
@@ -68,3 +69,6 @@ gem "linkedin"
 
 #Searching
 gem 'ransack'
+
+#analytics and pinging
+gem 'newrelic_rpm'
