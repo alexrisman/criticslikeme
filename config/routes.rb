@@ -6,6 +6,7 @@ Belch::Application.routes.draw do
   
   get "events/join/:token" => "events#join", :as =>"join_event"
   post "events/joining" => "events#joining", :as =>"joining_event"
+  match "demo" => "events#join", :defaults => {token: Event.first.token}
   resources :events, :except => :destroy do
     resources :interests
   end

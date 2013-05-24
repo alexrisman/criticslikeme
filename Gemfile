@@ -13,6 +13,7 @@ group :development do
   gem 'sqlite3'
   gem "debugger"
   gem "better_errors"
+  gem 'railroady'
 end
 
 
