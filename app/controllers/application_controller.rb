@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_unread_message_count
   
   def authorize 
-    redirect_to root_path alert: "Not logged in!" if current_user.nil?
+    redirect_to loginplz_path if current_user.nil?
   end
 
   def authorize_edit(user)

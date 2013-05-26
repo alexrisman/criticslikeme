@@ -19,6 +19,8 @@ Belch::Application.routes.draw do
 
   get "home/index"
   get "home/about"
+  
+  get "sessions/notloggedin", :as => "loginplz"
 
   
   #Linkedin routes
