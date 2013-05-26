@@ -9,6 +9,7 @@ class HomeController < ApplicationController
   def recommend
   end
 
-  def info
+  def about
+    @users = [User.find_by_name("Yee Wai"), User.find_by_name("Alex Risman"), User.find_by_name("Patrick Hadley")].compact
   end
 end
