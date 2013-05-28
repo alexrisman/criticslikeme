@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @events = current_user.owned_events + current_user.events
     @past_events = @events.select {|e| e.date < Time.now}.reverse
     @upcoming_events = @events.select {|e| e.date > Time.now}
-    @all_events = Event.all
+    @all_events = Event.all.reverse
     @other_events = @all_events.select {|e| !@events.include?(e) }
 
     respond_to do |format|

@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130504081630) do
+ActiveRecord::Schema.define(:version => 20130520022821) do
+
+  create_table "connections", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "l_id"
+    t.string   "profile_url"
+    t.string   "location"
+    t.string   "headline_string"
+    t.string   "picture_url"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "full_name"
+  end
+
+  create_table "connections_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "connection_id"
+  end
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
@@ -52,6 +70,15 @@ ActiveRecord::Schema.define(:version => 20130504081630) do
     t.boolean  "is_read"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "metrics", :force => true do |t|
+    t.string   "ipaddress"
+    t.integer  "user_id"
+    t.string   "location"
+    t.string   "user_agent"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "notifications", :force => true do |t|
@@ -119,7 +146,6 @@ ActiveRecord::Schema.define(:version => 20130504081630) do
     t.text     "school_names"
     t.text     "company_names"
     t.text     "languages"
-    t.text     "connections"
   end
 
 end
