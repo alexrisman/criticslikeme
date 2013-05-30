@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :events
   has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
   before_save :default_values
+  has_many :poops
   
   #Token to store in cookie
   before_create { generate_token(:token) }
@@ -542,19 +543,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def shares_connections(event)
-    a = self.connections.map {|c| c.id}
-    b = self.connections
-    #b = User.joins(:connections).where('connections.id' => a).all.uniq
-    d = []
-    e = []
-    b.each do |c|
-      d.push c.users.joins{:events}.where{{'events.id' => event.id} and (id != my{id})}.all
-      d.flatten.uniq
-      e.push d
-    end
-    e
-  end
 
 
 
@@ -601,6 +589,37 @@ class User < ActiveRecord::Base
     a.count
   end
 
+  def shares_connections(event)
+    a = self.connections.map {|c| c.id}
+    b = self.connections
+    #b = User.joins(:connections).where('connections.id' => a).all.uniq
+    d = []
+    e = []
+    b.each do |c|
+      d.push c.users.joins{:events}.where{{'events.id' => event.id} and (id != my{id})}.all
+      d.flatten.uniq
+      e.push d
+    end
+    e
+  end
+
+  def asses
+    Poop.where('user_id' => id).includes([:ass])
+  end
+
+  def shared_asses(event, type)
+    a = asses.where('ass_type' => type).map {|arse| arse.ass}.uniq
+    c = []
+    eid = event.id
+    a.each do |arse|
+      b = []
+      q = arse.users.joins{:events}.where{(events.id == eid) & (id != my{id})}
+      b.push q
+      c.push b.flatten.uniq
+    end
+    c
+  end
+  
 
 
 
