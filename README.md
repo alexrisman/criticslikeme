@@ -1,4 +1,4 @@
-Belch
+Confr
 =============
 Beer recommendations. Yay.
-http://belchapp.herokuapp.com/
+http://Confrapp.herokuapp.com/
