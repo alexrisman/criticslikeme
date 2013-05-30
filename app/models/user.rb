@@ -50,6 +50,12 @@ class User < ActiveRecord::Base
   def self.authenticate(token, password)
     find_by_token(token).try(:authenticate, password)
   end
+  
+  #Cron Job'd 
+  def self.updateFromLI
+    puts "Ohai. Alex should fill this in. The function name is self.updateFromLI"
+  end
+  
   #highest rating
   def highest_rating
   	ratings.max_by do |element|
