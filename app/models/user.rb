@@ -547,6 +547,23 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def shares_connections(event)
+    a = self.connections.map {|c| c.id}
+    b = self.connections
+    #b = User.joins(:connections).where('connections.id' => a).all.uniq
+    d = []
+    e = []
+    b.each do |c|
+      d.push c.users.joins{:events}.where{{'events.id' => event.id} and (id != my{id})}.all
+      d.flatten.uniq
+      e.push d
+    end
+    e
+  end
+
+
+
   def shared_connections(user)
     a = self.connections
     b = user.connections
