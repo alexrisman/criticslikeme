@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Belch::Application.load_tasks
+Confr::Application.load_tasks
