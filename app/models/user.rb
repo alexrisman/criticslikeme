@@ -52,9 +52,97 @@ class User < ActiveRecord::Base
     find_by_token(token).try(:authenticate, password)
   end
   
+  
   #Cron Job'd 
   def self.updateFromLI
-    puts "Ohai. Alex should fill this in. The function name is self.updateFromLI"
+    User.all.each do |u|
+      u.updateFromLI
+    end
+  end
+  
+  def updateFromLI
+    if (linkedin_authhash)
+      client = LinkedIn::Client.new("q1iihtxz0jdp", "zcRTqafcns6LqZwG")
+      client.authorize_from_access(linkedin_token, linkedin_secret)
+      c = client.profile(:fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections", "educations", "three-past-positions", "three-current-positions", "positions", "languages", "skills"])
+      
+      update_attributes(
+        :location_string => c.location.name,
+        :first_name => c.first_name,
+        :last_name => c.last_name,
+        :name => [c.first_name, " ", c.last_name].join,
+        :picture_url => c.picture_url,
+        :title => c.headline,
+        :industry => c.industry,
+        :email => c.email_address,
+        :linkedin_url => c.public_profile_url
+        )
+      
+      
+      if c.positions
+        c.positions.all.each do |p|
+          f = Industry.find_or_create_by_name(p.company.industry)
+          f.poops.find_or_create_by_user_id(id)
+
+          f = Company.find_or_create_by_name(p.company.name)
+          f.poops.find_or_create_by_user_id(id)
+        end
+      end
+
+      if c.educations
+        c.educations.all.each do |p|
+          f = School.find_or_create_by_name(p.school_name)
+          f.poops.find_or_create_by_user_id(id)
+        end
+      end
+
+      if c.skills
+        c.skills.all.each do |p|
+          f = Skill.find_or_create_by_name(p.skill.name)
+          f.poops.find_or_create_by_user_id(id)
+        end
+      end
+
+      if c.languages
+        c.languages.all.each do |p|
+          f = Language.find_or_create_by_name(p.language.name)
+          f.poops.find_or_create_by_user_id(id)
+        end
+      end
+
+      if c.industry
+        f = Industry.find_or_create_by_name(c.industry)
+        f.poops.find_or_create_by_user_id(id)
+      end
+
+      if c.location
+        f = Location.find_or_create_by_name(c.location.name)
+        f.poops.find_or_create_by_user_id(id)
+      end
+
+      if c.connections
+        c.connections.all.each do |f|
+          di = f.id
+          if con=Connection.find_by_l_id(di)
+            if !con.users.include?(self)
+              con.poops.find_or_create_by_user_id(id)
+            end
+          else
+            con = Connection.new
+            con.first_name = f.first_name
+            con.last_name = f.last_name
+            con.full_name = "#{f.first_name}" + " " + "#{f.last_name}"
+            con.headline_string = f.headline
+            (f.location) ? c.location = f.location.name : false
+            con.l_id = f.id
+            con.picture_url = f.picture_url
+            (f.site_standard_profile_request) ? con.profile_url = f.site_standard_profile_request.url : false
+            con.save!
+            con.poops.find_or_create_by_user_id(id)
+          end
+        end
+      end
+    end
   end
   
   #highest rating
