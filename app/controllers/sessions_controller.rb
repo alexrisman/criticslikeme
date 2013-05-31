@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       :linkedin_secret => omniauth['credentials']['secret']
     )
     
-    cookies[:user_token] = @user.token
+    cookies[:user_token] ={ :value =>  @user.token, :expires => Time.now + 20.days}
     
     if (!@user.name) 
       @user.updateFromLI
