@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   
   #Cron Job'd 
   def self.updateFromLI
-    User.all.each do |u|
+    User.where{updated_at > (Date.today - 20.days)}.each do |u|
       u.updateFromLI
     end
   end
