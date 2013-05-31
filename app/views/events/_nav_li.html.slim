@@ -1,2 +1,2 @@
 -if name
-  li=link_to "#{name} (#{count})", "##{name.tr(" ", "_")}"
+  li=link_to "#{name} (#{count})", "##{name.gsub(/\W/, '_')}"

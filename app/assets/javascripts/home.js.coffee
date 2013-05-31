@@ -26,3 +26,7 @@ $(document).ready ->
   $(".viewmorebtn").click ->
     $(this).parent().find(".hidemore").css({display: "block";})
     $(this).css({display: "none";})
+    
+  $("#sticky a").click ->
+    event.preventDefault();
+    $("html, body").animate({scrollTop: $($(this).attr("href")).offset().top }, 2000);
