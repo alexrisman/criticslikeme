@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
         )
       
       
-      if c.positions
+      if c.positions && c.positions.all
         c.positions.all.each do |p|
           f = Industry.find_or_create_by_name(p.company.industry)
           f.poops.find_or_create_by_user_id(id)
@@ -89,21 +89,21 @@ class User < ActiveRecord::Base
         end
       end
 
-      if c.educations
+      if c.educations && c.educations.all
         c.educations.all.each do |p|
           f = School.find_or_create_by_name(p.school_name)
           f.poops.find_or_create_by_user_id(id)
         end
       end
 
-      if c.skills
+      if c.skills && c.skills.all
         c.skills.all.each do |p|
           f = Skill.find_or_create_by_name(p.skill.name)
           f.poops.find_or_create_by_user_id(id)
         end
       end
 
-      if c.languages
+      if c.languages && c.languages.all
         c.languages.all.each do |p|
           f = Language.find_or_create_by_name(p.language.name)
           f.poops.find_or_create_by_user_id(id)
@@ -120,7 +120,7 @@ class User < ActiveRecord::Base
         f.poops.find_or_create_by_user_id(id)
       end
 
-      if c.connections
+      if c.connections && c.connections.all
         c.connections.all.each do |f|
           di = f.id
           if con=Connection.find_by_l_id(di)
@@ -143,6 +143,8 @@ class User < ActiveRecord::Base
         end
       end
     end
+    print "."
+    $stdout.flush
   end
   
   #highest rating
