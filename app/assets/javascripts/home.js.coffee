@@ -30,3 +30,7 @@ $(document).ready ->
   $("#sticky a").click ->
     event.preventDefault();
     $("html, body").animate({scrollTop: $($(this).attr("href")).offset().top }, 2000);
+    
+  $(".dynamic_btn").click ->
+    $(this).text($(this).data("msg"))
+    $(this).addClass("disabled")

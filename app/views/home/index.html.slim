@@ -3,7 +3,7 @@
   p Help people network and discover similar interests and experiences at your event.
   p#join 
     =link_to "Find out more", home_about_path, :class=> "btn btn-success btn-large info"
-    =link_to "Log In with LinkedIn and get started", linkedin_login_path, :class=> "btn btn-success btn-large"
+    =link_to "Log In with LinkedIn and get started", linkedin_login_path, :class=> "btn btn-success btn-large dynamic_btn", :data => {:msg => "Logging in..."}
     
 .whitebg
   h2
