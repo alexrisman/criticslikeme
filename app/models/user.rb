@@ -123,28 +123,52 @@ class User < ActiveRecord::Base
         f.poops.find_or_create_by_user_id(id)
       end
 
-      if c.connections && c.connections.all
-        c.connections.all.each do |f|
-          di = f.id
-          if con=Connection.find_by_l_id(di)
-            if !con.users.include?(self)
-              con.poops.find_or_create_by_user_id(id)
-            end
-          else
-            con = Connection.new
-            con.first_name = f.first_name
-            con.last_name = f.last_name
-            con.full_name = "#{f.first_name}" + " " + "#{f.last_name}"
-            con.headline_string = f.headline
-            (f.location) ? c.location = f.location.name : false
-            con.l_id = f.id
-            con.picture_url = f.picture_url
-            (f.site_standard_profile_request) ? con.profile_url = f.site_standard_profile_request.url : false
-            con.save!
-            con.poops.find_or_create_by_user_id(id)
-          end
+      if c.connections && connectinos = c.connections.all
+        id_list = connectinos.map {|co| co.id}
+        already_list = Connection.where('l_id' => id_list).includes(:users, :poops)
+        already_list.each do |co|
+          co.poops.find_or_create_by_user_id(self.id)
+        end
+        c_id_list = asses_by_type('Connection').map {|c| c.l_id}
+        connectinonos = connectinos.select {|co| !c_id_list.include?(co.id)}
+        connectinonos.each do |f|
+          con = Connection.new
+          con.first_name = f.first_name
+          con.last_name = f.last_name
+          con.full_name = "#{f.first_name}" + " " + "#{f.last_name}"
+          con.headline_string = f.headline
+          (f.location) ? c.location = f.location.name : false
+          con.l_id = f.id
+          con.picture_url = f.picture_url
+          (f.site_standard_profile_request) ? con.profile_url = f.site_standard_profile_request.url : false
+          con.save!
+          con.poops.create_by_user_id(id)
         end
       end
+
+
+
+      #   connectinos.each do |f|
+      #     di = f.id
+      #     if con=Connection.find_by_l_id(di)
+      #       if !con.users.include?(self)
+      #         con.poops.find_or_create_by_user_id(id)
+      #       end
+      #     else
+      #       con = Connection.new
+      #       con.first_name = f.first_name
+      #       con.last_name = f.last_name
+      #       con.full_name = "#{f.first_name}" + " " + "#{f.last_name}"
+      #       con.headline_string = f.headline
+      #       (f.location) ? c.location = f.location.name : false
+      #       con.l_id = f.id
+      #       con.picture_url = f.picture_url
+      #       (f.site_standard_profile_request) ? con.profile_url = f.site_standard_profile_request.url : false
+      #       con.save!
+      #       con.poops.find_or_create_by_user_id(id)
+      #     end
+      #   end
+      # end
     end
     print "."
     $stdout.flush
@@ -721,6 +745,8 @@ class User < ActiveRecord::Base
     end
     c
   end
+
+
   
 
 
