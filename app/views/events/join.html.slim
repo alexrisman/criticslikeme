@@ -17,10 +17,10 @@
       -if current_user
         = form_tag joining_event_path, :class=>"inline join_form" do
           = hidden_field_tag :event_id, @event.id
-          = submit_tag "Join!", :class=>"btn btn-large btn-success"
-        =link_to "No thanks", root_path, {:class=>"btn btn-danger nothanks_btn"}
+          = submit_tag "Join!", :class=>"btn btn-large btn-success dynamic_btn", :data => {:msg => "Joining Event..."}
+        =link_to "No thanks", root_path, :class=>"btn btn-danger nothanks_btn dynamic_btn", :data => {:msg => "Rejecting Event"}
       -else
-        =link_to "Log In with LinkedIn", linkedin_login_path, :class=> "btn btn-large btn-success join_form", :target=>"_new"
+        =link_to "Log In with LinkedIn", linkedin_login_path, :class=> "btn btn-large btn-success join_form dynamic_btn", :target=>"_new", :data => {:msg => "Logging in..."}
       p=@event.details
   
   

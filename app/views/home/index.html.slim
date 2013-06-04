@@ -1,5 +1,18 @@
 #splash
   h1 Break the ice
   p Help people network and discover similar interests and experiences at your event.
-  p#join =link_to "Log In with LinkedIn and get started", linkedin_login_path, :class=> "btn btn-success btn-large"
+  p#join 
+    =link_to "Find out more", home_about_path, :class=> "btn btn-success btn-large info"
+    =link_to "Log In with LinkedIn and get started", linkedin_login_path, :class=> "btn btn-success btn-large dynamic_btn", :data => {:msg => "Logging in..."}
+    
+.whitebg
+  h2
+    span.padleft Join other event organizers who use Confr
+  .centertext.banners
+    -@banners.each do |ban|
+      =image_tag ban
+    
+  
+/h2
+/  span.padleft Hear what others are saying
 /Should display alert messages
