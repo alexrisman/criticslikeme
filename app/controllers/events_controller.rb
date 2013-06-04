@@ -24,18 +24,21 @@ class EventsController < ApplicationController
     if !@event
       render :template => "sessions/notfound"
     else
-      @attendance_count = @event.users.count + 1 #plus 1 for admin
-      #@sorted_ratings = current_user.get_sorted_ratings_for(@event)
       
-      @shares_industry = current_user.shared_asses(@event, "Industry")
-      @shares_location = current_user.shared_asses(@event, "Location")
-      @shares_companies = current_user.shared_asses(@event, "Company")
-      @shares_schools = current_user.shared_asses(@event, "School")
       @coattendees = current_user.coattendees(@event)
-      @shares_languages = current_user.shared_asses(@event, "Language")
-      #@shares_connections = current_user.shares_attribute_list(@event, "connections")
-
-      @index = 0
+      @attendance_count = @coattendees.count + 1 #plus 1 for admin
+      
+      @shared_asses = []
+      @shared_zero = []
+      @names = ["Industry", "Company", "Location", "School", "Language"]
+      current_user.poops.where(:ass_type => @names).each do |poop|
+        u = poop.ass.users.joins{:events}.where("events.id = ? AND users.id != ?", @event.id, current_user.id)
+        if u.count > 0
+          @shared_asses.push [poop.ass, u]
+        else
+          @shared_zero.push [poop.ass, u]
+        end
+      end
       
       respond_to do |format|
         format.html # show.html.erb

@@ -1,12 +1,12 @@
 -if name
   ul.likeme id==name.gsub(/\W/, '_')
     li.navheader
-      span.padleft="People who #{verb_phrase} #{name} (#{user_array.count})"
+      span.padleft="People who #{translateAssTypeToVerb kind} #{name} (#{user_array.count})"
     -if user_array && user_array.count > 0
       -user_array.each_with_index do |u, i|
         = render :partial => 'events/user_li', :locals => { :u => u, :hidemore => (i>7) ? "hidemore" : "showmore" }
     -else
-      li.none ="There are no people on Confr right now who #{verb_phrase} #{name} right now. Check back again later."
+      li.none ="There are no people on Confr right now who #{translateAssTypeToVerb kind} #{name} right now. Check back again later."
     
     li.viewmorebtn
       a.btn.btn-large href=="##{name.tr(" ", "_")}" View more users like me
