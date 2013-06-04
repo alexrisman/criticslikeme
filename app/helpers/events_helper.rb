@@ -13,6 +13,8 @@ module EventsHelper
         "know "
       when "all"
         "may or may not be like you, but still might be "
+      when "about"
+        "are part of the Confr"
       else 
         "are in "
     end
