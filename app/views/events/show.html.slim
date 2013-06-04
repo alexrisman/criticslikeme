@@ -17,15 +17,17 @@
               .input-append
                 = f.text_field :name_or_school_names_or_company_names_or_location_string_or_industry_or_languages_cont, :placeholder=>"Name, school, work, etc", :class=>"input-medium"
                 = f.submit 'Search', :class=>"btn"
-            
-        = render :partial => 'nav_li', :locals => { :name => current_user.industry, :count => @shares_industry.count }
+
+        -@shares_industry.each_with_index do |sc, index|   
+          = render :partial => 'nav_li', :locals => { :name => current_user.asses_by_type('Industry')[index].name, :count => sc.count }
         -@shares_companies.each_with_index do |sc, index|
-          = render :partial => 'nav_li', :locals => { :name => current_user.company_names[index], :count => sc.count }
-        = render :partial => 'nav_li', :locals => { :name => current_user.location_string, :count => @shares_location.count }
+          = render :partial => 'nav_li', :locals => { :name => current_user.asses_by_type('Company')[index].name, :count => sc.count }
+        -@shares_location.each_with_index do |ss, index|
+          = render :partial => 'nav_li', :locals => { :name => current_user.asses_by_type('Location')[index].name, :count => ss.count }
         -@shares_schools.each_with_index do |ss, index|
-          = render :partial => 'nav_li', :locals => { :name => current_user.school_names[index], :count => ss.count }
+          = render :partial => 'nav_li', :locals => { :name => current_user.asses_by_type('School')[index].name, :count => ss.count }
         -@shares_languages.each_with_index do |ss, index|
-          = render :partial => 'nav_li', :locals => { :name => current_user.languages[index], :count => ss.count }
+          = render :partial => 'nav_li', :locals => { :name => current_user.asses_by_type('Language')[index].name, :count => ss.count }
         li=link_to "All (#{@coattendees.count})", "#cool"
         
     .span9.noleftwide
@@ -36,14 +38,16 @@
         .input-append
           = f.text_field :name_or_school_names_or_company_names_or_location_string_or_industry_or_languages_cont, :placeholder=>"Name, school, work, etc", :class=>"input-xlarge"
           = f.submit 'Search', :class=>"btn"
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.industry, :verb_phrase => "are in", :user_array => @shares_industry }
+      -@shares_industry.each_with_index do |ss, index|
+        = render :partial => 'likeme_ul', :locals => { :name => current_user.asses_by_type('Industry')[index].name, :verb_phrase => "are in", :user_array => ss }
       -@shares_companies.each_with_index do |sc, index|
-        = render :partial => 'likeme_ul', :locals => { :name => current_user.company_names[index], :verb_phrase => "work(ed) for", :user_array => sc }
-      = render :partial => 'likeme_ul', :locals => { :name => current_user.location_string, :verb_phrase => "are living in", :user_array => @shares_location }
+        = render :partial => 'likeme_ul', :locals => { :name => current_user.asses_by_type('Company')[index].name, :verb_phrase => "work(ed) for", :user_array => sc }
+      -@shares_location.each_with_index do |ss, index|
+        = render :partial => 'likeme_ul', :locals => { :name => current_user.asses_by_type('Location')[index].name, :verb_phrase => "are living in", :user_array => ss }
       -@shares_schools.each_with_index do |ss, index|
-        = render :partial => 'likeme_ul', :locals => { :name => current_user.school_names[index], :verb_phrase => "went to", :user_array => ss }
+        = render :partial => 'likeme_ul', :locals => { :name => current_user.asses_by_type('School')[index].name, :verb_phrase => "went to", :user_array => ss }
       -@shares_languages.each_with_index do |ss, index|
-        = render :partial => 'likeme_ul', :locals => { :name => current_user.languages[index], :verb_phrase => "speak", :user_array => ss }
+        = render :partial => 'likeme_ul', :locals => { :name => current_user.asses_by_type('Language')[index].name, :verb_phrase => "speak", :user_array => ss }
       /= render :partial => 'likeme_ul', :locals => { :name => " do", :verb_phrase => "know someone I", :user_array => @shares_connections }
       = render :partial => 'likeme_ul', :locals => { :name => "cool", :verb_phrase => "may or may not be like you, but still might be ", :user_array => @coattendees }
 

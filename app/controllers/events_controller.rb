@@ -27,12 +27,12 @@ class EventsController < ApplicationController
       @attendance_count = @event.users.count + 1 #plus 1 for admin
       #@sorted_ratings = current_user.get_sorted_ratings_for(@event)
       
-      @shares_industry = current_user.shares_attribute(@event, "industry")
-      @shares_location = current_user.shares_attribute(@event, "location_string")
-      @shares_companies = current_user.shares_attribute(@event, "company_names")
-      @shares_schools = current_user.shares_attribute(@event, "school_names")
+      @shares_industry = current_user.shared_asses(@event, "Industry")
+      @shares_location = current_user.shared_asses(@event, "Location")
+      @shares_companies = current_user.shared_asses(@event, "Company")
+      @shares_schools = current_user.shared_asses(@event, "School")
       @coattendees = current_user.coattendees(@event)
-      @shares_languages = current_user.shares_attribute(@event, "languages")
+      @shares_languages = current_user.shared_asses(@event, "Language")
       #@shares_connections = current_user.shares_attribute_list(@event, "connections")
 
       @index = 0

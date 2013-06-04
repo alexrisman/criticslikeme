@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
  :jobs,
  :school_names,
  :company_names,
- :languages
+ :languages,
+ :l_id
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   #validates_presence_of :password, :on => :create
@@ -75,7 +76,9 @@ class User < ActiveRecord::Base
         :title => c.headline,
         :industry => c.industry,
         :email => c.email_address,
-        :linkedin_url => c.public_profile_url
+        :linkedin_url => c.public_profile_url,
+        :l_id => c.id
+
         )
       
       
@@ -702,9 +705,12 @@ class User < ActiveRecord::Base
   def asses
     Poop.where('user_id' => id).includes([:ass])
   end
+  def asses_by_type(type)
+    asses.where('ass_type' => type).map {|arse| arse.ass}.uniq
+  end
 
   def shared_asses(event, type)
-    a = asses.where('ass_type' => type).map {|arse| arse.ass}.uniq
+    a = asses_by_type(type)
     c = []
     eid = event.id
     a.each do |arse|
