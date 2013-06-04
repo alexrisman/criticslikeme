@@ -4,6 +4,7 @@ class HomeController < ApplicationController
     if (current_user)
       redirect_to events_path
     end
+    @banners = Event.all.map {|e| e.banner.url }
   end
 
   def recommend
