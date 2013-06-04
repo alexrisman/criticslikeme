@@ -79,9 +79,16 @@ $teal: #0badb3;
       &#join {
         margin-top: 0;
       
-        a {width: 180px;}
+        a {
+          max-width: 180px;
+          height: 40px;
+          
+          &.info {
+            line-height: 35px;
+            margin-right: 1em;
+          }
+        }
       }
-    
     }  
   }
 }

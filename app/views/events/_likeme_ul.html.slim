@@ -1,5 +1,5 @@
 -if name
-  ul.likeme id==name.tr(" ", "_")
+  ul.likeme id==name.gsub(/\W/, '_')
     li.navheader
       span.padleft="People who #{verb_phrase} #{name} (#{user_array.count})"
     -if user_array && user_array.count > 0

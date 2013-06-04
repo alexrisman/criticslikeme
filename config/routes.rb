@@ -1,4 +1,4 @@
-Belch::Application.routes.draw do
+Confr::Application.routes.draw do
   
   #resources :messages
   get "login_callback" => "sessions#create", :as => "login_callback"
@@ -19,6 +19,8 @@ Belch::Application.routes.draw do
 
   get "home/index"
   get "home/about"
+  
+  get "sessions/notloggedin", :as => "loginplz"
 
   
   #Linkedin routes
