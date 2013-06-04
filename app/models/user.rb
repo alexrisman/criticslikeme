@@ -127,7 +127,7 @@ class User < ActiveRecord::Base
         id_list = connectinos.map {|co| co.id}
         already_list = Connection.where('l_id' => id_list).includes(:users, :poops)
         already_list.each do |co|
-          co.al.poops.find_or_create_by_user_id(self.id)
+          co.poops.find_or_create_by_user_id(self.id)
         end
         c_id_list = asses_by_type('Connection').map {|c| c.l_id}
         connectinonos = connectinos.select {|co| !c_id_list.include?(co.id)}
