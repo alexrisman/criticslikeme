@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
   def self.updateFromLI
     User.where{updated_at > (Date.today - 20.days)}.each do |u|
       u.updateFromLI
+      u.update_connections
     end
   end
   
@@ -123,28 +124,39 @@ class User < ActiveRecord::Base
         f.poops.find_or_create_by_user_id(id)
       end
 
-      if c.connections && connectinos = c.connections.all
-        id_list = connectinos.map {|co| co.id}
-        already_list = Connection.where('l_id' => id_list).includes(:users, :poops)
-        already_list.each do |co|
-          co.poops.find_or_create_by_user_id(self.id)
-        end
-        c_id_list = asses_by_type('Connection').map {|c| c.l_id}
-        connectinonos = connectinos.select {|co| !c_id_list.include?(co.id)}
-        connectinonos.each do |f|
-          con = Connection.new
-          con.first_name = f.first_name
-          con.last_name = f.last_name
-          con.full_name = "#{f.first_name}" + " " + "#{f.last_name}"
-          con.headline_string = f.headline
-          (f.location) ? c.location = f.location.name : false
-          con.l_id = f.id
-          con.picture_url = f.picture_url
-          (f.site_standard_profile_request) ? con.profile_url = f.site_standard_profile_request.url : false
-          con.save!
-          con.poops.create_by_user_id(id)
-        end
+
+    end
+    print "."
+    $stdout.flush
+  end
+  
+  def update_connections
+    client = LinkedIn::Client.new("q1iihtxz0jdp", "zcRTqafcns6LqZwG")
+    client.authorize_from_access(linkedin_token, linkedin_secret)
+    c = client.profile(:fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections"])
+    if c.connections && connectinos = c.connections.all
+      id_list = connectinos.map {|co| co.id}
+      already_list = Connection.where('l_id' => id_list).includes(:users, :poops)
+      already_list.each do |co|
+        co.poops.find_or_create_by_user_id(self.id)
       end
+      c_id_list = asses_by_type('Connection').map {|c| c.l_id}
+      connectinonos = connectinos.select {|co| !c_id_list.include?(co.id)}
+      connectinonos.each do |f|
+        con = Connection.new
+        con.first_name = f.first_name
+        con.last_name = f.last_name
+        con.full_name = "#{f.first_name}" + " " + "#{f.last_name}"
+        con.headline_string = f.headline
+        (f.location) ? c.location = f.location.name : false
+        con.l_id = f.id
+        con.picture_url = f.picture_url
+        (f.site_standard_profile_request) ? con.profile_url = f.site_standard_profile_request.url : false
+        con.save!
+        con.poops.create_by_user_id(id)
+      end
+    end
+
 
 
 
@@ -169,11 +181,7 @@ class User < ActiveRecord::Base
       #     end
       #   end
       # end
-    end
-    print "."
-    $stdout.flush
   end
-  
   #highest rating
   def highest_rating
   	ratings.max_by do |element|
@@ -745,6 +753,28 @@ class User < ActiveRecord::Base
     end
     c
   end
+
+  def shares_ass_with(user, type)
+    # t = type.constantize
+    # t.joins(:users).where{(users.id == my{id}) & (users.id == user.id)}
+    a = asses_by_type(type)
+    b = a.select {|arse| arse.users.include?(user) }
+  end
+
+  def shares_ass_names(user, type)
+    a = shares_ass_with(user, type)
+    b = a.map {|arse| arse.name}
+    c = b.select {|name| name != "private private"}
+  end
+
+  def common_asses(user)
+    a = ["School", "Industry", "Location", "Company", "Connection"]
+    b = a.map {|arse| shares_ass_names(user, arse)}
+    c = b.flatten.uniq.compact
+  end
+
+
+
 
 
   
