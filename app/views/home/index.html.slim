@@ -8,9 +8,10 @@
 .whitebg
   h2
     span.padleft Join other event organizers who use Confr
-  .centertext
-    =image_tag "Kellogg_Logo.gif"
-    =image_tag "kellstadt_logo.jpg"
+  .centertext.banners
+    -@banners.each do |ban|
+      =image_tag ban
+    
   
 /h2
 /  span.padleft Hear what others are saying
