@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
  :school_names,
  :company_names,
  :languages,
- :l_id
+ :l_id,
+ :skills
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   #validates_presence_of :password, :on => :create
@@ -25,6 +26,7 @@ class User < ActiveRecord::Base
   serialize :school_names
   serialize :company_names
   serialize :languages
+  serialize :skills
   has_and_belongs_to_many :events
   has_many :owned_events, :class_name => "Event", :foreign_key => "admin_id"
   before_save :default_values
@@ -44,8 +46,34 @@ class User < ActiveRecord::Base
     self.school_names ||= [] if self.school_names.nil?
     self.jobs ||= [] if self.jobs.nil?
     self.company_names ||= [] if self.company_names.nil?
+    if self.poops.where('ass_type' => 'Skill')[0]
+      self.skills ||= self.poops.where('ass_type' => 'Skill').map {|p| p.ass.name}
+    else
+      self.skills ||= []
+    end
+
     
   end
+  def values_for_search
+    if self.poops.where('ass_type' => 'Skill')[0]
+      self.skills = self.poops.where('ass_type' => 'Skill').map {|p| p.ass.name}
+    else
+      self.skills = []
+    end
+    if self.poops.where('ass_type' => 'Company')[0]
+      self.company_names = self.poops.where('ass_type' => 'Company').map {|p| p.ass.name}
+    else
+      self.company_names = []
+    end
+    if self.poops.where('ass_type' => 'School')[0]
+      self.school_names = self.poops.where('ass_type' => 'School').map {|p| p.ass.name}
+    else
+      self.school_names = []
+    end
+    self.save
+  end
+
+
   
   #Password Stuffs
   #has_secure_password

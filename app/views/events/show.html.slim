@@ -11,12 +11,12 @@
           h2 
             span.padleft People Like Me
         li
-          a
+          
             = search_form_for @search do |f|
               = f.hidden_field :events_token_cont, :value => @event.token
               .input-append
-                = f.text_field :name_or_school_names_or_company_names_or_location_string_or_industry_or_languages_cont, :placeholder=>"Name, school, work, etc", :class=>"input-medium"
-                = f.submit 'Search', :class=>"btn"
+              = f.text_field :name_or_school_names_or_company_names_or_skills_or_location_string_or_industry_or_languages_cont, :placeholder=>"Skills, company, or school", :class=>"input-medium"
+              = f.submit 'Search', :class=>"btn"
 
         -@shared_asses.each do |ass|
           = render :partial => 'nav_li', :locals => { :name => ass[0].name, :count => ass[1].count }

@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
     if (!@user.name) 
       @user.updateFromLI
     end
+    @user.values_for_search
   end
   
   def destroy

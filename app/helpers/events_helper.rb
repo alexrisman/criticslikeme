@@ -15,6 +15,8 @@ module EventsHelper
         "may or may not be like you, but still might be "
       when "about"
         "are part of the Confr"
+      when "Searching"
+        "are relevant to"
       else 
         "are in "
     end

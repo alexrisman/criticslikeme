@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604210700) do
+ActiveRecord::Schema.define(:version => 20130605211642) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20130604210700) do
     t.text     "company_names"
     t.text     "languages"
     t.string   "l_id"
+    t.text     "skills"
   end
 
 end

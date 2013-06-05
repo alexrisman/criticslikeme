@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @users = @search.result.sort{|x, y| current_user.shared_count(y) <=> current_user.shared_count(x) }
     @event = Event.find_by_token(params[:q][:events_token_cont])
     @coattendees = current_user.coattendees(@event)
-    @search_value = params[:q][:name_or_school_names_or_company_names_or_location_string_or_industry_or_languages_cont]
+    @search_value = params[:q][:name_or_school_names_or_company_names_or_skills_or_location_string_or_industry_or_languages_cont]
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: current_user }
