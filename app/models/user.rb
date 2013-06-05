@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   def self.updateFromLI
     User.where{updated_at > (Date.today - 20.days)}.each do |u|
       u.updateFromLI
-      #u.update_connections
+      u.update_connections
     end
   end
   
@@ -140,20 +140,20 @@ class User < ActiveRecord::Base
       already_list.each do |co|
         co.poops.find_or_create_by_user_id(self.id)
       end
-      c_id_list = asses_by_type('Connection').map {|c| c.l_id}
+      c_id_list = asses_by_type('Connection').compact.map {|c| c.l_id}
       connectinonos = connectinos.select {|co| !c_id_list.include?(co.id)}
       connectinonos.each do |f|
         con = Connection.new
         con.first_name = f.first_name
         con.last_name = f.last_name
-        con.full_name = "#{f.first_name}" + " " + "#{f.last_name}"
+        con.name = "#{f.first_name}" + " " + "#{f.last_name}"
         con.headline_string = f.headline
         (f.location) ? c.location = f.location.name : false
         con.l_id = f.id
         con.picture_url = f.picture_url
         (f.site_standard_profile_request) ? con.profile_url = f.site_standard_profile_request.url : false
         con.save!
-        con.poops.create_by_user_id(id)
+        con.poops.create(:user_id => id)
       end
     end
 
