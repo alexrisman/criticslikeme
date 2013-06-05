@@ -130,6 +130,37 @@ class User < ActiveRecord::Base
     $stdout.flush
   end
   
+  def updateFromOldData
+    self.school_names.each do |p|
+      f = School.find_or_create_by_name(p)
+      f.poops.find_or_create_by_user_id(id)
+    end
+
+    self.company_names.each do |p|
+      f = Company.find_or_create_by_name(p)
+      f.poops.find_or_create_by_user_id(id)
+    end
+
+    self.languages.each do |p|
+      f = Language.find_or_create_by_name(p)
+      f.poops.find_or_create_by_user_id(id)
+    end
+    
+    if self.industry?
+      f = Industry.find_or_create_by_name(self.industry)
+      f.poops.find_or_create_by_user_id(id)
+    end
+
+    if self.location_string?
+      f = Location.find_or_create_by_name(self.location_string)
+      f.poops.find_or_create_by_user_id(id)
+    end
+
+    print "."
+    $stdout.flush
+  end
+  
+  
   def update_connections
     client = LinkedIn::Client.new("q1iihtxz0jdp", "zcRTqafcns6LqZwG")
     client.authorize_from_access(linkedin_token, linkedin_secret)
