@@ -32,5 +32,6 @@ $(document).ready ->
     $("html, body").animate({scrollTop: $($(this).attr("href")).offset().top }, 2000);
     
   $(".dynamic_btn").click ->
-    $(this).text($(this).data("msg"))
+    $(this).text($(this).data("msg") + " ")
+    $(this).append("<img src='/assets/loading-16.gif'/>")
     $(this).addClass("disabled")
