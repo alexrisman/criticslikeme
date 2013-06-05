@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   def self.updateFromLI
     User.where{updated_at > (Date.today - 20.days)}.each do |u|
       u.updateFromLI
-      u.update_connections
+      #u.update_connections
     end
   end
   
