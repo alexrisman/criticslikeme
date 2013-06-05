@@ -83,8 +83,8 @@ class User < ActiveRecord::Base
         )
       
       
-      if c.positions && c.positions.all
-        c.positions.all.each do |p|
+      if c.positions && a = c.positions.all
+        a.each do |p|
           f = Industry.find_or_create_by_name(p.company.industry)
           f.poops.find_or_create_by_user_id(id)
 
@@ -93,34 +93,34 @@ class User < ActiveRecord::Base
         end
       end
 
-      if c.educations && c.educations.all
-        c.educations.all.each do |p|
+      if c.educations && a = c.educations.all
+        a.each do |p|
           f = School.find_or_create_by_name(p.school_name)
           f.poops.find_or_create_by_user_id(id)
         end
       end
 
-      if c.skills && c.skills.all
-        c.skills.all.each do |p|
+      if c.skills && a = c.skills.all
+        a.each do |p|
           f = Skill.find_or_create_by_name(p.skill.name)
           f.poops.find_or_create_by_user_id(id)
         end
       end
 
-      if c.languages && c.languages.all
-        c.languages.all.each do |p|
+      if c.languages && a = c.languages.all
+        a.each do |p|
           f = Language.find_or_create_by_name(p.language.name)
           f.poops.find_or_create_by_user_id(id)
         end
       end
 
-      if c.industry
-        f = Industry.find_or_create_by_name(c.industry)
+      if a = c.industry
+        f = Industry.find_or_create_by_name(a)
         f.poops.find_or_create_by_user_id(id)
       end
 
-      if c.location
-        f = Location.find_or_create_by_name(c.location.name)
+      if a = c.location
+        f = Location.find_or_create_by_name(a)
         f.poops.find_or_create_by_user_id(id)
       end
 
