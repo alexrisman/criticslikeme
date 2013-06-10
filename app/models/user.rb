@@ -827,7 +827,7 @@ class User < ActiveRecord::Base
   end
 
   def common_asses(user)
-    a = ["School", "Industry", "Location", "Company", "Connection"]
+    a = ["School", "Industry", "Location", "Company"]
     b = a.map {|arse| shares_ass_names(user, arse)}
     c = b.flatten.uniq.compact
   end
