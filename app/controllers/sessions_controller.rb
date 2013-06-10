@@ -13,7 +13,9 @@ class SessionsController < ApplicationController
     if (!@user.name) 
       @user.updateFromLI
     end
-    @user.values_for_search
+    if @user.company_names == [] && @user.school_names == [] && @user.skills == []
+      @user.values_for_search
+    end
   end
   
   def destroy

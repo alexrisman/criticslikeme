@@ -4,7 +4,7 @@
 
 .span3
   h2
-    span.padleft Search
+    span.padleft Search Results
   = search_form_for @search do |f|
     = f.hidden_field :events_token_cont, :value => @event.token
     .input-append
@@ -12,4 +12,5 @@
     = f.submit 'Search', :class=>"btn"
       
 .span9.noleftwide
-  = render :partial => 'events/likeme_ul', :locals => { :name => @search_value, :verb_phrase => "are relevant to", :user_array => @users, :kind => 'Searching'}
+  = render :partial => 'events/likeme_ul', :locals => { :name => "#{@search_value}, sorted by similarity to you", :verb_phrase => "are relevant to", :user_array => @users, :kind => 'Searching'}
+  = link_to "Back to #{@event.name}", event_path(@event)
