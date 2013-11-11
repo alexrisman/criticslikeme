@@ -11,10 +11,13 @@ class ApplicationController < ActionController::Base
     if current_user
       m.user = current_user
     end
-    m.ipaddress = request.remote_ip
-    m.location = request.fullpath
-    m.user_agent = request.user_agent
-    m.save!
+    my_string = request.user_agent
+    unless my_string.include? "NewRelic"
+      m.ipaddress = request.remote_ip
+      m.location = request.fullpath
+      m.user_agent = request.user_agent
+      m.save!
+    end
   end
   helper_method :record_metric
   before_filter :record_metric
