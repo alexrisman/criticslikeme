@@ -6,21 +6,21 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
   
-  def record_metric
-    m = Metric.new
-    if current_user
-      m.user = current_user
-    end
-    my_string = request.user_agent
-    unless my_string.include? "NewRelic"
-      m.ipaddress = request.remote_ip
-      m.location = request.fullpath
-      m.user_agent = request.user_agent
-      m.save!
-    end
-  end
-  helper_method :record_metric
-  before_filter :record_metric
+  # def record_metric
+  #   m = Metric.new
+  #   if current_user
+  #     m.user = current_user
+  #   end
+  #   my_string = request.user_agent
+  #   unless my_string.include? "NewRelic"
+  #     m.ipaddress = request.remote_ip
+  #     m.location = request.fullpath
+  #     m.user_agent = request.user_agent
+  #     m.save!
+  #   end
+  # end
+  # helper_method :record_metric
+  # before_filter :record_metric
   
   def client_profile
     if current_user
