@@ -338,8 +338,7 @@ class User < ActiveRecord::Base
   end
 
   def coattendees(event)
-    User.all(:conditions => (["id !=?", self.id])).select {|u| u.is_part_of?(event)}
-  end
+    User.joins(:events).where("event_id = ? and user_id != ?", event.id, self.id)  end
   
   def correlation_list(event)
     a = coattendees(event)
