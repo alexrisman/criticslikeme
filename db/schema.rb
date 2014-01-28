@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140126204306) do
+ActiveRecord::Schema.define(:version => 20140128034140) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(:version => 20140126204306) do
     t.integer "event_id"
     t.integer "user_id"
   end
+
+  add_index "events_users", ["event_id"], :name => "index_events_users_on_event_id"
+  add_index "events_users", ["user_id"], :name => "index_events_users_on_user_id"
 
   create_table "industries", :force => true do |t|
     t.string   "name"
@@ -92,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20140126204306) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "poops", ["user_id"], :name => "index_poops_on_user_id"
 
   create_table "ratings", :force => true do |t|
     t.integer  "stars"
@@ -139,5 +144,7 @@ ActiveRecord::Schema.define(:version => 20140126204306) do
     t.string   "l_id"
     t.text     "skills"
   end
+
+  add_index "users", ["id"], :name => "index_users_on_id"
 
 end
